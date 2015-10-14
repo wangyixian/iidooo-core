@@ -17,8 +17,8 @@
     <result column="Version" property="version" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ResID, ParentID, ResName, ResURL, Sequence, Invisible, Remarks, CreateTime, CreateUser, 
-    UpdateTime, UpdateUser, IsDelete, Version
+    R.ResID, R.ParentID, R.ResName, R.ResURL, R.Sequence, R.Invisible, R.Remarks, R.CreateTime, R.CreateUser, 
+    R.UpdateTime, R.UpdateUser, R.IsDelete, R.Version
   </sql>
   <select id="selectAll" resultMap="BaseResultMap">
     select 

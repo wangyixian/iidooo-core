@@ -4,14 +4,14 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="core" extends="core-default">
+	<package name="core" extends="iidooo-default">
 
-		<action name="login" class="com.iidooo.core.action.common.LoginAction" method="login">
+		<action name="login" class="com.iidooo.core.action.security.LoginAction" method="login">
 			<result name="success" type="redirect">index.action</result>
 			<result name="input">/WEB-INF/jsp/Login.jsp</result>
 		</action>
 
-		<action name="logout" class="com.iidooo.core.action.common.LoginAction" method="logout">
+		<action name="logout" class="com.iidooo.core.action.security.LoginAction" method="logout">
 			<result name="success">/WEB-INF/jsp/Login.jsp</result>
 		</action>
 

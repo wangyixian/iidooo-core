@@ -13,7 +13,7 @@
 	<!-- <constant name="struts.xwork.chaining.copyFieldErrors" value="true"/> -->
 	<!-- <constant name="struts.xwork.chaining.copyMessages" value="true"/> -->
 
-	<package name="core-default" extends="struts-default" abstract="true">
+	<package name="iidooo-default" extends="struts-default" abstract="true">
 	
 		<interceptors>
 			<interceptor name="actionInterceptor" class="com.iidooo.core.interceptor.ActionInterceptor"></interceptor>
