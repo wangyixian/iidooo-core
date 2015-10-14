@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="core" uri="/core-tags"%>
-<%@ taglib prefix="cms" uri="/cms-tags"%>
-<%@ taglib prefix="passport" uri="/passport-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -68,10 +66,10 @@
 	<jsp:include page="../include/Top.jsp"></jsp:include>		
 	<div class="page_content_wrap">	
 		<div class="page_content_left_wrap">
-			<cms:channelTree baseURL="contentList.action?content.siteID={0}&content.channelID={1}"/>
+			<!-- <cms:channelTree baseURL="contentList.action?content.siteID={0}&content.channelID={1}"/> -->
 		</div>
 		<div class="page_content_right_wrap">		
-			<passport:breadCrumb/>	
+			<core:breadCrumb/>	
 			<div class="page_content">
 				<s:actionerror/>
 				<s:actionmessage/>
@@ -88,7 +86,7 @@
 							</td>		
 							<th width="10%">用户名</th>
 							<td>
-								<cms:channelSelect id="selChannelID" name="content.newChannelID" value="${content.channelID }" siteID="${content.siteID }" isContainBlank="false"/>	
+								<%-- <cms:channelSelect id="selChannelID" name="content.newChannelID" value="${content.channelID }" siteID="${content.siteID }" isContainBlank="false"/>	 --%>
 							</td>			
 						</tr>
 						<tr>

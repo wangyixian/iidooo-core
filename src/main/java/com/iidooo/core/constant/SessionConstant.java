@@ -28,6 +28,9 @@ public class SessionConstant {
 
     public static final String LOGIN_ROLE_LIST = "LOGIN_ROLE_LIST";
 
+    public static final String LOGIN_RESOURCE_LIST = "LOGIN_RESOURCE_LIST";
+    public static final String LOGIN_RESOURCE_URL_LIST = "LOGIN_RESOURCE_URL_LIST";
+    
     // The login id of session and cookies key.
     public static final String LOGIN_ID = "LOGIN_ID";
 
@@ -43,4 +46,7 @@ public class SessionConstant {
 
     // The access URL of login success should be redirected.
     public static final String ACCESS_URL = "ACCESS_URL";
+    
+    // This site's URL should be set into session, then the css and js can be full path reference.
+    public static final String SITE_URL = "SITE_URL";
 }

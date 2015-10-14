@@ -19,6 +19,10 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author wangyixian
  * 
  */
+/**
+ * @author wangyixian
+ *
+ */
 public abstract class BaseAction extends ActionSupport {
 
     private static final Logger logger = Logger.getLogger(BaseAction.class);
@@ -27,6 +31,9 @@ public abstract class BaseAction extends ActionSupport {
 	 * 
 	 */
     private static final long serialVersionUID = 1L;
+
+    // The action result of security, means security validation is failed.
+    public static final String RESULT_SECURITY = "security";
 
     /**
      * The action name
@@ -48,10 +55,20 @@ public abstract class BaseAction extends ActionSupport {
         this.actionName = actionName;
     }
 
+    /**
+     * 得到访问Action的URL
+     * 
+     * @return actionUrl
+     */
     public String getActionUrl() {
         return actionUrl;
     }
 
+    /**
+     * 设置Action的URL
+     * 
+     * @param actionUrl
+     */
     public void setActionUrl(String actionUrl) {
         this.actionUrl = actionUrl;
     }
@@ -91,6 +108,12 @@ public abstract class BaseAction extends ActionSupport {
         }
     }
 
+    /**
+     * 通过Key获取Request作用域的对象值
+     * 
+     * @param key Request作用域的存储方式是Map，通过该Key获取值
+     * @return 获得的值是个String对象
+     */
     public String getRequestParameter(String key) {
         try {
             HttpServletRequest request = this.getRequest();
@@ -150,6 +173,12 @@ public abstract class BaseAction extends ActionSupport {
         }
     }
 
+    /**
+     * 通过Key获取Application作用域的对象值
+     * 
+     * @param key Application作用域的存储方式是Map，通过该Key获取值
+     * @return 获得的值是个Object对象
+     */
     public Object getApplicationValue(String key) {
         try {
             ActionContext ac = ActionContext.getContext();

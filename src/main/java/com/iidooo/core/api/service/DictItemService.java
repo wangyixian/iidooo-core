@@ -4,6 +4,6 @@ import java.util.List;
 
 import com.iidooo.core.dto.extend.DictItemDto;
 
-public interface IDictItemService {
+public interface DictItemService {
     List<DictItemDto> getDictItemList(String dictClassCode);
 }

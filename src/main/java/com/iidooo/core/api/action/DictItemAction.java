@@ -14,7 +14,7 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.iidooo.core.action.common.BaseAPIAction;
-import com.iidooo.core.api.service.IDictItemService;
+import com.iidooo.core.api.service.DictItemService;
 import com.iidooo.core.constant.ClassConstant;
 import com.iidooo.core.constant.HttpConstant;
 import com.iidooo.core.dto.extend.DictItemDto;
@@ -29,7 +29,7 @@ public class DictItemAction extends BaseAPIAction {
     private static final Logger logger = Logger.getLogger(DictItemAction.class);
 
     @Autowired
-    private IDictItemService dictItemService;
+    private DictItemService dictItemService;
 
     public void dictItems() {
         try {

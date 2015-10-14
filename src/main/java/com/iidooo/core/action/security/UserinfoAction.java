@@ -6,6 +6,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.iidooo.core.action.common.BaseAction;
+import com.iidooo.core.constant.SessionConstant;
+import com.iidooo.core.dto.extend.SecurityResDto;
+import com.iidooo.core.dto.extend.SecurityUserDto;
+import com.iidooo.core.service.security.UserinfoService;
 import com.iidooo.core.util.DateUtil;
 import com.iidooo.core.util.ValidateUtil;
 import com.opensymphony.xwork2.ActionContext;
@@ -19,32 +23,32 @@ public class UserinfoAction extends BaseAction {
     private static final Logger logger = Logger.getLogger(UserinfoAction.class);
 
     @Autowired
-    private IUserinfoService userInfoService;
+    private UserinfoService userInfoService;
 
-    private UserDto user;
+    private SecurityUserDto user;
 
-    private ResourceDto resource;
+    private SecurityResDto resource;
 
-    public UserDto getUser() {
+    public SecurityUserDto getUser() {
         return user;
     }
 
-    public void setUser(UserDto user) {
+    public void setUser(SecurityUserDto user) {
         this.user = user;
     }
 
-    public ResourceDto getResource() {
+    public SecurityResDto getResource() {
         return resource;
     }
 
-    public void setResource(ResourceDto resource) {
+    public void setResource(SecurityResDto resource) {
         this.resource = resource;
     }
 
     public String init() {
         try {
             Map<String, Object> sessionMap = ActionContext.getContext().getSession();
-            UserDto sessionUser = (UserDto) sessionMap.get(PassportConstant.LOGIN_USER);
+            SecurityUserDto sessionUser = (SecurityUserDto) sessionMap.get(SessionConstant.LOGIN_USER);
             user = userInfoService.getUser(sessionUser.getLoginID());
             return SUCCESS;
         } catch (Exception e) {

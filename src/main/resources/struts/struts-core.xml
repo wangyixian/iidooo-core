@@ -6,62 +6,62 @@
 <struts>
 	<package name="core" extends="core-default">
 
-		<action name="login" class="com.iidooo.passport.action.LoginAction" method="login">
+		<action name="login" class="com.iidooo.core.action.common.LoginAction" method="login">
 			<result name="success" type="redirect">index.action</result>
 			<result name="input">/WEB-INF/jsp/Login.jsp</result>
 		</action>
 
-		<action name="logout" class="com.iidooo.passport.action.LoginAction" method="logout">
+		<action name="logout" class="com.iidooo.core.action.common.LoginAction" method="logout">
 			<result name="success">/WEB-INF/jsp/Login.jsp</result>
 		</action>
 
-		<action name="index" class="com.iidooo.passport.action.IndexAction" method="init">
-			<result name="success">/WEB-INF/jsp/Index.jsp</result>
+		<action name="index" class="com.iidooo.core.action.index.IndexAction" method="init">
+			<result name="success">/WEB-INF/jsp/index/Index.jsp</result>
 		</action>
 
-		<action name="userinfo" class="com.iidooo.passport.action.UserinfoAction" method="init">
+		<action name="userinfo" class="com.iidooo.core.action.security.UserinfoAction" method="init">
 			<result name="success">/WEB-INF/jsp/Userinfo.jsp</result>
 		</action>
-		<action name="saveUserinfo" class="com.iidooo.passport.action.UserinfoAction" method="save">
+		<action name="saveUserinfo" class="com.iidooo.core.action.security.UserinfoAction" method="save">
 			<result name="success">/WEB-INF/jsp/Userinfo.jsp</result>
 			<result name="input">/WEB-INF/jsp/Userinfo.jsp</result>
 		</action>
 
-		<action name="password" class="com.iidooo.passport.action.PasswordAction" method="init">
+		<action name="password" class="com.iidooo.core.action.security.PasswordAction" method="init">
 			<result name="success">/WEB-INF/jsp/Password.jsp</result>
 		</action>
-		<action name="savePassword" class="com.iidooo.passport.action.PasswordAction" method="save">
+		<action name="savePassword" class="com.iidooo.core.action.security.PasswordAction" method="save">
 			<result name="success">/WEB-INF/jsp/Password.jsp</result>
 			<result name="input">/WEB-INF/jsp/Password.jsp</result>
 		</action>
-		<action name="userManage" class="com.iidooo.passport.action.user.UserListAction" method="init">
+		<action name="userManage" class="com.iidooo.core.action.security.UserListAction" method="init">
 			<result name="success">/WEB-INF/jsp/user/UserList.jsp</result>
 		</action>
-		<action name="userList" class="com.iidooo.passport.action.user.UserListAction" method="init">
+		<action name="userList" class="com.iidooo.core.action.security.UserListAction" method="init">
 			<result name="success">/WEB-INF/jsp/user/UserList.jsp</result>
 		</action>
-		<action name="userListDelete" class="com.iidooo.passport.action.user.UserListAction" method="delete">
+		<action name="userListDelete" class="com.iidooo.core.action.security.UserListAction" method="delete">
 			<result name="success" type="redirectAction">userList.action?user.userID=${user.userID}</result>
 			<result name="input">/WEB-INF/jsp/user/UserList.jsp</result>
 		</action>
 
-		<action name="userDetail" class="com.iidooo.passport.action.user.UserDetailAction" method="init">
+		<action name="userDetail" class="com.iidooo.core.action.security.UserDetailAction" method="init">
 			<result name="success">/WEB-INF/jsp/user/UserDetail.jsp</result>
 			<result name="input">/WEB-INF/jsp/user/UserDetail.jsp</result>
 		</action>
-		<action name="userCreate" class="com.iidooo.passport.action.user.UserDetailAction" method="create">
+		<action name="userCreate" class="com.iidooo.core.action.security.UserDetailAction" method="create">
 			<result name="success">/WEB-INF/jsp/user/UserDetail.jsp</result>
 			<result name="input">/WEB-INF/jsp/user/UserDetail.jsp</result>
 		</action>
-		<action name="userUpdate" class="com.iidooo.passport.action.user.UserDetailAction" method="update">
+		<action name="userUpdate" class="com.iidooo.core.action.security.UserDetailAction" method="update">
 			<result name="success">/WEB-INF/jsp/user/UserDetail.jsp</result>
 			<result name="input">/WEB-INF/jsp/user/UserDetail.jsp</result>
 		</action>
 
 		<!-- The ajax action did not need the result, the result will output as json -->
-		<action name="fileUpload" class="com.iidooo.core.action.FileUploadAction" method="upload">
+		<action name="fileUpload" class="com.iidooo.core.action.common.FileUploadAction" method="upload">
 		</action>
-		<action name="kindEditorFileManager" class="com.iidooo.core.action.KindEditorFileManagerAction" method="manage">
+		<action name="kindEditorFileManager" class="com.iidooo.core.action.common.KindEditorFileManagerAction" method="manage">
 		</action>
 	</package>
 </struts>

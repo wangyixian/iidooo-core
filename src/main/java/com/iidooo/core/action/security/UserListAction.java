@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.iidooo.core.action.common.BaseAction;
 import com.iidooo.core.dto.PageDto;
+import com.iidooo.core.dto.extend.SecurityUserDto;
+import com.iidooo.core.service.security.UserListService;
 import com.iidooo.core.util.PageUtil;
 import com.iidooo.core.util.ValidateUtil;
 
@@ -19,25 +21,25 @@ public class UserListAction extends BaseAction {
     private static final Logger logger = Logger.getLogger(UserListAction.class);
 
     @Autowired
-    private IUserListService userListService;
+    private UserListService userListService;
 
-    private List<UserDto> userList;
+    private List<SecurityUserDto> userList;
 
-    private UserDto user;
+    private SecurityUserDto user;
 
-    public List<UserDto> getUserList() {
+    public List<SecurityUserDto> getUserList() {
         return userList;
     }
 
-    public void setUserList(List<UserDto> userList) {
+    public void setUserList(List<SecurityUserDto> userList) {
         this.userList = userList;
     }
 
-    public UserDto getUser() {
+    public SecurityUserDto getUser() {
         return user;
     }
 
-    public void setUser(UserDto user) {
+    public void setUser(SecurityUserDto user) {
         this.user = user;
     }
 

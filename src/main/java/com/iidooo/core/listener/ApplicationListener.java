@@ -6,8 +6,6 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.http.HttpServlet;
 
 import org.apache.log4j.Logger;
 
@@ -20,7 +18,7 @@ import com.iidooo.core.dto.extend.DictItemDto;
 import com.iidooo.core.dto.extend.SecurityResDto;
 import com.iidooo.core.util.SpringUtil;
 
-public class ApplicationListener extends HttpServlet implements ServletContextListener {
+public class ApplicationListener extends BaseListener {
 
     /**
      * 
@@ -49,6 +47,7 @@ public class ApplicationListener extends HttpServlet implements ServletContextLi
     private void setDictAttributes(ServletContext sc) {
         try {
             DictItemDao dictItemDao = (DictItemDao) SpringUtil.getBean(sc, ClassConstant.BEAN_DICT_ITEM_DAO);
+            this.setAttribute(sc, dictItemDao, DictConstant.DICT_CLASS_CORE_PROPERTIES);
             this.setAttribute(sc, dictItemDao, DictConstant.DICT_CLASS_CORE_PAGE);
             this.setAttribute(sc, dictItemDao, DictConstant.DICT_CLASS_CORE_UPLOAD);
         } catch (Exception e) {

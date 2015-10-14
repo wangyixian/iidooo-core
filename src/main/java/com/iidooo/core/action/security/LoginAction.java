@@ -6,6 +6,7 @@
 package com.iidooo.core.action.security;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +19,12 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.iidooo.core.action.common.BaseAction;
+import com.iidooo.core.constant.HttpConstant;
 import com.iidooo.core.constant.SessionConstant;
+import com.iidooo.core.dto.extend.SecurityResDto;
 import com.iidooo.core.dto.extend.SecurityRoleDto;
 import com.iidooo.core.dto.extend.SecurityUserDto;
-import com.iidooo.core.service.LoginService;
+import com.iidooo.core.service.security.LoginService;
 import com.opensymphony.xwork2.ActionContext;
 
 /**
@@ -45,6 +48,8 @@ public class LoginAction extends BaseAction {
     private String loginID;
 
     private String password;
+    
+    //private String identifyCode;
 
     public String getLoginID() {
         return loginID;
@@ -61,6 +66,14 @@ public class LoginAction extends BaseAction {
     public void setPassword(String password) {
         this.password = password;
     }
+
+//    public String getIdentifyCode() {
+//        return identifyCode;
+//    }
+//
+//    public void setIdentifyCode(String identifyCode) {
+//        this.identifyCode = identifyCode;
+//    }
 
     public String login() {
         try {
@@ -91,7 +104,7 @@ public class LoginAction extends BaseAction {
 
             // Set the user name into the cookie
             String userName = user.getUserName();
-            Cookie cookieUserName = new Cookie(SessionConstant.USER_NAME, URLEncoder.encode(userName, SessionConstant.COOKIE_ENCODING_UTF8));
+            Cookie cookieUserName = new Cookie(SessionConstant.USER_NAME, URLEncoder.encode(userName, HttpConstant.CHARACTER_ENCODING_UTF8));
             cookieUserName.setPath("/");
             cookieUserName.setMaxAge(-1);
             response.addCookie(cookieUserName);
@@ -103,6 +116,15 @@ public class LoginAction extends BaseAction {
             // Put the login user's role list into the session.
             List<SecurityRoleDto> roleList = loginService.getUserRoleList(user.getUserID());
             sessionMap.put(SessionConstant.LOGIN_ROLE_LIST, roleList);
+            
+            // Put the user's resource list into the session.
+            List<SecurityResDto> resourceList = loginService.getUserResourceList(roleList);
+            sessionMap.put(SessionConstant.LOGIN_RESOURCE_LIST, resourceList);
+            List<String> resourceURLList = new ArrayList<String>();
+            for (SecurityResDto resourceDto : resourceList) {
+                resourceURLList.add(resourceDto.getResURL());
+            }
+            sessionMap.put(SessionConstant.LOGIN_RESOURCE_URL_LIST, resourceURLList);
             
             // Redirect to the URL of saved form Filter
             Cookie[] cookies = request.getCookies();
@@ -127,11 +149,11 @@ public class LoginAction extends BaseAction {
         try {
             // The login id and password is required.
             if (loginID == null || loginID.isEmpty()) {
-                addActionError(this.getText("MSG_FIELD_REQUIRED", new String[] { getText("LABEL_LOGIN_ID") }));
+                addActionError(this.getText("MSG_LOGIN_LOGIN_ID_REQUIRE"));
             }
 
             if (password == null || password.isEmpty()) {
-                addActionError(this.getText("MSG_FIELD_REQUIRED", new String[] { getText("LABEL_LOGIN_PASSWORD") }));
+                addActionError(this.getText("MSG_LOGIN_PASSWORD_REQUIRE"));
             }
         } catch (Exception e) {
             e.printStackTrace();

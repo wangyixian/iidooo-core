@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.iidooo.core.action.common.BaseAction;
+import com.iidooo.core.dto.extend.SecurityUserDto;
+import com.iidooo.core.service.security.UserDetailService;
 import com.iidooo.core.util.ValidateUtil;
 
 public class UserDetailAction extends BaseAction  {
@@ -15,15 +17,15 @@ public class UserDetailAction extends BaseAction  {
     private static final Logger logger = Logger.getLogger(UserDetailAction.class);
 
     @Autowired
-    private IUserDetailService userInfoService;
+    private UserDetailService userInfoService;
 
-    private UserDto user;
+    private SecurityUserDto user;
 
-    public UserDto getUser() {
+    public SecurityUserDto getUser() {
         return user;
     }
 
-    public void setUser(UserDto user) {
+    public void setUser(SecurityUserDto user) {
         this.user = user;
     }
 

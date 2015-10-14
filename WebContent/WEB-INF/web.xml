@@ -81,13 +81,5 @@
 			<taglib-uri>/core-tags</taglib-uri>
 			<taglib-location>/WEB-INF/tlds/core-tags.tld</taglib-location>
 		</taglib>
-		<!-- <taglib>
-			<taglib-uri>/passport-tags</taglib-uri>
-			<taglib-location>/WEB-INF/tlds/passport-tags.tld</taglib-location>
-		</taglib>
-		<taglib>
-			<taglib-uri>/cms-tags</taglib-uri>
-			<taglib-location>/WEB-INF/tlds/cms-tags.tld</taglib-location>
-		</taglib> -->
 	</jsp-config>
 </web-app>

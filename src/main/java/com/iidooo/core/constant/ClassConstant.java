@@ -19,4 +19,7 @@ public class ClassConstant {
     public static final String FIELD_PAGE_SORT_FIELD = "sortField";
     public static final String FIELD_PAGE_SORT_TYPE = "sortType";
     public static final String FIELD_PAGE_CURRENT_PAGE = "currentPage";
+    
+    public static final String FIELD_SECURITY_USER_ID = "userID";
+    public static final String FIELD_SECURITY_USER_NAME = "userName";
 }

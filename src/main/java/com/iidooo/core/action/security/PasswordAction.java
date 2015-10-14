@@ -6,6 +6,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.iidooo.core.action.common.BaseAction;
+import com.iidooo.core.constant.SessionConstant;
+import com.iidooo.core.dto.extend.SecurityUserDto;
+import com.iidooo.core.service.security.PasswordService;
 import com.opensymphony.xwork2.ActionContext;
 
 public class PasswordAction extends BaseAction {
@@ -18,7 +21,7 @@ public class PasswordAction extends BaseAction {
     private static final Logger logger = Logger.getLogger(PasswordAction.class);
 
     @Autowired
-    private IPasswordService passwordService;
+    private PasswordService passwordService;
 
     private String oldPassword;
 
@@ -63,7 +66,7 @@ public class PasswordAction extends BaseAction {
     public String save() {
         try {
             Map<String, Object> sessionMap = ActionContext.getContext().getSession();
-            UserDto sessionUser = (UserDto) sessionMap.get(PassportConstant.LOGIN_USER);
+            SecurityUserDto sessionUser = (SecurityUserDto) sessionMap.get(SessionConstant.LOGIN_USER);
             if (!passwordService.checkOldPassword(sessionUser.getLoginID(), oldPassword)) {
                 addActionError(this.getText("MSG_PASSWORD_FAILED"));  
                 return INPUT;

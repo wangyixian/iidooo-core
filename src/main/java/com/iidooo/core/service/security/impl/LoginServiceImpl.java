@@ -1,4 +1,4 @@
-package com.iidooo.core.service.impl;
+package com.iidooo.core.service.security.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.iidooo.core.dao.extend.SecurityResDao;
 import com.iidooo.core.dao.extend.SecurityRoleDao;
 import com.iidooo.core.dao.extend.SecurityUserDao;
+import com.iidooo.core.dto.extend.SecurityResDto;
 import com.iidooo.core.dto.extend.SecurityRoleDto;
 import com.iidooo.core.dto.extend.SecurityUserDto;
-import com.iidooo.core.service.LoginService;
+import com.iidooo.core.service.security.LoginService;
 import com.iidooo.core.util.DateUtil;
 import com.iidooo.core.util.SecurityUtil;
 
@@ -25,6 +27,9 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private SecurityRoleDao roleDao;
+
+    @Autowired
+    private SecurityResDao resourceDao;
 
     @Override
     public SecurityUserDto login(String loginID, String password) {
@@ -60,4 +65,17 @@ public class LoginServiceImpl implements LoginService {
         return result;
     }
 
+    @Override
+    public List<SecurityResDto> getUserResourceList(List<SecurityRoleDto> roles) {
+        List<SecurityResDto> result = new ArrayList<SecurityResDto>();
+        try {
+            if (roles != null && roles.size() > 0) {
+                result = resourceDao.selectResourceListByRoles(roles);
+            }
+        } catch (Exception e) {
+            logger.fatal(e);
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

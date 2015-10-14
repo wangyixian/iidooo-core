@@ -12,7 +12,7 @@
      http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<!-- enable component scanning (beware that this does not enable mapper scanning!) -->
-	<context:component-scan base-package="com.iidooo.*" />
+	<context:component-scan base-package="com.iidooo.core.*" />
 
 	<!-- enable autowire -->
 	<context:annotation-config />
