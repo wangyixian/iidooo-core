@@ -1,48 +1,48 @@
 package com.iidooo.core.dto.generate;
 
 public class SecurityUserRole {
-    private Integer userRoleID;
+    private String userRoleID;
 
-    private Integer userID;
+    private String userID;
 
-    private Integer roleID;
+    private String roleID;
 
     private String remarks;
 
     private String createTime;
 
-    private Integer createUser;
+    private String createUser;
 
     private String updateTime;
 
-    private Integer updateUser;
+    private String updateUser;
 
     private Integer isDelete;
 
     private Integer version;
 
-    public Integer getUserRoleID() {
+    public String getUserRoleID() {
         return userRoleID;
     }
 
-    public void setUserRoleID(Integer userRoleID) {
-        this.userRoleID = userRoleID;
+    public void setUserRoleID(String userRoleID) {
+        this.userRoleID = userRoleID == null ? null : userRoleID.trim();
     }
 
-    public Integer getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public void setUserID(String userID) {
+        this.userID = userID == null ? null : userID.trim();
     }
 
-    public Integer getRoleID() {
+    public String getRoleID() {
         return roleID;
     }
 
-    public void setRoleID(Integer roleID) {
-        this.roleID = roleID;
+    public void setRoleID(String roleID) {
+        this.roleID = roleID == null ? null : roleID.trim();
     }
 
     public String getRemarks() {
@@ -61,12 +61,12 @@ public class SecurityUserRole {
         this.createTime = createTime == null ? null : createTime.trim();
     }
 
-    public Integer getCreateUser() {
+    public String getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(Integer createUser) {
-        this.createUser = createUser;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser == null ? null : createUser.trim();
     }
 
     public String getUpdateTime() {
@@ -77,12 +77,12 @@ public class SecurityUserRole {
         this.updateTime = updateTime == null ? null : updateTime.trim();
     }
 
-    public Integer getUpdateUser() {
+    public String getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(Integer updateUser) {
-        this.updateUser = updateUser;
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser == null ? null : updateUser.trim();
     }
 
     public Integer getIsDelete() {

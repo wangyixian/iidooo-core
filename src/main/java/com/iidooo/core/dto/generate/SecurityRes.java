@@ -1,9 +1,9 @@
 package com.iidooo.core.dto.generate;
 
 public class SecurityRes {
-    private Integer resID;
+    private String resID;
 
-    private Integer parentID;
+    private String parentID;
 
     private String resName;
 
@@ -17,30 +17,30 @@ public class SecurityRes {
 
     private String createTime;
 
-    private Integer createUser;
+    private String createUser;
 
     private String updateTime;
 
-    private Integer updateUser;
+    private String updateUser;
 
     private Integer isDelete;
 
     private Integer version;
 
-    public Integer getResID() {
+    public String getResID() {
         return resID;
     }
 
-    public void setResID(Integer resID) {
-        this.resID = resID;
+    public void setResID(String resID) {
+        this.resID = resID == null ? null : resID.trim();
     }
 
-    public Integer getParentID() {
+    public String getParentID() {
         return parentID;
     }
 
-    public void setParentID(Integer parentID) {
-        this.parentID = parentID;
+    public void setParentID(String parentID) {
+        this.parentID = parentID == null ? null : parentID.trim();
     }
 
     public String getResName() {
@@ -91,12 +91,12 @@ public class SecurityRes {
         this.createTime = createTime == null ? null : createTime.trim();
     }
 
-    public Integer getCreateUser() {
+    public String getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(Integer createUser) {
-        this.createUser = createUser;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser == null ? null : createUser.trim();
     }
 
     public String getUpdateTime() {
@@ -107,12 +107,12 @@ public class SecurityRes {
         this.updateTime = updateTime == null ? null : updateTime.trim();
     }
 
-    public Integer getUpdateUser() {
+    public String getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(Integer updateUser) {
-        this.updateUser = updateUser;
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser == null ? null : updateUser.trim();
     }
 
     public Integer getIsDelete() {

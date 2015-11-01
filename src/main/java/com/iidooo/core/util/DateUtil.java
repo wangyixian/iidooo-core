@@ -2,17 +2,13 @@ package com.iidooo.core.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import org.apache.log4j.Logger;
 
+
 public class DateUtil {
     private static final Logger logger = Logger.getLogger(DateUtil.class);
-
-    public static final String FORMAT_DATETIME = "yyyy-MM-dd HH:mm:ss";
-
-    public static final String FORMAT_DATE = "yyyy-MM-dd";
-    
-    public static final String FORMAT_DATE_SIMPLE = "yyyyMMdd";
 
     public static String getNow(String format) {
         try {
@@ -42,6 +38,16 @@ public class DateUtil {
             e.printStackTrace();
             logger.fatal(e);
             return "";
+        }
+    }
+    
+    public static void main(String[] args){
+//        String now = DateUtil.getNow(DateTimeFormat.DATE_TIME_FULL_HYPHEN);
+//        System.out.println(now);
+        
+        Random random = new Random();
+        for(int i = 0; i < 100; i++){
+            System.out.println(random.nextInt(5) + 1);
         }
     }
 }

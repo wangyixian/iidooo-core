@@ -3,13 +3,13 @@ package com.iidooo.core.dao.generate;
 import com.iidooo.core.dto.generate.SecurityUserRole;
 
 public interface SecurityUserRoleMapper {
-    int deleteByPrimaryKey(Integer userRoleID);
+    int deleteByPrimaryKey(String userRoleID);
 
     int insert(SecurityUserRole record);
 
     int insertSelective(SecurityUserRole record);
 
-    SecurityUserRole selectByPrimaryKey(Integer userRoleID);
+    SecurityUserRole selectByPrimaryKey(String userRoleID);
 
     int updateByPrimaryKeySelective(SecurityUserRole record);
 

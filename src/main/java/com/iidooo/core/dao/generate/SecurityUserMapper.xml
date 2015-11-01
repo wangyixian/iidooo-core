@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.iidooo.core.dao.generate.SecurityUserMapper" >
   <resultMap id="BaseResultMap" type="com.iidooo.core.dto.generate.SecurityUser" >
-    <id column="UserID" property="userID" jdbcType="INTEGER" />
+    <id column="UserID" property="userID" jdbcType="CHAR" />
     <result column="UserName" property="userName" jdbcType="VARCHAR" />
     <result column="LoginID" property="loginID" jdbcType="VARCHAR" />
     <result column="Password" property="password" jdbcType="VARCHAR" />
@@ -16,9 +16,9 @@
     <result column="LoginTime" property="loginTime" jdbcType="VARCHAR" />
     <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
     <result column="CreateTime" property="createTime" jdbcType="VARCHAR" />
-    <result column="CreateUser" property="createUser" jdbcType="INTEGER" />
+    <result column="CreateUser" property="createUser" jdbcType="CHAR" />
     <result column="UpdateTime" property="updateTime" jdbcType="VARCHAR" />
-    <result column="UpdateUser" property="updateUser" jdbcType="INTEGER" />
+    <result column="UpdateUser" property="updateUser" jdbcType="CHAR" />
     <result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
     <result column="Version" property="version" jdbcType="INTEGER" />
   </resultMap>
@@ -27,34 +27,34 @@
     Description, LoginTime, Remarks, CreateTime, CreateUser, UpdateTime, UpdateUser, 
     IsDelete, Version
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from core_security_user
-    where UserID = #{userID,jdbcType=INTEGER}
+    from CORE_SECURITY_USER
+    where UserID = #{userID,jdbcType=CHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from core_security_user
-    where UserID = #{userID,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CORE_SECURITY_USER
+    where UserID = #{userID,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="com.iidooo.core.dto.generate.SecurityUser" >
-    insert into core_security_user (UserID, UserName, LoginID, 
+    insert into CORE_SECURITY_USER (UserID, UserName, LoginID, 
       Password, IsDisable, Sex, 
       Birthday, Email, Wechat, 
       Telephone, Description, LoginTime, 
       Remarks, CreateTime, CreateUser, 
       UpdateTime, UpdateUser, IsDelete, 
       Version)
-    values (#{userID,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{loginID,jdbcType=VARCHAR}, 
+    values (#{userID,jdbcType=CHAR}, #{userName,jdbcType=VARCHAR}, #{loginID,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{isDisable,jdbcType=INTEGER}, #{sex,jdbcType=CHAR}, 
       #{birthday,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
       #{telephone,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{loginTime,jdbcType=VARCHAR}, 
-      #{remarks,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=VARCHAR}, #{updateUser,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{remarks,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{createUser,jdbcType=CHAR}, 
+      #{updateTime,jdbcType=VARCHAR}, #{updateUser,jdbcType=CHAR}, #{isDelete,jdbcType=INTEGER}, 
       #{version,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.iidooo.core.dto.generate.SecurityUser" >
-    insert into core_security_user
+    insert into CORE_SECURITY_USER
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userID != null" >
         UserID,
@@ -116,7 +116,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userID != null" >
-        #{userID,jdbcType=INTEGER},
+        #{userID,jdbcType=CHAR},
       </if>
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
@@ -158,13 +158,13 @@
         #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="createUser != null" >
-        #{createUser,jdbcType=INTEGER},
+        #{createUser,jdbcType=CHAR},
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=VARCHAR},
       </if>
       <if test="updateUser != null" >
-        #{updateUser,jdbcType=INTEGER},
+        #{updateUser,jdbcType=CHAR},
       </if>
       <if test="isDelete != null" >
         #{isDelete,jdbcType=INTEGER},
@@ -175,7 +175,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.iidooo.core.dto.generate.SecurityUser" >
-    update core_security_user
+    update CORE_SECURITY_USER
     <set >
       <if test="userName != null" >
         UserName = #{userName,jdbcType=VARCHAR},
@@ -217,13 +217,13 @@
         CreateTime = #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="createUser != null" >
-        CreateUser = #{createUser,jdbcType=INTEGER},
+        CreateUser = #{createUser,jdbcType=CHAR},
       </if>
       <if test="updateTime != null" >
         UpdateTime = #{updateTime,jdbcType=VARCHAR},
       </if>
       <if test="updateUser != null" >
-        UpdateUser = #{updateUser,jdbcType=INTEGER},
+        UpdateUser = #{updateUser,jdbcType=CHAR},
       </if>
       <if test="isDelete != null" >
         IsDelete = #{isDelete,jdbcType=INTEGER},
@@ -232,10 +232,10 @@
         Version = #{version,jdbcType=INTEGER},
       </if>
     </set>
-    where UserID = #{userID,jdbcType=INTEGER}
+    where UserID = #{userID,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.iidooo.core.dto.generate.SecurityUser" >
-    update core_security_user
+    update CORE_SECURITY_USER
     set UserName = #{userName,jdbcType=VARCHAR},
       LoginID = #{loginID,jdbcType=VARCHAR},
       Password = #{password,jdbcType=VARCHAR},
@@ -249,11 +249,11 @@
       LoginTime = #{loginTime,jdbcType=VARCHAR},
       Remarks = #{remarks,jdbcType=VARCHAR},
       CreateTime = #{createTime,jdbcType=VARCHAR},
-      CreateUser = #{createUser,jdbcType=INTEGER},
+      CreateUser = #{createUser,jdbcType=CHAR},
       UpdateTime = #{updateTime,jdbcType=VARCHAR},
-      UpdateUser = #{updateUser,jdbcType=INTEGER},
+      UpdateUser = #{updateUser,jdbcType=CHAR},
       IsDelete = #{isDelete,jdbcType=INTEGER},
       Version = #{version,jdbcType=INTEGER}
-    where UserID = #{userID,jdbcType=INTEGER}
+    where UserID = #{userID,jdbcType=CHAR}
   </update>
 </mapper>

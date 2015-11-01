@@ -1,7 +1,7 @@
 package com.iidooo.core.dto.generate;
 
 public class DictClass {
-    private Integer dictClassID;
+    private String dictClassID;
 
     private String dictTypeCode;
 
@@ -15,22 +15,22 @@ public class DictClass {
 
     private String createTime;
 
-    private Integer createUser;
+    private String createUser;
 
     private String updateTime;
 
-    private Integer updateUser;
+    private String updateUser;
 
     private Integer isDelete;
 
     private Integer version;
 
-    public Integer getDictClassID() {
+    public String getDictClassID() {
         return dictClassID;
     }
 
-    public void setDictClassID(Integer dictClassID) {
-        this.dictClassID = dictClassID;
+    public void setDictClassID(String dictClassID) {
+        this.dictClassID = dictClassID == null ? null : dictClassID.trim();
     }
 
     public String getDictTypeCode() {
@@ -81,12 +81,12 @@ public class DictClass {
         this.createTime = createTime == null ? null : createTime.trim();
     }
 
-    public Integer getCreateUser() {
+    public String getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(Integer createUser) {
-        this.createUser = createUser;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser == null ? null : createUser.trim();
     }
 
     public String getUpdateTime() {
@@ -97,12 +97,12 @@ public class DictClass {
         this.updateTime = updateTime == null ? null : updateTime.trim();
     }
 
-    public Integer getUpdateUser() {
+    public String getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(Integer updateUser) {
-        this.updateUser = updateUser;
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser == null ? null : updateUser.trim();
     }
 
     public Integer getIsDelete() {
