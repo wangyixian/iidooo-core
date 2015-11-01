@@ -113,8 +113,21 @@ public abstract class BaseAction extends ActionSupport {
             logger.fatal(e);
         }
     }
-    
-    public boolean sessionContainKey(String key){
+
+    public void removeSessionKey(String key) {
+        try {
+            ActionContext ac = ActionContext.getContext();
+            Map<String, Object> session = ac.getSession();
+            if (session.containsKey(key)) {
+                session.remove(key);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+        }
+    }
+
+    public boolean sessionContainKey(String key) {
         try {
             ActionContext ac = ActionContext.getContext();
             Map<String, Object> session = ac.getSession();
