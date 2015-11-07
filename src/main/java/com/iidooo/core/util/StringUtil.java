@@ -13,6 +13,26 @@ public class StringUtil {
     private static final Logger logger = Logger.getLogger(StringUtil.class);
 
     /**
+     * 字符串为空判断.
+     *
+     * @param str check对象字符串
+     * @return boolean true:null 空字符串、false:非空字符串
+     */
+    public static boolean isNotBlank(final String str) {
+        try {
+            boolean result = false;
+            if (str != null && str.length() > 0) {
+                result = true;
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            return false;
+        }
+    }
+
+    /**
      * Replace the old string by the array of new strings. The old string's {1}, {2}... are the replace object.
      * 
      * @param old This old string should be replaced.
@@ -41,13 +61,13 @@ public class StringUtil {
             if (str == null || str.isEmpty()) {
                 return "";
             }
-            
+
             String result = str;
             if (str.length() < (start + end)) {
                 logger.warn("The input string is not long enough!");
                 return str;
             }
-            
+
             str.substring(start, end);
             return result;
         } catch (Exception e) {

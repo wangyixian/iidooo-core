@@ -38,5 +38,6 @@
 	<classpathentry kind="lib" path="lib/struts2-core-2.3.24.1.jar"/>
 	<classpathentry kind="lib" path="lib/xwork-core-2.3.24.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="lib/fluent-hc-4.3.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

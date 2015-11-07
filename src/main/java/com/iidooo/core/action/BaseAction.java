@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import com.iidooo.core.util.StringUtil;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -76,6 +77,23 @@ public abstract class BaseAction extends ActionSupport {
             e.printStackTrace();
             logger.fatal(e);
             return null;
+        }
+    }
+
+    public String getRequestURL() {
+        try {
+            HttpServletRequest request = this.getRequest();
+
+            StringBuffer url = request.getRequestURL();
+            String queryString = request.getQueryString();
+            if (StringUtil.isNotBlank(queryString)) {
+                url.append("?").append(queryString);
+            }
+            return url.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            return "";
         }
     }
 

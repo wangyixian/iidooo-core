@@ -8,16 +8,6 @@ public class WeChatConstant {
     public static final String MSG_SIGNATURE = "msg_signature";
 
     /**
-     * 时间戳
-     */
-    public static final String TIMESTAMP = "timestamp";
-
-    /**
-     * 随机数
-     */
-    public static final String NONCE = "nonce";
-
-    /**
      * 加密的随机字符串，以msg_encrypt格式提供。需要解密并返回echostr铭文，解密后的random, msg_len, msg,
      * $CorpID四个字段，其中msg即为echostr明文
      */
@@ -28,6 +18,16 @@ public class WeChatConstant {
     public static final String KEY_ACCESS_TOKEN = "access_token";
 
     public static final String KEY_TICKET = "ticket";
+    
+    public static final String KEY_JSAPI_TICKET = "jsapi_ticket";
+    
+    public static final String KEY_SIGNATURE = "signature";
+    
+    public static final String KEY_NONCESTR = "noncestr";
+    
+    public static final String KEY_TIMESTAMP = "timestamp";
+    
+    public static final String KEY_URL = "url";
     
     public static final String ENCODING_AES_KEY = "WBjpwpGxL7OKlygLbErnnllgg52RVxiQXrfjj52jnvc";
     
