@@ -1,6 +1,6 @@
-package com.iidooo.core.constant;
+package com.iidooo.weixin.constant;
 
-public class WeChatConstant {
+public class WeixinConstant {
 
     /**
      * 微信加密签名，msg_signature结合了企业填写的token，请求中的timestamp, nonce参数，加密的消息体
@@ -15,25 +15,31 @@ public class WeChatConstant {
     
     public static final String TOKEN = "6zanHbLP94rXAsq1";
     
+    public static final String KEY_ERR_CODE = "errcode";
+    
+    public static final String KEY_ERR_MSG = "errmsg";
+    
     public static final String KEY_ACCESS_TOKEN = "access_token";
+    
+    public static final String KEY_EXPIRES_IN = "expires_in";
 
     public static final String KEY_TICKET = "ticket";
     
     public static final String KEY_JSAPI_TICKET = "jsapi_ticket";
+//    
+//    public static final String KEY_SIGNATURE = "signature";
+//    
+//    public static final String KEY_NONCESTR = "noncestr";
+//    
+//    public static final String KEY_TIMESTAMP = "timestamp";
+//    
+//    public static final String KEY_URL = "url";
     
-    public static final String KEY_SIGNATURE = "signature";
+    public static final String KEY_CORPID = "corpID";
     
-    public static final String KEY_NONCESTR = "noncestr";
-    
-    public static final String KEY_TIMESTAMP = "timestamp";
-    
-    public static final String KEY_URL = "url";
+    public static final String KEY_SECRET = "secret";
     
     public static final String ENCODING_AES_KEY = "WBjpwpGxL7OKlygLbErnnllgg52RVxiQXrfjj52jnvc";
-    
-    public static final String CORPID = "wx837891e149859457";
-    
-    public static final String SECRET = "9d3fJfPmBMfXM6lfOdWAIu09jBhvSGHXGpXJi6ez-ApYNrUA2zN12RpixZiU5_l9";
     
     public static final String API_GET_ACCESS_TOKEN = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={0}&corpsecret={1}";
 

@@ -31,6 +31,20 @@ public class StringUtil {
             return false;
         }
     }
+    
+    public static boolean isBlank(final String str){
+        try {
+            boolean result = false;
+            if (str == null || str.length() <= 0) {
+                result = true;
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            return true;
+        }
+    }
 
     /**
      * Replace the old string by the array of new strings. The old string's {1}, {2}... are the replace object.
