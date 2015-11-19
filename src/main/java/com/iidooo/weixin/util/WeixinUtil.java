@@ -61,7 +61,7 @@ public class WeixinUtil {
         try {
 
             Signature result = new Signature();
-            
+
             String nonce_str = UUID.randomUUID().toString();
             long timestamp = System.currentTimeMillis() / 1000;
             String string1;
@@ -87,6 +87,26 @@ public class WeixinUtil {
             e.printStackTrace();
             logger.fatal(e);
             return null;
+        }
+    }
+
+    public static String getUserInfo(String accessToken, String code) {
+
+        String url = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token={0}&code={1}&agentid=2";
+        url = url.replace("{0}", accessToken);
+        url = url.replace("{1}", code);
+
+        try {
+            String response = HttpUtil.doGet(url);
+
+            JSONObject jsonObject = JSONObject.fromObject(response);
+            String userInfo = (String) jsonObject.get("UserId");
+
+            logger.info(userInfo);
+
+            return userInfo;
+        } catch (Exception e) {
+            return "";
         }
     }
 
