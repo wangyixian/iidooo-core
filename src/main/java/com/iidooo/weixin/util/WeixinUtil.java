@@ -100,9 +100,10 @@ public class WeixinUtil {
             String response = HttpUtil.doGet(url);
 
             JSONObject jsonObject = JSONObject.fromObject(response);
-            String userInfo = (String) jsonObject.get("UserId");
-
-            logger.info(userInfo);
+            String userInfo = (String) jsonObject.get("OpenId");
+            if (StringUtil.isBlank(userInfo)) {
+                userInfo = (String) jsonObject.get("UserId");
+            } 
 
             return userInfo;
         } catch (Exception e) {

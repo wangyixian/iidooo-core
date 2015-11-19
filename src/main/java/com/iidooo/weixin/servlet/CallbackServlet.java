@@ -32,11 +32,13 @@ public class CallbackServlet extends HttpServlet{
             String aesKey = req.getParameter(WeixinConstant.KEY_AES_KEY);
             String coprID = req.getParameter(WeixinConstant.KEY_CORPID);
             
-            WXBizMsgCrypt wxcpt = new WXBizMsgCrypt(token, aesKey, coprID);
-            String sEchoStr = wxcpt.VerifyURL(sVerifyMsgSig, sVerifyTimeStamp, sVerifyNonce, sVerifyEchoStr);
-            System.out.println("verifyurl echostr: " + sEchoStr);
+//            WXBizMsgCrypt wxcpt = new WXBizMsgCrypt(token, aesKey, coprID);
+//            String sEchoStr = wxcpt.VerifyURL(sVerifyMsgSig, sVerifyTimeStamp, sVerifyNonce, sVerifyEchoStr);
+//            System.out.println("verifyurl echostr: " + sEchoStr);
 
-            resp.getWriter().print(sEchoStr);
+//            resp.getWriter().print(sEchoStr);
+            
+            resp.getWriter().print("success");
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);

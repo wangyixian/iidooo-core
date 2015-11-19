@@ -32,8 +32,8 @@ public class HttpUtil {
     public static String sendPostRequest() {
         return "test";
     }
-    
-    public static String doGet(String url){
+
+    public static String doGet(String url) {
         JSONObject result = new JSONObject();
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -82,11 +82,118 @@ public class HttpUtil {
         return result.toString();
     }
 
+    public static String doPost(String url) {
+
+        JSONObject result = new JSONObject();
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+
+        HttpPost httpPost = new HttpPost(url);
+
+        httpPost.addHeader(HTTP.CONTENT_TYPE, HttpConstant.CONTENT_TYPE_JSON);
+        CloseableHttpResponse response = null;
+        try {
+            response = httpclient.execute(httpPost);
+
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+
+                HttpEntity entity = response.getEntity();
+                InputStreamReader inputStreamReader = new InputStreamReader(entity.getContent(), HttpConstant.CHARACTER_ENCODING_UTF8);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String line = null;
+                StringBuilder httpContent = new StringBuilder();
+                while ((line = bufferedReader.readLine()) != null) {
+                    httpContent.append(line + "\n");
+                }
+
+                result = JSONObject.fromObject(httpContent.toString());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+        } finally {
+            if (response != null) {
+                try {
+                    response.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.fatal(e);
+                }
+            }
+            if (httpclient != null) {
+                try {
+                    httpclient.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.fatal(e);
+                }
+            }
+        }
+
+        return result.toString();
+    }
+
+    public static String doPost(String url, String data) {
+
+        JSONObject result = new JSONObject();
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+
+        HttpPost httpPost = new HttpPost(url);
+
+        httpPost.addHeader(HTTP.CONTENT_TYPE, HttpConstant.CONTENT_TYPE_JSON);
+        CloseableHttpResponse response = null;
+        try {
+            StringEntity stringEntity = new StringEntity(data);
+            stringEntity.setContentEncoding(HttpConstant.CHARACTER_ENCODING_UTF8);
+            stringEntity.setContentType(HttpConstant.CONTENT_TYPE_JSON);
+            httpPost.setEntity(stringEntity);
+            response = httpclient.execute(httpPost);
+
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+
+                HttpEntity entity = response.getEntity();
+                InputStreamReader inputStreamReader = new InputStreamReader(entity.getContent(), HttpConstant.CHARACTER_ENCODING_UTF8);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String line = null;
+                StringBuilder httpContent = new StringBuilder();
+                while ((line = bufferedReader.readLine()) != null) {
+                    httpContent.append(line + "\n");
+                }
+
+                result = JSONObject.fromObject(httpContent.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+        } finally {
+            if (response != null) {
+                try {
+                    response.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.fatal(e);
+                }
+            }
+            if (httpclient != null) {
+                try {
+                    httpclient.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.fatal(e);
+                }
+            }
+        }
+
+        return result.toString();
+    }
+
     public static String doGet(String url, String method, String data) {
         JSONObject result = new JSONObject();
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        
+
         // Set the get request params
         JSONObject jsonObject = JSONObject.fromObject(data);
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -197,5 +304,5 @@ public class HttpUtil {
 
         return result.toString();
     }
-    
+
 }
