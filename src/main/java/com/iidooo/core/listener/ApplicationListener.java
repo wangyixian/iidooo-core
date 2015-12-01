@@ -1,25 +1,8 @@
-//package com.iidooo.core.listener;
-//
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//
-//import javax.servlet.ServletContext;
-//import javax.servlet.ServletContextEvent;
-//
-//import org.apache.log4j.Logger;
-//
-//import com.iidooo.core.constant.ClassConstant;
-//import com.iidooo.core.constant.DictConstant;
-//import com.iidooo.core.constant.SessionConstant;
-//import com.iidooo.core.dao.extend.DictItemDao;
-//import com.iidooo.core.dao.extend.SecurityResDao;
-//import com.iidooo.core.dto.extend.DictItemDto;
-//import com.iidooo.core.dto.extend.SecurityResDto;
-//import com.iidooo.core.util.SpringUtil;
-//
-//public class ApplicationListener extends BaseListener {
-//
+package com.iidooo.core.listener;
+
+
+public class ApplicationListener {
+
 //    /**
 //     * 
 //     */
@@ -144,4 +127,4 @@
 //            logger.fatal(e);
 //        }
 //    }
-//}
+}
