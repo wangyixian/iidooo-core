@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.iidooo.core.dao.generate.DictClassMapper" >
   <resultMap id="BaseResultMap" type="com.iidooo.core.dto.generate.DictClass" >
-    <id column="DictClassID" property="dictClassID" jdbcType="CHAR" />
+    <id column="DictClassID" property="dictClassID" jdbcType="INTEGER" />
     <result column="DictTypeCode" property="dictTypeCode" jdbcType="VARCHAR" />
     <result column="DictClassCode" property="dictClassCode" jdbcType="VARCHAR" />
     <result column="DictClassName" property="dictClassName" jdbcType="VARCHAR" />
     <result column="Sequence" property="sequence" jdbcType="INTEGER" />
     <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
     <result column="CreateTime" property="createTime" jdbcType="VARCHAR" />
-    <result column="CreateUser" property="createUser" jdbcType="CHAR" />
+    <result column="CreateUser" property="createUser" jdbcType="INTEGER" />
     <result column="UpdateTime" property="updateTime" jdbcType="VARCHAR" />
-    <result column="UpdateUser" property="updateUser" jdbcType="CHAR" />
+    <result column="UpdateUser" property="updateUser" jdbcType="INTEGER" />
     <result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
     <result column="Version" property="version" jdbcType="INTEGER" />
   </resultMap>
@@ -19,15 +19,15 @@
     DictClassID, DictTypeCode, DictClassCode, DictClassName, Sequence, Remarks, CreateTime, 
     CreateUser, UpdateTime, UpdateUser, IsDelete, Version
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from CORE_DICT_CLASS
-    where DictClassID = #{dictClassID,jdbcType=CHAR}
+    where DictClassID = #{dictClassID,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from CORE_DICT_CLASS
-    where DictClassID = #{dictClassID,jdbcType=CHAR}
+    where DictClassID = #{dictClassID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.iidooo.core.dto.generate.DictClass" >
     insert into CORE_DICT_CLASS (DictClassID, DictTypeCode, DictClassCode, 
@@ -35,10 +35,10 @@
       CreateTime, CreateUser, UpdateTime, 
       UpdateUser, IsDelete, Version
       )
-    values (#{dictClassID,jdbcType=CHAR}, #{dictTypeCode,jdbcType=VARCHAR}, #{dictClassCode,jdbcType=VARCHAR}, 
+    values (#{dictClassID,jdbcType=INTEGER}, #{dictTypeCode,jdbcType=VARCHAR}, #{dictClassCode,jdbcType=VARCHAR}, 
       #{dictClassName,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=VARCHAR}, #{createUser,jdbcType=CHAR}, #{updateTime,jdbcType=VARCHAR}, 
-      #{updateUser,jdbcType=CHAR}, #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}
+      #{createTime,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, #{updateTime,jdbcType=VARCHAR}, 
+      #{updateUser,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.iidooo.core.dto.generate.DictClass" >
@@ -83,7 +83,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="dictClassID != null" >
-        #{dictClassID,jdbcType=CHAR},
+        #{dictClassID,jdbcType=INTEGER},
       </if>
       <if test="dictTypeCode != null" >
         #{dictTypeCode,jdbcType=VARCHAR},
@@ -104,13 +104,13 @@
         #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="createUser != null" >
-        #{createUser,jdbcType=CHAR},
+        #{createUser,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=VARCHAR},
       </if>
       <if test="updateUser != null" >
-        #{updateUser,jdbcType=CHAR},
+        #{updateUser,jdbcType=INTEGER},
       </if>
       <if test="isDelete != null" >
         #{isDelete,jdbcType=INTEGER},
@@ -142,13 +142,13 @@
         CreateTime = #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="createUser != null" >
-        CreateUser = #{createUser,jdbcType=CHAR},
+        CreateUser = #{createUser,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null" >
         UpdateTime = #{updateTime,jdbcType=VARCHAR},
       </if>
       <if test="updateUser != null" >
-        UpdateUser = #{updateUser,jdbcType=CHAR},
+        UpdateUser = #{updateUser,jdbcType=INTEGER},
       </if>
       <if test="isDelete != null" >
         IsDelete = #{isDelete,jdbcType=INTEGER},
@@ -157,7 +157,7 @@
         Version = #{version,jdbcType=INTEGER},
       </if>
     </set>
-    where DictClassID = #{dictClassID,jdbcType=CHAR}
+    where DictClassID = #{dictClassID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.iidooo.core.dto.generate.DictClass" >
     update CORE_DICT_CLASS
@@ -167,11 +167,11 @@
       Sequence = #{sequence,jdbcType=INTEGER},
       Remarks = #{remarks,jdbcType=VARCHAR},
       CreateTime = #{createTime,jdbcType=VARCHAR},
-      CreateUser = #{createUser,jdbcType=CHAR},
+      CreateUser = #{createUser,jdbcType=INTEGER},
       UpdateTime = #{updateTime,jdbcType=VARCHAR},
-      UpdateUser = #{updateUser,jdbcType=CHAR},
+      UpdateUser = #{updateUser,jdbcType=INTEGER},
       IsDelete = #{isDelete,jdbcType=INTEGER},
       Version = #{version,jdbcType=INTEGER}
-    where DictClassID = #{dictClassID,jdbcType=CHAR}
+    where DictClassID = #{dictClassID,jdbcType=INTEGER}
   </update>
 </mapper>

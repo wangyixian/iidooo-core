@@ -1,48 +1,48 @@
 package com.iidooo.core.dto.generate;
 
 public class SecurityRoleRes {
-    private String roleResID;
+    private Integer roleResID;
 
-    private String roleID;
+    private Integer roleID;
 
-    private String resID;
+    private Integer resID;
 
     private String remarks;
 
     private String createTime;
 
-    private String createUser;
+    private Integer createUser;
 
     private String updateTime;
 
-    private String updateUser;
+    private Integer updateUser;
 
     private Integer isDelete;
 
     private Integer version;
 
-    public String getRoleResID() {
+    public Integer getRoleResID() {
         return roleResID;
     }
 
-    public void setRoleResID(String roleResID) {
-        this.roleResID = roleResID == null ? null : roleResID.trim();
+    public void setRoleResID(Integer roleResID) {
+        this.roleResID = roleResID;
     }
 
-    public String getRoleID() {
+    public Integer getRoleID() {
         return roleID;
     }
 
-    public void setRoleID(String roleID) {
-        this.roleID = roleID == null ? null : roleID.trim();
+    public void setRoleID(Integer roleID) {
+        this.roleID = roleID;
     }
 
-    public String getResID() {
+    public Integer getResID() {
         return resID;
     }
 
-    public void setResID(String resID) {
-        this.resID = resID == null ? null : resID.trim();
+    public void setResID(Integer resID) {
+        this.resID = resID;
     }
 
     public String getRemarks() {
@@ -61,12 +61,12 @@ public class SecurityRoleRes {
         this.createTime = createTime == null ? null : createTime.trim();
     }
 
-    public String getCreateUser() {
+    public Integer getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser == null ? null : createUser.trim();
+    public void setCreateUser(Integer createUser) {
+        this.createUser = createUser;
     }
 
     public String getUpdateTime() {
@@ -77,12 +77,12 @@ public class SecurityRoleRes {
         this.updateTime = updateTime == null ? null : updateTime.trim();
     }
 
-    public String getUpdateUser() {
+    public Integer getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser == null ? null : updateUser.trim();
+    public void setUpdateUser(Integer updateUser) {
+        this.updateUser = updateUser;
     }
 
     public Integer getIsDelete() {

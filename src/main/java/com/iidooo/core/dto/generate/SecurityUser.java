@@ -1,7 +1,7 @@
 package com.iidooo.core.dto.generate;
 
 public class SecurityUser {
-    private String userID;
+    private Integer userID;
 
     private String userName;
 
@@ -17,34 +17,32 @@ public class SecurityUser {
 
     private String email;
 
-    private String wechat;
+    private String weixinID;
 
     private String telephone;
 
     private String description;
 
-    private String loginTime;
-
     private String remarks;
 
     private String createTime;
 
-    private String createUser;
+    private Integer createUser;
 
     private String updateTime;
 
-    private String updateUser;
+    private Integer updateUser;
 
     private Integer isDelete;
 
     private Integer version;
 
-    public String getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID == null ? null : userID.trim();
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
 
     public String getUserName() {
@@ -103,12 +101,12 @@ public class SecurityUser {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getWechat() {
-        return wechat;
+    public String getWeixinID() {
+        return weixinID;
     }
 
-    public void setWechat(String wechat) {
-        this.wechat = wechat == null ? null : wechat.trim();
+    public void setWeixinID(String weixinID) {
+        this.weixinID = weixinID == null ? null : weixinID.trim();
     }
 
     public String getTelephone() {
@@ -127,14 +125,6 @@ public class SecurityUser {
         this.description = description == null ? null : description.trim();
     }
 
-    public String getLoginTime() {
-        return loginTime;
-    }
-
-    public void setLoginTime(String loginTime) {
-        this.loginTime = loginTime == null ? null : loginTime.trim();
-    }
-
     public String getRemarks() {
         return remarks;
     }
@@ -151,12 +141,12 @@ public class SecurityUser {
         this.createTime = createTime == null ? null : createTime.trim();
     }
 
-    public String getCreateUser() {
+    public Integer getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser == null ? null : createUser.trim();
+    public void setCreateUser(Integer createUser) {
+        this.createUser = createUser;
     }
 
     public String getUpdateTime() {
@@ -167,12 +157,12 @@ public class SecurityUser {
         this.updateTime = updateTime == null ? null : updateTime.trim();
     }
 
-    public String getUpdateUser() {
+    public Integer getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser == null ? null : updateUser.trim();
+    public void setUpdateUser(Integer updateUser) {
+        this.updateUser = updateUser;
     }
 
     public Integer getIsDelete() {

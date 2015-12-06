@@ -3,13 +3,13 @@ package com.iidooo.core.dao.generate;
 import com.iidooo.core.dto.generate.DictItem;
 
 public interface DictItemMapper {
-    int deleteByPrimaryKey(String dictItemID);
+    int deleteByPrimaryKey(Integer dictItemID);
 
     int insert(DictItem record);
 
     int insertSelective(DictItem record);
 
-    DictItem selectByPrimaryKey(String dictItemID);
+    DictItem selectByPrimaryKey(Integer dictItemID);
 
     int updateByPrimaryKeySelective(DictItem record);
 

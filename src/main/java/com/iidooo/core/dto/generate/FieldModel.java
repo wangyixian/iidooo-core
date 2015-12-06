@@ -1,11 +1,13 @@
 package com.iidooo.core.dto.generate;
 
-public class SecurityUserRole {
-    private Integer userRoleID;
+public class FieldModel {
+    private Integer modelID;
 
-    private Integer userID;
+    private String modelName;
 
-    private Integer roleID;
+    private String tableName;
+
+    private Integer sequence;
 
     private String remarks;
 
@@ -21,28 +23,36 @@ public class SecurityUserRole {
 
     private Integer version;
 
-    public Integer getUserRoleID() {
-        return userRoleID;
+    public Integer getModelID() {
+        return modelID;
     }
 
-    public void setUserRoleID(Integer userRoleID) {
-        this.userRoleID = userRoleID;
+    public void setModelID(Integer modelID) {
+        this.modelID = modelID;
     }
 
-    public Integer getUserID() {
-        return userID;
+    public String getModelName() {
+        return modelName;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public void setModelName(String modelName) {
+        this.modelName = modelName == null ? null : modelName.trim();
     }
 
-    public Integer getRoleID() {
-        return roleID;
+    public String getTableName() {
+        return tableName;
     }
 
-    public void setRoleID(Integer roleID) {
-        this.roleID = roleID;
+    public void setTableName(String tableName) {
+        this.tableName = tableName == null ? null : tableName.trim();
+    }
+
+    public Integer getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
     }
 
     public String getRemarks() {

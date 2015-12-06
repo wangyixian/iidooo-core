@@ -1,7 +1,7 @@
 package com.iidooo.core.dto.generate;
 
 public class SecurityRole {
-    private String roleID;
+    private Integer roleID;
 
     private String roleName;
 
@@ -9,22 +9,22 @@ public class SecurityRole {
 
     private String createTime;
 
-    private String createUser;
+    private Integer createUser;
 
     private String updateTime;
 
-    private String updateUser;
+    private Integer updateUser;
 
     private Integer isDelete;
 
     private Integer version;
 
-    public String getRoleID() {
+    public Integer getRoleID() {
         return roleID;
     }
 
-    public void setRoleID(String roleID) {
-        this.roleID = roleID == null ? null : roleID.trim();
+    public void setRoleID(Integer roleID) {
+        this.roleID = roleID;
     }
 
     public String getRoleName() {
@@ -51,12 +51,12 @@ public class SecurityRole {
         this.createTime = createTime == null ? null : createTime.trim();
     }
 
-    public String getCreateUser() {
+    public Integer getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser == null ? null : createUser.trim();
+    public void setCreateUser(Integer createUser) {
+        this.createUser = createUser;
     }
 
     public String getUpdateTime() {
@@ -67,12 +67,12 @@ public class SecurityRole {
         this.updateTime = updateTime == null ? null : updateTime.trim();
     }
 
-    public String getUpdateUser() {
+    public Integer getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser == null ? null : updateUser.trim();
+    public void setUpdateUser(Integer updateUser) {
+        this.updateUser = updateUser;
     }
 
     public Integer getIsDelete() {
