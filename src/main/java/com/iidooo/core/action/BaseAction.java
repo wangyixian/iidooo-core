@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import com.iidooo.core.dto.PageDto;
 import com.iidooo.core.util.StringUtil;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,10 +20,6 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author wangyixian
  * 
  */
-/**
- * @author wangyixian
- *
- */
 public abstract class BaseAction extends ActionSupport {
 
     private static final Logger logger = Logger.getLogger(BaseAction.class);
@@ -31,6 +28,38 @@ public abstract class BaseAction extends ActionSupport {
 	 * 
 	 */
     private static final long serialVersionUID = 1L;
+
+    public static String RESULT_SECURITY = "security";
+    
+    private String actionName;
+
+    private String actionURL;
+    
+    private PageDto page;
+
+    public String getActionName() {
+        return actionName;
+    }
+
+    public void setActionName(String actionName) {
+        this.actionName = actionName;
+    }
+
+    public String getActionURL() {
+        return actionURL;
+    }
+
+    public void setActionURL(String actionURL) {
+        this.actionURL = actionURL;
+    }
+    
+    public PageDto getPage() {
+        return page;
+    }
+
+    public void setPage(PageDto page) {
+        this.page = page;
+    }
 
     /**
      * Get the session
@@ -197,5 +226,48 @@ public abstract class BaseAction extends ActionSupport {
     public ServletContext getServletContext() {
         ServletContext servletContext = ServletActionContext.getServletContext();
         return servletContext;
+    }
+    
+    /**
+     * Execute the page action.
+     * 
+     * @param count The record count of data
+     * @param page The input page object
+     * @return The new page object
+     */
+    protected void executePage(int count) {
+        try {
+
+            if (page == null) {
+                page = new PageDto(); 
+                
+                // Set the page default size
+//                @SuppressWarnings("unchecked")
+//                Map<String, DictItemDto> pageDictItemMap = (Map<String, DictItemDto>) sc.getAttribute(DictConstant.DICT_CLASS_CORE_PAGE);
+//                DictItemDto pageSize = pageDictItemMap.get(DictConstant.DICT_ITEM_DEFAULT_PAGE_SIZE);
+//                page.setPageSize(Integer.parseInt(pageSize.getDictItemValue()));
+//            } else {
+//                result.setSortField(page.getSortField());
+//                result.setSortType(page.getSortType());
+//                result.setCurrentPage(page.getCurrentPage());
+            }
+
+            // Set paging dto fields.
+            page.setPageSize(page.getPageSize());
+            page.setRecordSum(count);
+
+            int pageSum = count / page.getPageSize();
+            if (count % page.getPageSize() > 0) {
+                pageSum++;
+            }
+            page.setPageSum(pageSum);
+
+            page.setStart((page.getCurrentPage() - 1) * page.getPageSize());
+            page.setEnd(page.getStart() + page.getPageSize());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e.toString());
+        }
     }
 }

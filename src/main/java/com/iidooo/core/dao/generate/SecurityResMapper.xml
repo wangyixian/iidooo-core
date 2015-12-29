@@ -7,7 +7,6 @@
     <result column="ResName" property="resName" jdbcType="VARCHAR" />
     <result column="ResURL" property="resURL" jdbcType="VARCHAR" />
     <result column="Sequence" property="sequence" jdbcType="INTEGER" />
-    <result column="Invisible" property="invisible" jdbcType="INTEGER" />
     <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
     <result column="CreateTime" property="createTime" jdbcType="VARCHAR" />
     <result column="CreateUser" property="createUser" jdbcType="INTEGER" />
@@ -17,8 +16,8 @@
     <result column="Version" property="version" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ResID, ParentID, ResName, ResURL, Sequence, Invisible, Remarks, CreateTime, CreateUser, 
-    UpdateTime, UpdateUser, IsDelete, Version
+    ResID, ParentID, ResName, ResURL, Sequence, Remarks, CreateTime, CreateUser, UpdateTime, 
+    UpdateUser, IsDelete, Version
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,15 +31,15 @@
   </delete>
   <insert id="insert" parameterType="com.iidooo.core.dto.generate.SecurityRes" >
     insert into CORE_SECURITY_RES (ResID, ParentID, ResName, 
-      ResURL, Sequence, Invisible, 
-      Remarks, CreateTime, CreateUser, 
-      UpdateTime, UpdateUser, IsDelete, 
-      Version)
+      ResURL, Sequence, Remarks, 
+      CreateTime, CreateUser, UpdateTime, 
+      UpdateUser, IsDelete, Version
+      )
     values (#{resID,jdbcType=INTEGER}, #{parentID,jdbcType=INTEGER}, #{resName,jdbcType=VARCHAR}, 
-      #{resURL,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, #{invisible,jdbcType=INTEGER}, 
-      #{remarks,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=VARCHAR}, #{updateUser,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
-      #{version,jdbcType=INTEGER})
+      #{resURL,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, #{updateTime,jdbcType=VARCHAR}, 
+      #{updateUser,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.iidooo.core.dto.generate.SecurityRes" >
     insert into CORE_SECURITY_RES
@@ -59,9 +58,6 @@
       </if>
       <if test="sequence != null" >
         Sequence,
-      </if>
-      <if test="invisible != null" >
-        Invisible,
       </if>
       <if test="remarks != null" >
         Remarks,
@@ -101,9 +97,6 @@
       <if test="sequence != null" >
         #{sequence,jdbcType=INTEGER},
       </if>
-      <if test="invisible != null" >
-        #{invisible,jdbcType=INTEGER},
-      </if>
       <if test="remarks != null" >
         #{remarks,jdbcType=VARCHAR},
       </if>
@@ -142,9 +135,6 @@
       <if test="sequence != null" >
         Sequence = #{sequence,jdbcType=INTEGER},
       </if>
-      <if test="invisible != null" >
-        Invisible = #{invisible,jdbcType=INTEGER},
-      </if>
       <if test="remarks != null" >
         Remarks = #{remarks,jdbcType=VARCHAR},
       </if>
@@ -175,7 +165,6 @@
       ResName = #{resName,jdbcType=VARCHAR},
       ResURL = #{resURL,jdbcType=VARCHAR},
       Sequence = #{sequence,jdbcType=INTEGER},
-      Invisible = #{invisible,jdbcType=INTEGER},
       Remarks = #{remarks,jdbcType=VARCHAR},
       CreateTime = #{createTime,jdbcType=VARCHAR},
       CreateUser = #{createUser,jdbcType=INTEGER},

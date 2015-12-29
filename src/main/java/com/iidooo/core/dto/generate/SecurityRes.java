@@ -11,8 +11,6 @@ public class SecurityRes {
 
     private Integer sequence;
 
-    private Integer invisible;
-
     private String remarks;
 
     private String createTime;
@@ -65,14 +63,6 @@ public class SecurityRes {
 
     public void setSequence(Integer sequence) {
         this.sequence = sequence;
-    }
-
-    public Integer getInvisible() {
-        return invisible;
-    }
-
-    public void setInvisible(Integer invisible) {
-        this.invisible = invisible;
     }
 
     public String getRemarks() {

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iidooo.core.dao.extend.SecurityRoleDao" >
+  <resultMap id="BaseResultMap" type="com.iidooo.core.dto.extend.SecurityRoleDto" >
+    <id column="RoleID" property="roleID" jdbcType="INTEGER" />
+    <result column="RoleName" property="roleName" jdbcType="VARCHAR" />
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="CreateTime" property="createTime" jdbcType="VARCHAR" />
+    <result column="CreateUser" property="createUser" jdbcType="INTEGER" />
+    <result column="UpdateTime" property="updateTime" jdbcType="VARCHAR" />
+    <result column="UpdateUser" property="updateUser" jdbcType="INTEGER" />
+    <result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
+    <result column="Version" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    R.RoleID, R.RoleName, R.Remarks, R.CreateTime, R.CreateUser, R.UpdateTime, R.UpdateUser, R.IsDelete, 
+    R.Version
+  </sql>
+  <select id="selectByUserID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM CORE_SECURITY_ROLE R
+    JOIN CORE_SECURITY_USER_ROLE UR
+    ON R.RoleID = UR.RoleID 
+    AND UR.UserID = #{userID,jdbcType=INTEGER}
+    AND R.IsDelete = 0 AND UR.IsDelete = 0
+  </select>
+</mapper>
