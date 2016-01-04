@@ -5,7 +5,7 @@
 	<jsp-version>1.0</jsp-version>
 	<short-name>core-tags</short-name>
 	<uri>/core-tags</uri>
-	
+
 	<tag>
 		<name>dictItemList</name>
 		<tag-class>com.iidooo.core.tag.DictItemListTag</tag-class>
@@ -92,5 +92,26 @@
 		<name>breadCrumb</name>
 		<tag-class>com.iidooo.core.tag.BreadCrumbTag</tag-class>
 		<body-content>empty</body-content>
+	</tag>
+
+	<tag>
+		<name>tree</name>
+		<tag-class>com.iidooo.core.tag.TreeTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cssClass</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>root</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 </taglib>
