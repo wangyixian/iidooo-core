@@ -29,15 +29,16 @@ public class WeiXinListener extends HttpServlet implements ServletContextListene
     public void contextInitialized(ServletContextEvent arg0) {
         try {
             ServletContext sc = arg0.getServletContext();
-            String corpID = sc.getInitParameter(WeixinConstant.KEY_CORPID);
-            String secret = sc.getInitParameter(WeixinConstant.KEY_SECRET);
-
+            String appID = sc.getInitParameter(WeixinConstant.KEY_APP_ID);
+            String appSecrect = sc.getInitParameter(WeixinConstant.KEY_APP_SECRET);
+            String isCorp = sc.getInitParameter(WeixinConstant.KEY_IS_CORP);
+            
             // 未配置corpID、secret时给出提示
-            if (StringUtil.isBlank(corpID) || StringUtil.isBlank(secret)) {
+            if (StringUtil.isBlank(appID) || StringUtil.isBlank(appSecrect)) {
                 logger.error("corpID and secret configuration error, please check carefully.");
             } else {
                 // 启动定时获取access_token的线程
-                Runnable thread = new WeixinThread(corpID, secret);
+                Runnable thread = new WeixinThread(appID, appSecrect, isCorp);
                 new Thread(thread).start();
             }
         } catch (Exception e) {

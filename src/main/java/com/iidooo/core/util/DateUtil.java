@@ -2,13 +2,27 @@ package com.iidooo.core.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
 import org.apache.log4j.Logger;
 
-
 public class DateUtil {
     private static final Logger logger = Logger.getLogger(DateUtil.class);
+
+    public static final String DATE_TIME_FULL_HYPHEN = "yyyy-MM-dd HH:mm:ss:ssssss";
+
+    public static final String DATE_TIME_HYPHEN = "yyyy-MM-dd HH:mm:ss";
+
+    public static final String DATE_HYPHEN = "yyyy-MM-dd";
+
+    public static final String DATE_TIME_FULL_SLASH = "yyyy/MM/dd HH:mm:ss:ssssss";
+
+    public static final String DATE_TIME_SLASH = "yyyy/MM/dd HH:mm:ss";
+
+    public static final String DATE_SLASH = "yyyy/MM/dd";
+
+    public static final String DATE_SIMPLE = "yyyyMMdd";
+
+    public static final String DATE_TIME_FULL_SIMPLE = "yyyyMMddHHmmssssssss";
 
     public static String getNow(String format) {
         try {
@@ -17,7 +31,6 @@ public class DateUtil {
             String now = sdf.format(nowDate);
             return now;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.fatal(e);
             return "";
         }
@@ -35,19 +48,39 @@ public class DateUtil {
             String outputStr = sdf.format(inputDate);
             return outputStr;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.fatal(e);
             return "";
         }
     }
-    
-    public static void main(String[] args){
-//        String now = DateUtil.getNow(DateTimeFormat.DATE_TIME_FULL_HYPHEN);
-//        System.out.println(now);
-        
-        Random random = new Random();
-        for(int i = 0; i < 100; i++){
-            System.out.println(random.nextInt(5) + 1);
+
+    /**
+     * 两个日期相减
+     * 
+     * @param subtrahend 减数日期，格式：yyyyMMddHHmmssssssss
+     * @param minuend 被减数日期，格式：yyyyMMddHHmmssssssss
+     * @return 相差多少毫秒
+     */
+    public static int subtract(String subtrahendDate, String subtrahendFormat, String minuendDate, String minuendFormat) {
+        try {
+            // 得到减数日期值
+            int subtrahend = 0;
+            if (!subtrahendFormat.equals(DateUtil.DATE_TIME_FULL_SIMPLE)) {
+                subtrahendDate = DateUtil.format(subtrahendDate, subtrahendFormat, DateUtil.DATE_TIME_FULL_SIMPLE);
+                subtrahend = Integer.parseInt(subtrahendDate);
+            }
+            
+            // 得到被减数日期值
+            int minuend = 0;
+            if (!minuendFormat.equals(DateUtil.DATE_TIME_FULL_SIMPLE)) {
+                minuendDate = DateUtil.format(minuendDate, minuendFormat, DateUtil.DATE_TIME_FULL_SIMPLE);
+                minuend = Integer.parseInt(minuendDate);
+            }
+            
+            return subtrahend - minuend;
+
+        } catch (Exception e) {
+            logger.fatal(e);
+            return 0;
         }
     }
 }

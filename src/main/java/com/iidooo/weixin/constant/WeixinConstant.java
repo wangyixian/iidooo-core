@@ -40,11 +40,18 @@ public class WeixinConstant {
     //
     // public static final String KEY_URL = "url";
 
-    public static final String KEY_CORPID = "corpID";
-
-    public static final String KEY_SECRET = "secret";
-
-    public static final String API_GET_ACCESS_TOKEN = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={0}&corpsecret={1}";
+    // APP ID(应用ID), 如果是企业号，就是CORPID
+    public static final String KEY_APP_ID = "AppID";
+    // 应用密钥
+    public static final String KEY_APP_SECRET = "AppSecret";
+    // 是否时企业号的标识，企业号的API是不一样的
+    public static final String KEY_IS_CORP = "IsCorp";
+    
+    // 企业号API
+    public static final String CORP_API_GET_ACCESS_TOKEN = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={0}&corpsecret={1}";
+    
+    // 公众号API
+    public static final String API_GET_ACCESS_TOKEN = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}";
 
     public static final String API_GET_JSAPI_TICKET = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={0}";
 

@@ -8,11 +8,13 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
 import com.iidooo.core.constant.ClassConstant;
 import com.iidooo.core.dao.extend.DictItemDao;
 import com.iidooo.core.dto.extend.DictItemDto;
+import com.iidooo.core.util.MybatisUtil;
 import com.iidooo.core.util.SpringUtil;
 import com.iidooo.core.util.StringUtil;
 
@@ -89,6 +91,7 @@ public class DictItemSelectTag extends SimpleTagSupport{
 
     @Override
     public void doTag() throws JspException, IOException {
+        SqlSession sqlSession = MybatisUtil.getSqlSessionFactory().openSession();
         PageContext pageContext = null;
         JspWriter out = null;
         try {
@@ -105,7 +108,7 @@ public class DictItemSelectTag extends SimpleTagSupport{
                 out.println(StringUtil.replace(HTML_OPTION, "0", ""));
             }
             
-            DictItemDao dictItemDao = (DictItemDao)SpringUtil.getBean(pageContext.getServletContext(), ClassConstant.BEAN_DICT_ITEM_DAO);
+            DictItemDao dictItemDao = sqlSession.getMapper(DictItemDao.class);
             List<DictItemDto> dictItemList = dictItemDao.selectByClassCode(dictClassCode);
             
             for (DictItemDto item : dictItemList) {

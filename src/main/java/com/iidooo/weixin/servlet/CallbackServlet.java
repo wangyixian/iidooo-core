@@ -30,7 +30,7 @@ public class CallbackServlet extends HttpServlet{
 
             String token = req.getParameter(WeixinConstant.KEY_TOKEN);
             String aesKey = req.getParameter(WeixinConstant.KEY_AES_KEY);
-            String coprID = req.getParameter(WeixinConstant.KEY_CORPID);
+            String coprID = req.getParameter(WeixinConstant.KEY_APP_ID);
             
 //            WXBizMsgCrypt wxcpt = new WXBizMsgCrypt(token, aesKey, coprID);
 //            String sEchoStr = wxcpt.VerifyURL(sVerifyMsgSig, sVerifyTimeStamp, sVerifyNonce, sVerifyEchoStr);

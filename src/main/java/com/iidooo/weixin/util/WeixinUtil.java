@@ -18,11 +18,16 @@ import com.iidooo.weixin.entity.Signature;
 public class WeixinUtil {
     private static final Logger logger = Logger.getLogger(WeixinUtil.class);
 
-    public static AccessToken getAccessToken(String corpID, String secret) {
+    public static AccessToken getAccessToken(String appID, String appSecret, boolean isCorp) {
         try {
             AccessToken result = new AccessToken();
             // 获取access_token（有效期7200秒，开发者必须在自己的服务全局缓存access_token）
-            String url = StringUtil.replace(WeixinConstant.API_GET_ACCESS_TOKEN, corpID, secret);
+            String url = "";
+            if (isCorp) {
+                url = StringUtil.replace(WeixinConstant.CORP_API_GET_ACCESS_TOKEN, appID, appSecret);
+            } else {
+                url = StringUtil.replace(WeixinConstant.API_GET_ACCESS_TOKEN, appID, appSecret);
+            }
             String response = HttpUtil.doGet(url);
 
             JSONObject jsonObject = JSONObject.fromObject(response);

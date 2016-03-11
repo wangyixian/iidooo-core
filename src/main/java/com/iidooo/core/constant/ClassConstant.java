@@ -1,10 +1,6 @@
 package com.iidooo.core.constant;
 
 public class ClassConstant {
-
-    public static final String BEAN_DICT_ITEM_DAO = "dictItemDao";
-    public static final String BEAN_SECURITY_RES_DAO = "securityResDao";
-
     public static final String FIELD_UPDATETIME = "UpdateTime";
     
     public static final String FIELD_DICT_CLASS_CODE = "dictClassCode";
