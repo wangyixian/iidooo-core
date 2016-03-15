@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
-import com.iidooo.core.dto.PageDto;
+import com.iidooo.core.model.Page;
 import com.iidooo.core.util.StringUtil;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -35,7 +35,7 @@ public abstract class BaseAction extends ActionSupport {
 
     private String actionURL;
     
-    private PageDto page;
+    private Page page;
 
     public String getActionName() {
         return actionName;
@@ -53,11 +53,11 @@ public abstract class BaseAction extends ActionSupport {
         this.actionURL = actionURL;
     }
     
-    public PageDto getPage() {
+    public Page getPage() {
         return page;
     }
 
-    public void setPage(PageDto page) {
+    public void setPage(Page page) {
         this.page = page;
     }
 
@@ -239,7 +239,7 @@ public abstract class BaseAction extends ActionSupport {
         try {
 
             if (page == null) {
-                page = new PageDto(); 
+                page = new Page(); 
                 
                 // Set the page default size
 //                @SuppressWarnings("unchecked")

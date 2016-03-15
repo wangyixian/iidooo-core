@@ -1,11 +1,11 @@
-package com.iidooo.core.dto;
+package com.iidooo.core.model;
 
-import com.iidooo.core.constant.ClassConstant;
-import com.iidooo.core.constant.DBConstant;
+import com.iidooo.core.enums.SortField;
+import com.iidooo.core.enums.SortType;
 
-public class PageDto {
+public class Page {
 
-    public PageDto() {
+    public Page() {
 
         // The default page is 1
         currentPage = 1;
@@ -13,9 +13,9 @@ public class PageDto {
         // The default page size is 10
         pageSize = 10;
 
-        sortField = ClassConstant.FIELD_UPDATETIME;
+        sortField = SortField.UpdateTime.toString();
 
-        sortType = DBConstant.SORT_TYPE_DESC;
+        sortType = SortType.desc.toString();
     }
 
     /**

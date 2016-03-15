@@ -6,8 +6,10 @@ public enum MessageCode {
     
     FieldRequired("FieldRequired", 50001);
     
+    @SuppressWarnings("unused")
     private String name;
     
+    @SuppressWarnings("unused")
     private int value;
     
     private MessageCode(String name, int value){

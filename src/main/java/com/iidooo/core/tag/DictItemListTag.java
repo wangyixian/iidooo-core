@@ -86,7 +86,7 @@ public class DictItemListTag extends SimpleTagSupport {
             pageContext = (PageContext) getJspContext();
             out = pageContext.getOut();
 
-            DictItemDao DictItemDao = (DictItemDao) SpringUtil.getBean(pageContext.getServletContext(), ClassConstant.BEAN_DICT_ITEM_DAO);
+            DictItemDao DictItemDao = (DictItemDao) SpringUtil.getBean(pageContext.getServletContext(), ""/*ClassConstant.BEAN_DICT_ITEM_DAO*/);
             List<DictItemDto> dictItemList = DictItemDao.selectByClassCode(dictClassCode);
 
             out.println("<ul id='" + id + "' class='dict_item_list'>");

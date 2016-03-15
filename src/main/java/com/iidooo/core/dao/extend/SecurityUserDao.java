@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.iidooo.core.dto.PageDto;
 import com.iidooo.core.dto.extend.SecurityUserDto;
+import com.iidooo.core.model.Page;
 
 public interface SecurityUserDao {
     
@@ -24,7 +24,7 @@ public interface SecurityUserDao {
     
     int selectAllCount();
 
-    List<SecurityUserDto> selectAll(PageDto page);
+    List<SecurityUserDto> selectAll(Page page);
     
     int updateByPrimaryKey(SecurityUserDto user);
     
