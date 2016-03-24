@@ -1,13 +1,9 @@
 package com.iidooo.core.util;
 
+import java.util.Random;
+
 import org.apache.log4j.Logger;
 
-/**
- * The Utility Class of String Operation
- * 
- * @author Ethan
- *
- */
 public class StringUtil {
 
     private static final Logger logger = Logger.getLogger(StringUtil.class);
@@ -26,7 +22,6 @@ public class StringUtil {
             }
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.fatal(e);
             return false;
         }
@@ -40,7 +35,6 @@ public class StringUtil {
             }
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.fatal(e);
             return true;
         }
@@ -64,7 +58,6 @@ public class StringUtil {
             }
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.fatal(e);
             return old;
         }
@@ -85,9 +78,28 @@ public class StringUtil {
             str.substring(start, end);
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.fatal(e);
             return str;
+        }
+    }
+    
+    public static String getRandomStr(int length){
+        try {
+            int A = 'A';
+            int Z = 'Z';
+            
+            Random rand = new Random();
+            StringBuilder sb = new StringBuilder();
+            while (sb.length() < length) {
+                int number = rand.nextInt(Z + 1);
+                if (number >= A) {
+                    sb.append((char)number);
+                }
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            logger.fatal(e);
+            return "";
         }
     }
 }

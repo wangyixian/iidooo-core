@@ -9,7 +9,10 @@ public enum ResponseStatus {
     QueryEmpty(201),
 
     // 处理失败
-    Failed(400);
+    Failed(400),
+    
+    // 创建失败
+    InsertFailed(401);
 
     @SuppressWarnings("unused")
     private int code;
