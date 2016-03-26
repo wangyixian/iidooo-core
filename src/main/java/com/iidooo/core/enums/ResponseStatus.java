@@ -4,20 +4,30 @@ public enum ResponseStatus {
 
     // 处理成功，返回OK
     OK(200),
-    
+
     // 处理成功，但返回值为空
     QueryEmpty(201),
 
     // 处理失败
     Failed(400),
-    
-    // 创建失败
-    InsertFailed(401);
 
-    @SuppressWarnings("unused")
-    private int code;
+    // 创建失败
+    InsertFailed(401),
+    
+    UpdateFailed(402);
+
+    private Integer code;
 
     private ResponseStatus(int code) {
         this.code = code;
     }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
 }
