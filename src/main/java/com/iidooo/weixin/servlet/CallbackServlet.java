@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.iidooo.weixin.constant.WeixinConstant;
-import com.qq.weixin.mp.aes.WXBizMsgCrypt;
 
 public class CallbackServlet extends HttpServlet{
     /**

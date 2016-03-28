@@ -1,9 +1,15 @@
 package com.iidooo.core.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResponseResult {
+public class ResponseResult implements Serializable{
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     // 响应状态
     private Integer status;

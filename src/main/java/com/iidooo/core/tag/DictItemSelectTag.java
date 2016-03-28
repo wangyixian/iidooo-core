@@ -11,11 +11,9 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
-import com.iidooo.core.constant.ClassConstant;
 import com.iidooo.core.dao.extend.DictItemDao;
 import com.iidooo.core.dto.extend.DictItemDto;
 import com.iidooo.core.util.MybatisUtil;
-import com.iidooo.core.util.SpringUtil;
 import com.iidooo.core.util.StringUtil;
 
 public class DictItemSelectTag extends SimpleTagSupport{

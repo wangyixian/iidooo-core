@@ -26,8 +26,8 @@ public class StringUtil {
             return false;
         }
     }
-    
-    public static boolean isBlank(final String str){
+
+    public static boolean isBlank(final String str) {
         try {
             boolean result = false;
             if (str == null || str.length() <= 0) {
@@ -82,21 +82,30 @@ public class StringUtil {
             return str;
         }
     }
-    
-    public static String getRandomStr(int length){
+
+    public static String getRandomStr(int length) {
         try {
             int A = 'A';
             int Z = 'Z';
-            
+
             Random rand = new Random();
             StringBuilder sb = new StringBuilder();
             while (sb.length() < length) {
                 int number = rand.nextInt(Z + 1);
                 if (number >= A) {
-                    sb.append((char)number);
+                    sb.append((char) number);
                 }
             }
             return sb.toString();
+        } catch (Exception e) {
+            logger.fatal(e);
+            return "";
+        }
+    }
+
+    public static String getRequestBaseURL(String requestURL, String servletPath) {
+        try {
+            return requestURL.replace(servletPath, "");
         } catch (Exception e) {
             logger.fatal(e);
             return "";
