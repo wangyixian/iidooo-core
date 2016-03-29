@@ -13,45 +13,24 @@ public final class ValidateUtil {
 
     private static Logger logger = Logger.getLogger(ValidateUtil.class);
 
-    public static boolean isEmpty(final String str) {
-        try {
-            if (str == null || str.trim().length() <= 0) {
-                return true;
-            }
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.fatal(e);
-            return false;
-        }
-    }
-    
-    public static boolean isEmpty(Integer value){
-        try {
-            if (value == null || value.toString().trim().length() <= 0) {
-                return true;
-            }
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.fatal(e);
-            return false;
-        }
-    }
-
     /**
      * 是否是纯数字组合的字符串验证.
      *
      * @param str 对象文字列
      * @return true:数字组合字符串 false:非数字组合字符串
      */
-    /*
-     * public static boolean isStrNumber(final String str) {
-     * 
-     * logger.debug("The begin of the method ValidatorUtil.isStrNumber"); if (isEmptyIgnoreSpace(str)) { return false; } Pattern pattern =
-     * Pattern.compile(Constants.REGEX_NUMBER_STR); boolean flg = pattern.matcher(str).matches();
-     * logger.debug("The end of the method ValidatorUtil.isStrNumber"); return flg; }
-     *//**
+    public static boolean isNumber(String str) {
+        try {
+            Pattern pattern = Pattern.compile(RegularConstant.REGEX_NUMBER);
+            boolean result = pattern.matcher(str).matches();
+            return result;
+        } catch (Exception e) {
+            logger.fatal(e);
+            return false;
+        }
+    }
+
+    /**
      * 金额类数据字符串验证（可带小数点的金额类数据）.
      *
      * @param str 对象文字列
@@ -67,9 +46,6 @@ public final class ValidateUtil {
 
     public static boolean isEnglish(final String str) {
         try {
-            if (isEmpty(str)) {
-                return false;
-            }
             Pattern pattern = Pattern.compile(RegularConstant.REGEX_ENGLISH);
             return pattern.matcher(str).matches();
         } catch (Exception e) {
@@ -80,11 +56,7 @@ public final class ValidateUtil {
     }
 
     public static boolean isEnglishNumber(final String str) {
-
         try {
-            if (isEmpty(str)) {
-                return false;
-            }
             Pattern pattern = Pattern.compile(RegularConstant.REGEX_ENGLISH_NUMBER);
             return pattern.matcher(str).matches();
         } catch (Exception e) {

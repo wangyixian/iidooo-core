@@ -1,6 +1,7 @@
 package com.iidooo.core.model;
 
 import com.iidooo.core.enums.MessageLevel;
+import com.iidooo.core.enums.MessageType;
 
 public class Message {
     private Integer code;
@@ -14,12 +15,14 @@ public class Message {
     public Message(Integer code, MessageLevel type) {
         this.code = code;
         this.type = type;
+        this.description = "";
     }
 
     public Message(Integer code, MessageLevel type, String field) {
         this.code = code;
         this.type = type;
         this.field = field;
+        this.description = "";
     }
 
     public Integer getCode() {

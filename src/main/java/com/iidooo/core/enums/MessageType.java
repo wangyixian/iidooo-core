@@ -2,9 +2,13 @@ package com.iidooo.core.enums;
 
 public enum MessageType {
 
-    Exception(40001),
+    Exception(401),
 
-    FieldRequired(50001);
+    FieldRequired(501),
+    
+    FieldNumberRequired(502),
+    
+    IsSlient(503);
 
     private Integer code;
 

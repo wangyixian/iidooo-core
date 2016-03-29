@@ -10,11 +10,14 @@ public enum ResponseStatus {
 
     // 处理失败
     Failed(400),
-
+    
     // 创建失败
     InsertFailed(401),
     
-    UpdateFailed(402);
+    UpdateFailed(402),
+    
+    // 应为一些原因而受限制后处理失败
+    ConfinedFailed(403);
 
     private Integer code;
 

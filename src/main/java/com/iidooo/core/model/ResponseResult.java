@@ -1,15 +1,11 @@
 package com.iidooo.core.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResponseResult implements Serializable{
+import net.sf.json.JSONArray;
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+public class ResponseResult{
 
     // 响应状态
     private Integer status;
@@ -21,7 +17,7 @@ public class ResponseResult implements Serializable{
     private List<Message> messages;
     
     public ResponseResult(){
-        data = new Object();
+        data = new JSONArray();
     }
 
     public Integer getStatus() {
