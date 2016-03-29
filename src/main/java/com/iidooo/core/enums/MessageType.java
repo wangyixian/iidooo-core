@@ -2,14 +2,21 @@ package com.iidooo.core.enums;
 
 public enum MessageType {
 
-    DEBUG,
+    Exception(40001),
 
-    INFO,
+    FieldRequired(50001);
 
-    WARN,
+    private Integer code;
 
-    ERROR,
+    public Integer getCode() {
+        return code;
+    }
 
-    FATAL,
+    public void setCode(Integer code) {
+        this.code = code;
+    }
 
+    private MessageType(Integer code) {
+        this.code = code;
+    }
 }

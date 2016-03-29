@@ -1,41 +1,40 @@
 package com.iidooo.core.model;
 
-import com.iidooo.core.enums.MessageCode;
-import com.iidooo.core.enums.MessageType;
+import com.iidooo.core.enums.MessageLevel;
 
 public class Message {
-    private MessageCode code;
+    private Integer code;
 
-    private MessageType type;
+    private MessageLevel type;
 
     private String field;
 
     private String description;
 
-    public Message(MessageCode code, MessageType type) {
+    public Message(Integer code, MessageLevel type) {
         this.code = code;
         this.type = type;
     }
 
-    public Message(MessageCode code, MessageType type, String field) {
+    public Message(Integer code, MessageLevel type, String field) {
         this.code = code;
         this.type = type;
         this.field = field;
     }
 
-    public MessageCode getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(MessageCode code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 
-    public MessageType getType() {
+    public MessageLevel getType() {
         return type;
     }
 
-    public void setType(MessageType type) {
+    public void setType(MessageLevel type) {
         this.type = type;
     }
 
