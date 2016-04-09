@@ -1,7 +1,9 @@
 package com.iidooo.core.util;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.apache.log4j.Logger;
 
@@ -21,6 +23,8 @@ public class DateUtil {
     public static final String DATE_SLASH = "yyyy/MM/dd";
 
     public static final String DATE_SIMPLE = "yyyyMMdd";
+    
+    public static final String DATE_YEAR_MONTH_SIMPLE = "yyyyMM";
 
     public static final String DATE_TIME_FULL_SIMPLE = "yyyyMMddHHmmssssssss";
 
@@ -85,7 +89,10 @@ public class DateUtil {
     }
     
     public static void main(String[] args) {
-       
+            Calendar calendar = GregorianCalendar.getInstance();
+            System.out.println(calendar.get(Calendar.DATE));
+            System.out.println(calendar.get(Calendar.MONTH) + 1);
+            System.out.println(calendar.get(Calendar.YEAR));
         
     }
 }

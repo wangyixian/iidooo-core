@@ -20,10 +20,10 @@ public class OSSUtil {
         }
     }
     
-    public static String uploadFile(OSSClient client, String bucketName, String key, String filePath) {
+    public static String uploadFile(OSSClient client, String bucketName, String folder, String filePath) {
         try {
             File file = new File(filePath);
-            String newKey = key + file.getName();
+            String newKey = folder + file.getName();
             
             client.putObject(bucketName, newKey, file);
             return newKey;

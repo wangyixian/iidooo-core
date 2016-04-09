@@ -1,7 +1,6 @@
 package com.iidooo.core.model;
 
 import com.iidooo.core.enums.MessageLevel;
-import com.iidooo.core.enums.MessageType;
 
 public class Message {
     private Integer code;

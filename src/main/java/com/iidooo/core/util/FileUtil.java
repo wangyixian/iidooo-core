@@ -20,7 +20,13 @@ public class FileUtil {
      */
     public static String save(byte[] fileByte, String folderPath, String fileName) {
         try {
-            
+            File file = new File(folderPath);
+
+            // 判断文件夹是否存在,如果不存在则创建文件夹
+            if (!file.exists()) {
+                file.mkdir();
+            }
+
             // 新的文件路径
             String newFilePath = folderPath + File.separator + fileName;
 
@@ -28,6 +34,7 @@ public class FileUtil {
             FileOutputStream out = new FileOutputStream(newFilePath);
             out.write(fileByte);
             out.close();
+
             return newFilePath;
         } catch (Exception e) {
             logger.fatal(e);
@@ -52,8 +59,40 @@ public class FileUtil {
             String newName = name + "_" + date + "." + suffix;
             return newName;
         } catch (Exception e) {
+            e.printStackTrace();
             logger.fatal(e);
             return "";
+        }
+    }
+
+    public static String getNewFileName(String fileName, String appendStr) {
+        try {
+            int dotPosition = fileName.lastIndexOf('.');
+            // 获取文件类型
+            String suffix = fileName.substring(dotPosition + 1, fileName.length());
+            // 获取文件名
+            String name = fileName.substring(0, dotPosition);
+
+            String newName = name + appendStr + "." + suffix;
+            return newName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            throw e;
+        }
+    }
+    
+    public static String getFileSuffix(String fileName){
+        try {
+            int dotPosition = fileName.lastIndexOf('.');
+            // 获取文件类型
+            String suffix = fileName.substring(dotPosition + 1, fileName.length());
+            
+            return suffix;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            throw e;
         }
     }
 }
