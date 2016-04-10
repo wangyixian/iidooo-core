@@ -51,8 +51,8 @@ public class PictureUtil {
             // 判断是否是等比缩放
             if (proportion == true) {
                 // 为等比缩放计算输出的图片宽度及高度
-                double rate1 = ((double) inputImg.getWidth(null)) / (double) width + 0.1;
-                double rate2 = ((double) inputImg.getHeight(null)) / (double) height + 0.1;
+                double rate1 = ((double) inputImg.getWidth(null)) / (double) width;
+                double rate2 = ((double) inputImg.getHeight(null)) / (double) height;
                 // 根据缩放比率大的进行缩放控制
                 double rate = rate1 > rate2 ? rate1 : rate2;
                 newWidth = (int) (((double) inputImg.getWidth(null)) / rate);
@@ -78,14 +78,11 @@ public class PictureUtil {
 //                outputFolder.mkdir();
 //            }
 
-            // 得到图片的扩展名，也就是图片的格式
-            String format = FileUtil.getFileSuffix(outputFilePath);
-
             FileOutputStream out = new FileOutputStream(outputFilePath);
             // JPEGImageEncoder可适用于其他图片类型的转换
             // JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
             // encoder.encode(tag);
-            ImageIO.write(tag, format, out);
+            ImageIO.write(tag, "jpeg", out);
             out.close();
 
         } catch (Exception e) {
@@ -121,15 +118,7 @@ public class PictureUtil {
             // Image.SCALE_SMOOTH 的缩略算法 生成缩略图片的平滑度的,优先级比速度高 生成的图片质量比较好 但速度慢
             tag.getGraphics().drawImage(inputImg.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH), 0, 0, null);
 
-            File outputFolder = new File(outputFilePath);
-            // 判断文件夹是否存在,如果不存在则创建文件夹
-            if (!outputFolder.exists()) {
-                outputFolder.mkdir();
-            }
-
-            // 得到图片的扩展名，也就是图片的格式
             String format = FileUtil.getFileSuffix(outputFilePath);
-
             FileOutputStream out = new FileOutputStream(outputFilePath);
             // JPEGImageEncoder可适用于其他图片类型的转换
             // JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
@@ -167,9 +156,8 @@ public class PictureUtil {
             // 读取图片文件
             fileInputStream = new FileInputStream(inputFilePath);
 
-            // 获取文件格式
             String format = FileUtil.getFileSuffix(inputFilePath);
-
+            
             // ImageReader声称能够解码指定格式
             Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName(format);
             ImageReader reader = it.next();
@@ -222,7 +210,7 @@ public class PictureUtil {
      * @param inputFilePath
      * @param outputFilePath
      */
-    public static void cutCenterSquare(String inputFilePath, String outputFilePath) {
+    public static void cutSquare(String inputFilePath, String outputFilePath) {
         try {
             // 获得源文件
             File inputFile = new File(inputFilePath);
@@ -251,9 +239,10 @@ public class PictureUtil {
 
     public static void main(String[] arg) {
         try {
-            String inputFilePath = "/Users/Ethan/workspace/upload/201604/sample.png";
-            String outputFilePath = "/Users/Ethan/workspace/upload/201604/sample.png";
-            PictureUtil.compress(inputFilePath, outputFilePath, 200, 200, true);
+            String inputFilePath = "/Users/Ethan/workspace/upload/sample3.jpg";
+            String outputFilePath = "/Users/Ethan/workspace/upload/sample3_mini.jpg";
+            //PictureUtil.cutSquare(inputFilePath, outputFilePath);
+            PictureUtil.compress(inputFilePath, outputFilePath, 500, 500, true);
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
