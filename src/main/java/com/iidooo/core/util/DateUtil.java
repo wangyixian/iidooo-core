@@ -1,5 +1,7 @@
 package com.iidooo.core.util;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +25,7 @@ public class DateUtil {
     public static final String DATE_SLASH = "yyyy/MM/dd";
 
     public static final String DATE_SIMPLE = "yyyyMMdd";
-    
+
     public static final String DATE_YEAR_MONTH_SIMPLE = "yyyyMM";
 
     public static final String DATE_TIME_FULL_SIMPLE = "yyyyMMddHHmmssssssss";
@@ -72,14 +74,14 @@ public class DateUtil {
                 subtrahendDate = DateUtil.format(subtrahendDate, subtrahendFormat, DateUtil.DATE_TIME_FULL_SIMPLE);
                 subtrahend = Integer.parseInt(subtrahendDate);
             }
-            
+
             // 得到被减数日期值
             int minuend = 0;
             if (!minuendFormat.equals(DateUtil.DATE_TIME_FULL_SIMPLE)) {
                 minuendDate = DateUtil.format(minuendDate, minuendFormat, DateUtil.DATE_TIME_FULL_SIMPLE);
                 minuend = Integer.parseInt(minuendDate);
             }
-            
+
             return subtrahend - minuend;
 
         } catch (Exception e) {
@@ -87,12 +89,30 @@ public class DateUtil {
             return 0;
         }
     }
-    
+
+    /**
+     * 把字符串日期格式转换成Date类型
+     *
+     * @param dateString 字符串日期
+     * @param format 格式化
+     * @return 变换后Date
+     */
+    public static Date parseToDate(String dateString, String format) {
+        try {
+            DateFormat df = new SimpleDateFormat(format);
+            Date result = df.parse(dateString);
+            return result;
+        } catch (Exception e) {
+            logger.fatal(e);
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
-            Calendar calendar = GregorianCalendar.getInstance();
-            System.out.println(calendar.get(Calendar.DATE));
-            System.out.println(calendar.get(Calendar.MONTH) + 1);
-            System.out.println(calendar.get(Calendar.YEAR));
-        
+        Calendar calendar = GregorianCalendar.getInstance();
+        System.out.println(calendar.get(Calendar.DATE));
+        System.out.println(calendar.get(Calendar.MONTH) + 1);
+        System.out.println(calendar.get(Calendar.YEAR));
+
     }
 }
