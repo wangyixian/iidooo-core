@@ -1,7 +1,9 @@
 package com.iidooo.core.util;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +20,12 @@ import javax.imageio.stream.ImageInputStream;
 import org.apache.log4j.Logger;
 
 import sun.awt.image.ImageFormatException;
+
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifIFD0Directory;
+import com.drew.metadata.exif.ExifSubIFDDirectory;
 
 public class PictureUtil {
 
@@ -236,13 +244,138 @@ public class PictureUtil {
             logger.fatal(e);
         }
     }
+    
+    public static void MaintainOrientation(String filePath){
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                throw new FileNotFoundException();
+            }
+            
+            Metadata metadata = ImageMetadataReader.readMetadata(file);
+            Directory directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
+            int orientation = 0;
+            if (null != directory && directory.containsTag(ExifSubIFDDirectory.TAG_ORIENTATION)) {
+                orientation = directory.getInt(ExifSubIFDDirectory.TAG_ORIENTATION);
+                logger.debug(filePath + " 's orientation is :" + orientation);
+            }
+            
+            switch (orientation) {
+            // case 1:
+            // return "Top, left side (Horizontal / normal)";
+            // case 2:
+            // return "Top, right side (Mirror horizontal)";
+            case 3:
+                // return "Bottom, right side (Rotate 180)";
+                BufferedImage old_img3 = (BufferedImage) ImageIO.read(file);
+                int w3 = old_img3.getWidth();
+                int h3 = old_img3.getHeight();
+
+                BufferedImage new_img3 = new BufferedImage(w3, h3, BufferedImage.TYPE_INT_BGR);
+                Graphics2D g2d3 = new_img3.createGraphics();
+
+                AffineTransform origXform3 = g2d3.getTransform();
+                AffineTransform newXform3 = (AffineTransform) (origXform3.clone());
+                // center of rotation is center of the panel
+                // double xRot3 = w3/2.0;
+                newXform3.rotate(Math.toRadians(180.0), w3 / 2.0, h3 / 2.0); // 旋转180度
+
+                g2d3.setTransform(newXform3);
+                // draw image centered in panel
+                g2d3.drawImage(old_img3, 0, 0, null);
+                // Reset to Original
+                g2d3.setTransform(origXform3);
+                // 写到新的文件
+                FileOutputStream out3 = new FileOutputStream(file);
+                try {
+                    ImageIO.write(new_img3, "png", out3);
+                } finally {
+                    out3.close();
+                }
+
+                break;
+            // case 4:
+            // return "Bottom, left side (Mirror vertical)";
+            // case 5:
+            // return "Left side, top (Mirror horizontal and rotate 270
+            // CW)";
+            case 6:
+                // return "Right side, top (Rotate 90 CW)";
+
+                BufferedImage old_img6 = (BufferedImage) ImageIO.read(file);
+                int w6 = old_img6.getWidth();
+                int h6 = old_img6.getHeight();
+
+                BufferedImage new_img6 = new BufferedImage(h6, w6, BufferedImage.TYPE_INT_BGR);
+                Graphics2D g2d6 = new_img6.createGraphics();
+
+                AffineTransform origXform6 = g2d6.getTransform();
+                AffineTransform newXform6 = (AffineTransform) (origXform6.clone());
+                // center of rotation is center of the panel
+                double xRot6 = h6 / 2.0;
+                newXform6.rotate(Math.toRadians(90.0), xRot6, xRot6); // 旋转90度
+
+                g2d6.setTransform(newXform6);
+                // draw image centered in panel
+                g2d6.drawImage(old_img6, 0, 0, null);
+                // Reset to Original
+                g2d6.setTransform(origXform6);
+                // 写到新的文件
+                FileOutputStream out6 = new FileOutputStream(file);
+                try {
+                    ImageIO.write(new_img6, "png", out6);
+                } finally {
+                    out6.close();
+                }
+
+                break;
+            // case 7:
+            // return "Right side, bottom (Mirror horizontal and rotate 90
+            // CW)";
+            case 8:
+                // return "Left side, bottom (Rotate 270 CW)";
+                BufferedImage old_img8 = (BufferedImage) ImageIO.read(file);
+                int w8 = old_img8.getWidth();
+                int h8 = old_img8.getHeight();
+
+                BufferedImage new_img8 = new BufferedImage(h8, w8, BufferedImage.TYPE_INT_BGR);
+                Graphics2D g2d8 = new_img8.createGraphics();
+
+                AffineTransform origXform8 = g2d8.getTransform();
+                AffineTransform newXform8 = (AffineTransform) (origXform8.clone());
+                // center of rotation is center of the panel
+                double xRot8 = w8 / 2.0;
+                newXform8.rotate(Math.toRadians(270.0), xRot8, xRot8); // 旋转90度
+
+                g2d8.setTransform(newXform8);
+                // draw image centered in panel
+                g2d8.drawImage(old_img8, 0, 0, null);
+                // Reset to Original
+                g2d8.setTransform(origXform8);
+                // 写到新的文件
+                FileOutputStream out8 = new FileOutputStream(file);
+                try {
+                    ImageIO.write(new_img8, "png", out8);
+                } finally {
+                    out8.close();
+                }
+
+                break;
+            // default:
+            // return String.valueOf(orientation);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+        }
+    }
 
     public static void main(String[] arg) {
         try {
             String inputFilePath = "/Users/Ethan/workspace/upload/sample3.jpg";
             String outputFilePath = "/Users/Ethan/workspace/upload/sample3_mini.jpg";
-            //PictureUtil.cutSquare(inputFilePath, outputFilePath);
-            PictureUtil.compress(inputFilePath, outputFilePath, 500, 500, true);
+            PictureUtil.MaintainOrientation(inputFilePath);
+//            PictureUtil.compress(inputFilePath, outputFilePath, 500, 500, true);
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
