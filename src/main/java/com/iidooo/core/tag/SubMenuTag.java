@@ -47,7 +47,7 @@ public class SubMenuTag extends SimpleTagSupport {
 
             out.println("<div id='subMenu' class='sub_menu'>");
 
-            if (!ValidateUtil.isEmpty(title)) {
+            if (!StringUtil.isBlank(title)) {
                 out.println("<div class='sub_menu_title'>");
                 out.println(title);
                 out.println("</div>");
