@@ -98,8 +98,25 @@ public class StringUtil {
             }
             return sb.toString();
         } catch (Exception e) {
+            e.printStackTrace();
             logger.fatal(e);
-            return "";
+            throw e;
+        }
+    }
+
+    public static String getRandomNumber(int length) {
+        try {
+            Random rand = new Random();
+            StringBuilder sb = new StringBuilder();
+            while (sb.length() < length) {
+                int number = rand.nextInt(9 + 1);
+                sb.append(number);
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            throw e;
         }
     }
 
@@ -110,5 +127,9 @@ public class StringUtil {
             logger.fatal(e);
             return "";
         }
+    }
+    
+    public static void main(String[] args){
+        System.out.println(StringUtil.getRandomNumber(6));
     }
 }

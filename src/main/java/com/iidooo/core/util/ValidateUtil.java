@@ -123,12 +123,12 @@ public final class ValidateUtil {
      */
 
     /**
-     * Validate the email format
+     * 验证是否是Email的格式
      *
-     * @param email This email will be check.
-     * @return The validate result.
+     * @param email 该Email地址需要验证
+     * @return 验证正确还是错误的结果
      */
-    public static boolean validateEmail(final String email) {
+    public static boolean isEmail(String email) {
         try {
             if (email == null || email.isEmpty()) {
                 return false;
