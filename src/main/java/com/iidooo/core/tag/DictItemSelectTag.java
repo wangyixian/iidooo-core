@@ -11,8 +11,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
-import com.iidooo.core.dao.extend.DictItemDao;
-import com.iidooo.core.dto.extend.DictItemDto;
+import com.iidooo.core.mapper.DictItemMapper;
+import com.iidooo.core.model.po.DictItem;
 import com.iidooo.core.util.MybatisUtil;
 import com.iidooo.core.util.StringUtil;
 
@@ -106,10 +106,10 @@ public class DictItemSelectTag extends SimpleTagSupport{
                 out.println(StringUtil.replace(HTML_OPTION, "0", ""));
             }
             
-            DictItemDao dictItemDao = sqlSession.getMapper(DictItemDao.class);
-            List<DictItemDto> dictItemList = dictItemDao.selectByClassCode(dictClassCode);
+            DictItemMapper dictItemDao = sqlSession.getMapper(DictItemMapper.class);
+            List<DictItem> dictItemList = dictItemDao.selectByClassCode(dictClassCode);
             
-            for (DictItemDto item : dictItemList) {
+            for (DictItem item : dictItemList) {
                 String dictItemCode = item.getDictItemCode();
                 String dictItemName = item.getDictItemName();
                 if (value != null && !value.isEmpty() && value.equals(dictItemCode)) {

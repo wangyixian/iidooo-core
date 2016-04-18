@@ -1,11 +1,15 @@
 package com.iidooo.core.service;
 
-import com.iidooo.core.model.vo.SecurityUserInfo;
+import com.iidooo.core.model.po.SecurityUser;
 
 public interface SecurityUserService {
-    SecurityUserInfo getUserInfoByID(Integer userID);
+    SecurityUser getSecurityUserByID(Integer userID);
     
-    SecurityUserInfo createDefaultUser(String photoURL);
-    
-    SecurityUserInfo updateUserInfo(SecurityUserInfo userInfo);
+    SecurityUser getSecurityUserByEmail(String email);
+
+    SecurityUser createDefaultUser(String photoURL, String email);
+
+    SecurityUser updateUserInfo(SecurityUser securityUser);
+
+    SecurityUser updateUserExp(Integer userID, Integer experience, Integer isLimited) throws Exception ;
 }

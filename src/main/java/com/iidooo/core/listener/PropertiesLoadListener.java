@@ -1,8 +1,5 @@
 package com.iidooo.core.listener;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 import java.util.Properties;
 
 import javax.servlet.ServletContext;
@@ -32,7 +29,7 @@ public class PropertiesLoadListener extends HttpServlet implements ServletContex
 
             // 把 system.properties 加入 ServletContext
             Properties systemProperties = PropertiesUtil.loadProperties("system.properties");
-            sc.setAttribute("aliyun.properties", systemProperties);
+            sc.setAttribute("system.properties", systemProperties);
 
             // 把 aliyun.properties 加入 ServletContext
             Properties aliyunProperties = PropertiesUtil.loadProperties("aliyun.properties");

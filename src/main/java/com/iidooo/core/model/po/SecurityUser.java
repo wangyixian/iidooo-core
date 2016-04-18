@@ -33,6 +33,8 @@ public class SecurityUser {
 
     private Integer points;
 
+    private Integer experience;
+
     private String remarks;
 
     private Date updateTime;
@@ -165,6 +167,14 @@ public class SecurityUser {
 
     public void setPoints(Integer points) {
         this.points = points;
+    }
+
+    public Integer getExperience() {
+        return experience;
+    }
+
+    public void setExperience(Integer experience) {
+        this.experience = experience;
     }
 
     public String getRemarks() {

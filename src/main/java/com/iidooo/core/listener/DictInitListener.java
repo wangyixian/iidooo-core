@@ -13,8 +13,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
 import com.iidooo.core.constant.DictConstant;
-import com.iidooo.core.dao.extend.DictItemDao;
-import com.iidooo.core.dto.extend.DictItemDto;
+import com.iidooo.core.mapper.DictItemMapper;
+import com.iidooo.core.model.po.DictItem;
 import com.iidooo.core.util.MybatisUtil;
 
 public class DictInitListener extends HttpServlet implements ServletContextListener {
@@ -47,7 +47,7 @@ public class DictInitListener extends HttpServlet implements ServletContextListe
     private void setDictAttributes(ServletContext sc) {
         try {
             SqlSession sqlSession = MybatisUtil.getSqlSessionFactory().openSession();
-            DictItemDao dictItemDao = sqlSession.getMapper(DictItemDao.class);
+            DictItemMapper dictItemDao = sqlSession.getMapper(DictItemMapper.class);
             this.setAttribute(sc, dictItemDao, DictConstant.DICT_CLASS_CORE_PROPERTIES);
             this.setAttribute(sc, dictItemDao, DictConstant.DICT_CLASS_CORE_PAGE);
             this.setAttribute(sc, dictItemDao, DictConstant.DICT_CLASS_CORE_UPLOAD);
@@ -57,12 +57,12 @@ public class DictInitListener extends HttpServlet implements ServletContextListe
         }
     }
 
-    private void setAttribute(ServletContext sc, DictItemDao dictItemDao, String classCode) {
+    private void setAttribute(ServletContext sc, DictItemMapper dictItemDao, String classCode) {
         try {
-            List<DictItemDto> dictItemList = dictItemDao.selectByClassCode(classCode);
+            List<DictItem> dictItemList = dictItemDao.selectByClassCode(classCode);
             // Save the page properties into the application context
-            Map<String, DictItemDto> dictItemMap = new HashMap<String, DictItemDto>();
-            for (DictItemDto dictItemDto : dictItemList) {
+            Map<String, DictItem> dictItemMap = new HashMap<String, DictItem>();
+            for (DictItem dictItemDto : dictItemList) {
                 dictItemMap.put(dictItemDto.getDictItemCode(), dictItemDto);
             }
             sc.setAttribute(classCode, dictItemMap);

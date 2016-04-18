@@ -1,5 +1,7 @@
 package com.iidooo.core.mapper;
 
+import java.util.List;
+
 import com.iidooo.core.model.po.DictItem;
 
 public interface DictItemMapper {
@@ -9,7 +11,12 @@ public interface DictItemMapper {
 
     int insertSelective(DictItem record);
 
-    DictItem selectByPrimaryKey(Integer dictItemID);
+    /**
+     * 根据ClassCode获取字典项列表
+     * @param dictClassCode 字典 class code
+     * @return 字典项列表
+     */
+    List<DictItem> selectByClassCode(String dictClassCode);
 
     int updateByPrimaryKeySelective(DictItem record);
 

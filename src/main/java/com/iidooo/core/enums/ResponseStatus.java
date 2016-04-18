@@ -17,7 +17,10 @@ public enum ResponseStatus {
     UpdateFailed(402),
     
     // 应为一些原因而受限制后处理失败
-    ConfinedFailed(403);
+    ConfinedFailed(403), 
+    
+    // 信息重复导致处理失败
+    DuplicateFailed(404);
 
     private Integer code;
 

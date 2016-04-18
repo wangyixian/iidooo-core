@@ -1,7 +1,6 @@
 package com.iidooo.core.mapper;
 
 import com.iidooo.core.model.po.SecurityUser;
-import com.iidooo.core.model.vo.SecurityUserInfo;
 
 public interface SecurityUserMapper {
     int deleteByPrimaryKey(Integer userID);
@@ -18,9 +17,16 @@ public interface SecurityUserMapper {
     /**
      * 通过用户主键ID获得UserInfo对象
      * @param userID 用户主键ID
-     * @return SecurityUserInfo对象
+     * @return securityUser对象
      */
-    SecurityUserInfo selectByUserID(Integer userID);
+    SecurityUser selectByUserID(Integer userID);
+    
+    /**
+     * 通过用户的Email获得用户对象
+     * @param email 用户的Email
+     * @return 所获的的用户对象
+     */
+    SecurityUser selectByEmail(String email);
 
     /**
      * 根据用户ID更新用户信息

@@ -22,7 +22,7 @@ import org.apache.struts2.dispatcher.multipart.MultiPartRequestWrapper;
 import org.json.simple.JSONObject;
 
 import com.iidooo.core.constant.DictConstant;
-import com.iidooo.core.dto.extend.DictItemDto;
+import com.iidooo.core.model.po.DictItem;
 
 /**
  * This action is for upload files
@@ -110,8 +110,8 @@ public class FileUploadAction extends BaseAction {
 
             // 最大文件大小
             @SuppressWarnings("unchecked")
-            Map<String, DictItemDto> uploadDictItemMap = (Map<String, DictItemDto>) sc.getAttribute(DictConstant.DICT_CLASS_CORE_UPLOAD);
-            DictItemDto dictItemMaxSize = uploadDictItemMap.get(DictConstant.DICT_ITEM_IMAGE_MAX_SIZE);
+            Map<String, DictItem> uploadDictItemMap = (Map<String, DictItem>) sc.getAttribute(DictConstant.DICT_CLASS_CORE_UPLOAD);
+            DictItem dictItemMaxSize = uploadDictItemMap.get(DictConstant.DICT_ITEM_IMAGE_MAX_SIZE);
 
             long maxSize = Long.parseLong(dictItemMaxSize.getDictItemValue());
 

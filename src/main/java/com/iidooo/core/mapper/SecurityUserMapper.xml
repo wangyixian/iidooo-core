@@ -17,6 +17,7 @@
     <result column="UserType" property="userType" jdbcType="VARCHAR" />
     <result column="Level" property="level" jdbcType="INTEGER" />
     <result column="Points" property="points" jdbcType="INTEGER" />
+    <result column="Experience" property="experience" jdbcType="INTEGER" />
     <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
     <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="UpdateUserID" property="updateUserID" jdbcType="INTEGER" />
@@ -26,38 +27,25 @@
     <result column="Version" property="version" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    UserID, LoginID, Password, UserName, Mobile, Email, Sex, Birthday, WeixinID, PhotoURL, 
-    IsSilent, IsDisable, UserType, Level, Points, Remarks, UpdateTime, UpdateUserID, 
-    CreateTime, CreateUserID, IsDelete, Version
+    U.UserID, U.LoginID, '' as password, U.UserName, U.Mobile, U.Email, U.Sex, U.Birthday, U.WeixinID, U.PhotoURL, 
+    U.IsSilent, U.IsDisable, U.UserType, U.Level, U.Points, U.Experience, U.Remarks, U.UpdateTime, U.UpdateUserID, 
+    U.CreateTime, U.CreateUserID, U.IsDelete, U.Version
   </sql>
-  
-  <resultMap id="UserInfoResultMap" type="com.iidooo.core.model.vo.SecurityUserInfo" >
-    <id column="UserID" property="userID" jdbcType="INTEGER" />
-    <result column="LoginID" property="loginID" jdbcType="VARCHAR" />
-    <result column="UserName" property="userName" jdbcType="VARCHAR" />
-    <result column="Mobile" property="mobile" jdbcType="VARCHAR" />
-    <result column="Email" property="email" jdbcType="VARCHAR" />
-    <result column="Sex" property="sex" jdbcType="CHAR" />
-    <result column="Birthday" property="birthday" jdbcType="DATE" />
-    <result column="WeixinID" property="weixinID" jdbcType="VARCHAR" />
-    <result column="PhotoURL" property="photoURL" jdbcType="VARCHAR" />
-    <result column="IsSilent" property="isSilent" jdbcType="INTEGER" />
-    <result column="IsDisable" property="isDisable" jdbcType="INTEGER" />
-    <result column="Level" property="level" jdbcType="INTEGER" />
-    <result column="Points" property="points" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="UserInfo_Column_List" >
-    U.UserID, U.LoginID, U.UserName, U.Mobile, U.Email, U.Sex, U.Birthday, U.WeixinID, U.PhotoURL, 
-    U.IsSilent, U.IsDisable, U.Level, U.Points
-  </sql>
-  
-  <select id="selectByUserID" resultMap="UserInfoResultMap" parameterType="java.lang.Integer" >
+   
+  <select id="selectByUserID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="UserInfo_Column_List" />, C.ContentCount
-    from SECURITY_USER U , 
-    (select count(C.ContentID) as ContentCount from CMS_CONTENT C where CreateUserID = #{userID,jdbcType=INTEGER}) C
-    where U.UserID = #{userID,jdbcType=INTEGER}
+    <include refid="Base_Column_List" />
+    from SECURITY_USER U  
+    where U.IsDelete = 0 and U.UserID = #{userID,jdbcType=INTEGER}
   </select>
+  
+  <!-- 通过用户的Email获得用户对象 -->
+  <select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SECURITY_USER U  
+    where U.IsDelete = 0 and U.Email = #{email,jdbcType=VARCHAR}
+  </select>  
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from SECURITY_USER
@@ -204,6 +192,8 @@
       0,1
     </trim>
   </insert>
+  
+  <!-- 根据用户ID更新用户信息 -->
   <update id="updateByUserID" parameterType="com.iidooo.core.model.po.SecurityUser" >
     update SECURITY_USER
     <set >
@@ -248,6 +238,9 @@
       </if>
       <if test="points != null" >
         Points = #{points,jdbcType=INTEGER},
+      </if>
+      <if test="experience != null" >
+        Experience = #{experience,jdbcType=INTEGER},
       </if>
       <if test="remarks != null" >
         Remarks = #{remarks,jdbcType=VARCHAR},

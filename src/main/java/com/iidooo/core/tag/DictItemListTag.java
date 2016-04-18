@@ -12,8 +12,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.apache.log4j.Logger;
 
 import com.iidooo.core.constant.ClassConstant;
-import com.iidooo.core.dao.extend.DictItemDao;
-import com.iidooo.core.dto.extend.DictItemDto;
+import com.iidooo.core.mapper.DictItemMapper;
+import com.iidooo.core.model.po.DictItem;
 import com.iidooo.core.util.SpringUtil;
 import com.iidooo.core.util.StringUtil;
 
@@ -86,8 +86,8 @@ public class DictItemListTag extends SimpleTagSupport {
             pageContext = (PageContext) getJspContext();
             out = pageContext.getOut();
 
-            DictItemDao DictItemDao = (DictItemDao) SpringUtil.getBean(pageContext.getServletContext(), ""/*ClassConstant.BEAN_DICT_ITEM_DAO*/);
-            List<DictItemDto> dictItemList = DictItemDao.selectByClassCode(dictClassCode);
+            DictItemMapper DictItemDao = (DictItemMapper) SpringUtil.getBean(pageContext.getServletContext(), ""/*ClassConstant.BEAN_DICT_ITEM_DAO*/);
+            List<DictItem> dictItemList = DictItemDao.selectByClassCode(dictClassCode);
 
             out.println("<ul id='" + id + "' class='dict_item_list'>");
 
@@ -96,7 +96,7 @@ public class DictItemListTag extends SimpleTagSupport {
 
             boolean isItemFocus = false;
 
-            for (DictItemDto item : dictItemList) {
+            for (DictItem item : dictItemList) {
                 String dictItemCode = item.getDictItemCode();
                 String dictItemName = item.getDictItemName();
                 if (value != null && !value.isEmpty() && value.equals(dictItemCode)) {

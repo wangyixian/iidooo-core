@@ -14,6 +14,7 @@ public class Message {
     public Message(Integer code, MessageLevel type) {
         this.code = code;
         this.type = type;
+        this.field = "";
         this.description = "";
     }
 
