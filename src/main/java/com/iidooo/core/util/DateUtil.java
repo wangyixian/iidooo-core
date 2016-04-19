@@ -28,6 +28,8 @@ public class DateUtil {
     public static final String DATE_YEAR_MONTH_SIMPLE = "yyyyMM";
 
     public static final String DATE_TIME_FULL_SIMPLE = "yyyyMMddHHmmssssssss";
+    
+    public static final String TIME_COLON = "HH:mm:ss";
 
     public static String getNow(String format) {
         try {
@@ -96,7 +98,7 @@ public class DateUtil {
      * @param format 格式化
      * @return 变换后Date
      */
-    public static Date parseToDate(String dateString, String format) {
+    public static Date getDate(String dateString, String format) {
         try {
             DateFormat df = new SimpleDateFormat(format);
             Date result = df.parse(dateString);
@@ -112,6 +114,6 @@ public class DateUtil {
         System.out.println(calendar.get(Calendar.DATE));
         System.out.println(calendar.get(Calendar.MONTH) + 1);
         System.out.println(calendar.get(Calendar.YEAR));
-
+        System.out.println(DateUtil.getNow(DateUtil.TIME_COLON));
     }
 }

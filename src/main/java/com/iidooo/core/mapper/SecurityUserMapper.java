@@ -1,5 +1,7 @@
 package com.iidooo.core.mapper;
 
+import java.util.List;
+
 import com.iidooo.core.model.po.SecurityUser;
 
 public interface SecurityUserMapper {
@@ -27,6 +29,13 @@ public interface SecurityUserMapper {
      * @return 所获的的用户对象
      */
     SecurityUser selectByEmail(String email);
+    
+    /**
+     * 查询用户一览
+     * @param securityUser 封装的查询条件
+     * @return 所获得的用户一览
+     */
+    List<SecurityUser> selectForSearch(SecurityUser securityUser);
 
     /**
      * 根据用户ID更新用户信息
