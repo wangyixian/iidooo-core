@@ -2,6 +2,7 @@ package com.iidooo.core.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.iidooo.core.model.po.HisUserExp;
 import com.iidooo.core.model.po.SecurityUser;
 import com.iidooo.core.service.SecurityUserService;
 import com.iidooo.core.util.DateUtil;
+import com.iidooo.core.util.IntegerUtil;
 import com.iidooo.core.util.SecurityUtil;
 import com.iidooo.core.util.StringUtil;
 
@@ -57,12 +59,21 @@ public class SecurityUserServiceImpl implements SecurityUserService {
     }
 
     @Override
-    public SecurityUser createDefaultUser(String photoURL, String email) {
+    public SecurityUser createDefaultUser(String photoURL, String email, Properties properties) {
         try {
+
+            // 随机获取firstName，middleName，lastName
+            Integer firstRandom = IntegerUtil.getRandomNumber(Integer.valueOf(properties.getProperty("RANDOM_FIRST_NAME_SUM")));
+            Integer middleRandom = IntegerUtil.getRandomNumber(Integer.valueOf(properties.getProperty("RANDOM_MIDDLE_NAME_SUM")));
+            Integer lastRandom = IntegerUtil.getRandomNumber(Integer.valueOf(properties.getProperty("RANDOM_LAST_NAME_SUM")));
+            String firstName = properties.getProperty("RANDOM_FIRST_NAME_" + firstRandom.toString());
+            String middleName = properties.getProperty("RANDOM_MIDDLE_NAME_" + middleRandom.toString());
+            String lastName = properties.getProperty("RANDOM_LAST_NAME_" + lastRandom.toString());
+
             SecurityUser user = new SecurityUser();
             user.setLoginID(StringUtil.getRandomStr(6));
             user.setPassword(SecurityUtil.getMd5("123456"));
-            user.setUserName(user.getLoginID());
+            user.setUserName(firstName + middleName + lastName);
             user.setBirthday(new Date());
             user.setEmail(email);
             user.setIsDisable(0);
@@ -82,15 +93,14 @@ public class SecurityUserServiceImpl implements SecurityUserService {
             user.setUpdateUserID(1);
             user.setIsDelete(0);
             user.setVersion(1);
-            
+
             // 创建用户失败
             if (securityUserMapper.insertSelective(user) <= 0) {
                 return null;
             }
 
             // 为了用户唯一性，用UserID再更新一遍用户名
-            user.setUserName(user.getUserName() + user.getUserID().toString());
-            user.setLoginID(user.getUserName());
+            user.setLoginID(user.getLoginID() + user.getUserID().toString());
             if (securityUserMapper.updateByUserID(user) <= 0) {
                 return null;
             }

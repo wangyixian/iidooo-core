@@ -1,5 +1,7 @@
 package com.iidooo.core.service;
 
+import java.util.Properties;
+
 import com.iidooo.core.model.po.SecurityUser;
 
 public interface SecurityUserService {
@@ -7,7 +9,7 @@ public interface SecurityUserService {
     
     SecurityUser getSecurityUserByEmail(String email);
 
-    SecurityUser createDefaultUser(String photoURL, String email);
+    SecurityUser createDefaultUser(String photoURL, String email, Properties properties);
 
     SecurityUser updateUserInfo(SecurityUser securityUser);
 

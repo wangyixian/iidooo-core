@@ -126,7 +126,7 @@ public class StringUtil {
             throw e;
         }
     }
-
+    
     /**
      * 得到请求的基础路径，如：http://www.iidooo.com:8080
      * 

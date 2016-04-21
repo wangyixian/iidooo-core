@@ -39,6 +39,9 @@ public class PropertiesLoadListener extends HttpServlet implements ServletContex
             Properties mailProperties = PropertiesUtil.loadProperties("mail.properties");
             sc.setAttribute("mail.properties", mailProperties);
 
+            // 把 random_name.properties 加入 ServletContext
+            Properties randomNameProperties = PropertiesUtil.loadProperties("random_name.properties");
+            sc.setAttribute("random_name.properties", randomNameProperties);
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);

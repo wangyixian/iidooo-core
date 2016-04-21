@@ -13,6 +13,7 @@ public interface DictItemMapper {
 
     /**
      * 根据ClassCode获取字典项列表
+     * 
      * @param dictClassCode 字典 class code
      * @return 字典项列表
      */
