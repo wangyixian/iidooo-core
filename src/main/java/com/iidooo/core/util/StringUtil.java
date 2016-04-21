@@ -104,12 +104,19 @@ public class StringUtil {
         }
     }
 
-    public static String getRandomNumber(int length) {
+    /**
+     * 得到随机数字符串
+     * 
+     * @param length 字符串的长度
+     * @param rank 每个数字的范围
+     * @return 返回得到的随机数字符串
+     */
+    public static String getRandomNumber(int length, int rank) {
         try {
             Random rand = new Random();
             StringBuilder sb = new StringBuilder();
             while (sb.length() < length) {
-                int number = rand.nextInt(9 + 1);
+                int number = rand.nextInt(rank + 1);
                 sb.append(number);
             }
             return sb.toString();
@@ -120,6 +127,13 @@ public class StringUtil {
         }
     }
 
+    /**
+     * 得到请求的基础路径，如：http://www.iidooo.com:8080
+     * 
+     * @param requestURL
+     * @param servletPath
+     * @return
+     */
     public static String getRequestBaseURL(String requestURL, String servletPath) {
         try {
             return requestURL.replace(servletPath, "");
@@ -128,8 +142,10 @@ public class StringUtil {
             return "";
         }
     }
-    
-    public static void main(String[] args){
-        System.out.println(StringUtil.getRandomNumber(6));
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(StringUtil.getRandomNumber(4, 9));
+        }
     }
 }

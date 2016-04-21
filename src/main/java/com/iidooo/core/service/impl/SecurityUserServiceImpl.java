@@ -67,7 +67,7 @@ public class SecurityUserServiceImpl implements SecurityUserService {
             user.setEmail(email);
             user.setIsDisable(0);
             user.setIsSilent(0);
-            user.setLevel(1);
+            user.setLevel(0);
             user.setMobile("");
             user.setPhotoURL(photoURL);
             user.setPoints(0);
