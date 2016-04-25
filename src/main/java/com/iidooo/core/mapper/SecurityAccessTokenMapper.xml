@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iidooo.core.mapper.SecurityAccessTokenMapper">
+	<resultMap id="BaseResultMap" type="com.iidooo.core.model.po.SecurityAccessToken">
+		<id column="TokenID" property="tokenID" jdbcType="INTEGER" />
+		<result column="Token" property="token" jdbcType="VARCHAR" />
+		<result column="UserID" property="userID" jdbcType="INTEGER" />
+		<result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+		<result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="UpdateUserID" property="updateUserID" jdbcType="INTEGER" />
+		<result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="CreateUserID" property="createUserID" jdbcType="INTEGER" />
+		<result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
+		<result column="Version" property="version" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		TokenID, Token, UserID, Remarks, UpdateTime, UpdateUserID, CreateTime, CreateUserID,
+		IsDelete, Version
+	</sql>
+
+	<!-- 根据用户获取AccessToken对象 -->
+	<select id="selectByUserID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from SECURITY_ACCESS_TOKEN
+		where IsDelete = 0 and UserID = #{userID,jdbcType=INTEGER}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from SECURITY_ACCESS_TOKEN
+		where TokenID = #{tokenID,jdbcType=INTEGER}
+	</delete>
+
+	<!-- 插入一个SecurityAccessToken -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="tokenID" parameterType="com.iidooo.core.model.po.SecurityAccessToken">
+		insert into SECURITY_ACCESS_TOKEN
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="token != null">
+				Token,
+			</if>
+			<if test="userID != null">
+				UserID,
+			</if>
+			<if test="remarks != null">
+				Remarks,
+			</if>
+			<if test="updateTime != null">
+				UpdateTime,
+			</if>
+			<if test="updateUserID != null">
+				UpdateUserID,
+			</if>
+			<if test="createTime != null">
+				CreateTime,
+			</if>
+			<if test="createUserID != null">
+				CreateUserID,
+			</if>
+			<if test="isDelete != null">
+				IsDelete,
+			</if>
+			<if test="version != null">
+				Version,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="token != null">
+				#{token,jdbcType=VARCHAR},
+			</if>
+			<if test="userID != null">
+				#{userID,jdbcType=INTEGER},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateUserID != null">
+				#{updateUserID,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserID != null">
+				#{createUserID,jdbcType=INTEGER},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 通过TokenID更新SecurityAccessToken -->
+	<update id="update" parameterType="com.iidooo.core.model.po.SecurityAccessToken">
+		update SECURITY_ACCESS_TOKEN
+		<set>
+			<if test="token != null">
+				Token = #{token,jdbcType=VARCHAR},
+			</if>
+			<if test="userID != null">
+				UserID = #{userID,jdbcType=INTEGER},
+			</if>
+			<if test="remarks != null">
+				Remarks = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateUserID != null">
+				UpdateUserID = #{updateUserID,jdbcType=INTEGER},
+			</if>
+			Version = Version + 1
+		</set>
+		where TokenID = #{tokenID,jdbcType=INTEGER}
+	</update>
+</mapper>

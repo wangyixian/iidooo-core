@@ -2,6 +2,8 @@ package com.iidooo.core.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.iidooo.core.model.po.SecurityUser;
 
 public interface SecurityUserMapper {
@@ -17,6 +19,14 @@ public interface SecurityUserMapper {
     int insertSelective(SecurityUser user);
 
     /**
+     * 通过LoginID和Password获取用户信息
+     * @param loginID 登录名
+     * @param password 密码
+     * @return 返回的用户对象
+     */
+    SecurityUser selectByLogin(@Param("loginID")String loginID, @Param("password")String password);
+    
+    /**
      * 通过用户主键ID获得UserInfo对象
      * @param userID 用户主键ID
      * @return securityUser对象
@@ -29,6 +39,13 @@ public interface SecurityUserMapper {
      * @return 所获的的用户对象
      */
     SecurityUser selectByEmail(String email);
+    
+    /**
+     * 通过用户的登录Token获得用户对象
+     * @param token 登录令牌
+     * @return 所获的的用户对象
+     */
+    SecurityUser selectByToken(String token);
     
     /**
      * 查询用户一览

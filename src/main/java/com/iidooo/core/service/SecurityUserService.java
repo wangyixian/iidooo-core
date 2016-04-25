@@ -2,12 +2,18 @@ package com.iidooo.core.service;
 
 import java.util.Properties;
 
+import com.iidooo.core.model.po.SecurityAccessToken;
 import com.iidooo.core.model.po.SecurityUser;
 
 public interface SecurityUserService {
+    
+    SecurityAccessToken getAccessTokenByLogin(String loginID, String password, String userType) throws Exception;
+    
     SecurityUser getSecurityUserByID(Integer userID);
     
     SecurityUser getSecurityUserByEmail(String email);
+    
+    SecurityUser getSecurityUserByToken(String token);
 
     SecurityUser createDefaultUser(String photoURL, String email, Properties properties);
 

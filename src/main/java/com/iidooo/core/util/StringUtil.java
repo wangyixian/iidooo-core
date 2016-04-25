@@ -1,6 +1,7 @@
 package com.iidooo.core.util;
 
 import java.util.Random;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
@@ -126,7 +127,7 @@ public class StringUtil {
             throw e;
         }
     }
-    
+
     /**
      * 得到请求的基础路径，如：http://www.iidooo.com:8080
      * 
@@ -143,9 +144,20 @@ public class StringUtil {
         }
     }
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 10; i++) {
-            System.out.println(StringUtil.getRandomNumber(4, 9));
+    public static String getGUID() {
+        try {
+            String result = UUID.randomUUID().toString();
+            result = result.replace("-", "");
+            return result;
+        } catch (Exception e) {
+            logger.fatal(e);
+            return "";
         }
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(StringUtil.getGUID());
+        System.out.println(StringUtil.getGUID().length());
     }
 }

@@ -39,8 +39,9 @@ public class PictureUtil {
      * @param width 缩放目标宽度
      * @param height 缩放目标高度
      * @param proportion 是否等比例，默认为true
+     * @throws Exception 抛出异常
      */
-    public static void compress(String inputFilePath, String outputFilePath, int width, int height, boolean proportion) {
+    public static void compress(String inputFilePath, String outputFilePath, int width, int height, boolean proportion) throws Exception {
         try {
             // 获得源文件
             File inputFile = new File(inputFilePath);
@@ -87,15 +88,17 @@ public class PictureUtil {
 //            }
 
             FileOutputStream out = new FileOutputStream(outputFilePath);
+            String format = FileUtil.getFileSuffix(outputFilePath);
             // JPEGImageEncoder可适用于其他图片类型的转换
             // JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
             // encoder.encode(tag);
-            ImageIO.write(tag, "jpeg", out);
+            ImageIO.write(tag, format, out);
             out.close();
 
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
+            throw e;
         }
     }
     
@@ -104,8 +107,9 @@ public class PictureUtil {
      * 
      * @param inputFilePath 输入的文件路径
      * @param outputFilePath 压缩后输出的文件路径
+     * @throws Exception 抛出异常
      */
-    public static void compress(String inputFilePath, String outputFilePath) {
+    public static void compress(String inputFilePath, String outputFilePath) throws Exception {
         try {
             // 获得源文件
             File inputFile = new File(inputFilePath);
@@ -137,6 +141,7 @@ public class PictureUtil {
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
+            throw e;
         }
     }
 
@@ -149,9 +154,10 @@ public class PictureUtil {
      * @param y y轴的开始坐标
      * @param width 所裁剪的宽度
      * @param height 所裁剪的高度
+     * @throws Exception 抛出处理异常
      */
-    public static void cut(String inputFilePath, String outputFilePath, int x, int y, int width, int height) {
-
+    public static void cut(String inputFilePath, String outputFilePath, int x, int y, int width, int height) throws Exception {
+        
         FileInputStream fileInputStream = null;
         ImageInputStream imageInputStream = null;
         try {
@@ -165,7 +171,7 @@ public class PictureUtil {
             fileInputStream = new FileInputStream(inputFilePath);
 
             String format = FileUtil.getFileSuffix(inputFilePath);
-            
+            System.out.println(format);
             // ImageReader声称能够解码指定格式
             Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName(format);
             ImageReader reader = it.next();
@@ -197,6 +203,7 @@ public class PictureUtil {
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
+            throw e;
         } finally {
             try {
                 if (fileInputStream != null) {
@@ -208,6 +215,7 @@ public class PictureUtil {
             } catch (IOException e) {
                 e.printStackTrace();
                 logger.fatal(e);
+                throw e;
             }
         }
     }
@@ -217,8 +225,9 @@ public class PictureUtil {
      * 
      * @param inputFilePath
      * @param outputFilePath
+     * @throws Exception 抛出处理异常
      */
-    public static void cutSquare(String inputFilePath, String outputFilePath) {
+    public static void cutSquare(String inputFilePath, String outputFilePath) throws Exception {
         try {
             // 获得源文件
             File inputFile = new File(inputFilePath);
@@ -238,14 +247,19 @@ public class PictureUtil {
                 int y = Math.round((height - width) / 2);
                 cut(inputFilePath, outputFilePath, x, y, stand, stand);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
+            throw e;
         }
     }
     
-    public static void MaintainOrientation(String filePath){
+    /**
+     * 保持上传照片的图片方向不发生调整
+     * @param filePath 图片的文件路径
+     * @throws Exception 抛出异常
+     */
+    public static void MaintainOrientation(String filePath) throws Exception{
         try {
             File file = new File(filePath);
             if (!file.exists()) {
@@ -259,7 +273,7 @@ public class PictureUtil {
                 orientation = directory.getInt(ExifSubIFDDirectory.TAG_ORIENTATION);
                 logger.debug(filePath + " 's orientation is :" + orientation);
             }
-            
+            String format = FileUtil.getFileSuffix(filePath);
             switch (orientation) {
             // case 1:
             // return "Top, left side (Horizontal / normal)";
@@ -288,7 +302,7 @@ public class PictureUtil {
                 // 写到新的文件
                 FileOutputStream out3 = new FileOutputStream(file);
                 try {
-                    ImageIO.write(new_img3, "png", out3);
+                    ImageIO.write(new_img3, format, out3);
                 } finally {
                     out3.close();
                 }
@@ -323,7 +337,7 @@ public class PictureUtil {
                 // 写到新的文件
                 FileOutputStream out6 = new FileOutputStream(file);
                 try {
-                    ImageIO.write(new_img6, "png", out6);
+                    ImageIO.write(new_img6, format, out6);
                 } finally {
                     out6.close();
                 }
@@ -355,7 +369,7 @@ public class PictureUtil {
                 // 写到新的文件
                 FileOutputStream out8 = new FileOutputStream(file);
                 try {
-                    ImageIO.write(new_img8, "png", out8);
+                    ImageIO.write(new_img8, format, out8);
                 } finally {
                     out8.close();
                 }
@@ -367,15 +381,16 @@ public class PictureUtil {
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
+            throw e;
         }
     }
 
     public static void main(String[] arg) {
         try {
-            String inputFilePath = "/Users/Ethan/workspace/upload/sample3.jpg";
-            String outputFilePath = "/Users/Ethan/workspace/upload/sample3_mini.jpg";
-            PictureUtil.MaintainOrientation(inputFilePath);
-//            PictureUtil.compress(inputFilePath, outputFilePath, 500, 500, true);
+            String inputFilePath = "/Users/Ethan/百度云同步盘/MyProjects/iidooo-cms/04.executable/test/image_20160424002100000029.jpg";
+            String outputFilePath = "/Users/Ethan/百度云同步盘/MyProjects/iidooo-cms/04.executable/test/image_20160424002100000029_mini.jpg";
+            //PictureUtil.MaintainOrientation(inputFilePath);
+            PictureUtil.compress(inputFilePath, outputFilePath, 200, 200, false);
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
