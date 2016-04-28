@@ -11,13 +11,13 @@ import org.apache.log4j.Logger;
 public class DateUtil {
     private static final Logger logger = Logger.getLogger(DateUtil.class);
 
-    public static final String DATE_TIME_FULL_HYPHEN = "yyyy-MM-dd HH:mm:ss:ssssss";
+    public static final String DATE_TIME_FULL_HYPHEN = "yyyy-MM-dd HH:mm:ss:sss";
 
     public static final String DATE_TIME_HYPHEN = "yyyy-MM-dd HH:mm:ss";
 
     public static final String DATE_HYPHEN = "yyyy-MM-dd";
 
-    public static final String DATE_TIME_FULL_SLASH = "yyyy/MM/dd HH:mm:ss:ssssss";
+    public static final String DATE_TIME_FULL_SLASH = "yyyy/MM/dd HH:mm:ss:sss";
 
     public static final String DATE_TIME_SLASH = "yyyy/MM/dd HH:mm:ss";
 
@@ -27,7 +27,7 @@ public class DateUtil {
 
     public static final String DATE_YEAR_MONTH_SIMPLE = "yyyyMM";
 
-    public static final String DATE_TIME_FULL_SIMPLE = "yyyyMMddHHmmssssssss";
+    public static final String DATE_TIME_FULL_SIMPLE = "yyyyMMddHHmmsssss";
     
     public static final String TIME_COLON = "HH:mm:ss";
 
@@ -97,15 +97,16 @@ public class DateUtil {
      * @param dateString 字符串日期
      * @param format 格式化
      * @return 变换后Date
+     * @throws Exception 
      */
-    public static Date getDate(String dateString, String format) {
+    public static Date getDate(String dateString, String format) throws Exception {
         try {
             DateFormat df = new SimpleDateFormat(format);
             Date result = df.parse(dateString);
             return result;
         } catch (Exception e) {
             logger.fatal(e);
-            return null;
+            throw e;
         }
     }
 

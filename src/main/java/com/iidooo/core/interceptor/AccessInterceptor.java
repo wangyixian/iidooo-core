@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.iidooo.core.mapper.SecurityClientMapper;
@@ -27,7 +29,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
                 appID = request.getParameter("appID");
                 secret = request.getParameter("secret");
             }
-            
+
             if (StringUtil.isBlank(appID) || StringUtil.isBlank(secret)) {
                 logger.warn("Access Denied!");
                 return false;
@@ -35,6 +37,13 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 
             if (securityClientMapper.selectByAppIDSecret(appID, secret) == null) {
                 logger.warn("Access Denied!");
+                return false;
+            }
+
+            // 临时代码，拦截爬虫和安卓机
+            String userAgent = request.getHeader("User-Agent");
+            if (userAgent.toLowerCase().contains("scrapy") || userAgent.toLowerCase().contains("android")) {
+                logger.warn("Access Denied because of " + userAgent);
                 return false;
             }
             logger.info("Access OK!");

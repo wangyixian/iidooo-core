@@ -95,4 +95,22 @@ public class FileUtil {
             throw e;
         }
     }
+    
+    public static String getFileName(String filePath){
+        try {
+            int dotPosition = filePath.lastIndexOf('.');
+            int slashPosition = filePath.lastIndexOf(File.separator);
+            String fileName = filePath.substring(slashPosition + 1, dotPosition);
+            return fileName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            throw e;
+        }
+    }
+    
+    public static void main(String[] args){
+        String fileName = FileUtil.getFileName("http://iidooo-toxic-wave-test.oss-cn-hangzhou.aliyuncs.com/201604/baobao_20160428205000035.png");
+        System.out.println(fileName);
+    }
 }
