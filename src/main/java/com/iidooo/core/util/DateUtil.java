@@ -28,7 +28,7 @@ public class DateUtil {
     public static final String DATE_YEAR_MONTH_SIMPLE = "yyyyMM";
 
     public static final String DATE_TIME_FULL_SIMPLE = "yyyyMMddHHmmsssss";
-    
+
     public static final String TIME_COLON = "HH:mm:ss";
 
     public static String getNow(String format) {
@@ -43,7 +43,7 @@ public class DateUtil {
         }
     }
 
-    public static String format(String inputStr, String inputFormat, String outputFormat) {
+    public static String format(String inputStr, String inputFormat, String outputFormat) throws Exception {
         try {
             if (inputStr == null || inputStr.isEmpty()) {
                 return "";
@@ -56,7 +56,23 @@ public class DateUtil {
             return outputStr;
         } catch (Exception e) {
             logger.fatal(e);
-            return "";
+            throw e;
+        }
+    }
+
+    public static boolean isFormat(String inputStr, String format) throws Exception {
+        try {
+            if (inputStr == null || inputStr.isEmpty()) {
+                return false;
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            if (sdf.parse(inputStr) != null) {
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            logger.fatal(e);
+            return false;
         }
     }
 
@@ -97,7 +113,7 @@ public class DateUtil {
      * @param dateString 字符串日期
      * @param format 格式化
      * @return 变换后Date
-     * @throws Exception 
+     * @throws Exception
      */
     public static Date getDate(String dateString, String format) throws Exception {
         try {

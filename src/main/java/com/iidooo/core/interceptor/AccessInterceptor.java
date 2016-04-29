@@ -42,7 +42,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 
             // 临时代码，拦截爬虫和安卓机
             String userAgent = request.getHeader("User-Agent");
-            if (userAgent.toLowerCase().contains("scrapy") || userAgent.toLowerCase().contains("android")) {
+            if (userAgent.toLowerCase().contains("scrapy")) {
                 logger.warn("Access Denied because of " + userAgent);
                 return false;
             }

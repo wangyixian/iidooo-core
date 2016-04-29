@@ -209,4 +209,8 @@ public final class ValidateUtil {
      * Pattern.compile(Constants.REGEX_CHINESE_STR); boolean flg = pattern.matcher(str).matches();
      * logger.debug("The end of the method ValidatorUtil.isChinese"); return flg; }
      */
+    
+    public static void main(String[] args){
+
+    }
 }

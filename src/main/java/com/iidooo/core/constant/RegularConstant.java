@@ -2,10 +2,7 @@ package com.iidooo.core.constant;
 
 public class RegularConstant {
 
-    /**
-     * 数字组合的字符串正则表达式.
-     */
-    public static final String REGEX_NUMBER = "^[0-9]*$";
+    public static final String REGEX_NUMBER = "^[0-9]*$"; // 数字组合的字符串正则表达式.
 
     public static final String REGEX_MOBILE = "^(1[0-9]{10})$";
     
