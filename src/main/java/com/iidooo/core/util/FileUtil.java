@@ -43,6 +43,36 @@ public class FileUtil {
     }
 
     /**
+     * 修改文件名
+     * @param filePath 文件路径
+     * @param newFileName 新的文件名
+     * @return 重命名后的文件路径
+     */
+    public static String changeFileName(String filePath, String newFileName) {
+        try {
+            int dotPosition = filePath.lastIndexOf('.');
+            if (dotPosition < 0) {
+                return filePath;
+            }
+            // 获取文件类型
+            String suffix = filePath.substring(dotPosition + 1, filePath.length());
+            
+            int slashPosition = filePath.lastIndexOf(File.separator);
+            if (slashPosition < 0) {
+                return filePath;
+            }
+            
+            String folderPath = filePath.substring(0, slashPosition);
+            filePath = folderPath + File.separator + newFileName + "." + suffix;
+            return filePath;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            return "";
+        }
+    }
+
+    /**
      * 通过在文件名后加上时间毫秒来获取唯一文件名
      *
      * @param fileName 原文件名
@@ -50,13 +80,20 @@ public class FileUtil {
      */
     public static String getUniqueFileName(String fileName) {
         try {
-            int dotPosition = fileName.lastIndexOf('.');
-            // 获取文件类型
-            String suffix = fileName.substring(dotPosition + 1, fileName.length());
-            // 获取文件名
-            String name = fileName.substring(0, dotPosition);
             String date = DateUtil.getNow(DateUtil.DATE_TIME_FULL_SIMPLE);
-            String newName = name + "_" + date + "." + suffix;
+            String newName = "";
+            int dotPosition = fileName.lastIndexOf('.');
+            if (dotPosition < 0) {
+                newName = fileName + "_" + date;
+            } else {
+                // 获取文件类型
+                String suffix = fileName.substring(dotPosition + 1, fileName.length());
+                // 获取文件名
+                String name = fileName.substring(0, dotPosition);
+
+                newName = name + "_" + date + "." + suffix;
+            }
+
             return newName;
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,13 +118,13 @@ public class FileUtil {
             throw e;
         }
     }
-    
-    public static String getFileSuffix(String fileName){
+
+    public static String getFileSuffix(String fileName) {
         try {
             int dotPosition = fileName.lastIndexOf('.');
             // 获取文件类型
             String suffix = fileName.substring(dotPosition + 1, fileName.length());
-            
+
             return suffix;
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,22 +132,29 @@ public class FileUtil {
             throw e;
         }
     }
-    
-    public static String getFileName(String filePath){
+
+    public static String getFileName(String filePath) {
         try {
             int dotPosition = filePath.lastIndexOf('.');
+            if (dotPosition < 0) {
+                return "";
+            }
             int slashPosition = filePath.lastIndexOf(File.separator);
+            if (slashPosition < 0) {
+                return "";
+            }
             String fileName = filePath.substring(slashPosition + 1, dotPosition);
             return fileName;
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
-            throw e;
+            return "";
         }
     }
-    
-    public static void main(String[] args){
-        String fileName = FileUtil.getFileName("http://iidooo-toxic-wave-test.oss-cn-hangzhou.aliyuncs.com/201604/baobao_20160428205000035.png");
-        System.out.println(fileName);
+
+    public static void main(String[] args) {
+        String filePath = "http://iidooo-toxic-wave-test.oss-cn-hangzhou.aliyuncs.com/201604/baobao_20160428205000035.png";
+        String newFilePath =  FileUtil.changeFileName(filePath, DateUtil.getNow(DateUtil.DATE_TIME_FULL_SIMPLE));
+        System.out.println(newFilePath);
     }
 }

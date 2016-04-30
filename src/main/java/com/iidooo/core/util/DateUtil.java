@@ -11,13 +11,13 @@ import org.apache.log4j.Logger;
 public class DateUtil {
     private static final Logger logger = Logger.getLogger(DateUtil.class);
 
-    public static final String DATE_TIME_FULL_HYPHEN = "yyyy-MM-dd HH:mm:ss:sss";
+    public static final String DATE_TIME_FULL_HYPHEN = "yyyy-MM-dd HH:mm:ss:SSS";
 
     public static final String DATE_TIME_HYPHEN = "yyyy-MM-dd HH:mm:ss";
 
     public static final String DATE_HYPHEN = "yyyy-MM-dd";
 
-    public static final String DATE_TIME_FULL_SLASH = "yyyy/MM/dd HH:mm:ss:sss";
+    public static final String DATE_TIME_FULL_SLASH = "yyyy/MM/dd HH:mm:ss:SSS";
 
     public static final String DATE_TIME_SLASH = "yyyy/MM/dd HH:mm:ss";
 
@@ -27,7 +27,7 @@ public class DateUtil {
 
     public static final String DATE_YEAR_MONTH_SIMPLE = "yyyyMM";
 
-    public static final String DATE_TIME_FULL_SIMPLE = "yyyyMMddHHmmsssss";
+    public static final String DATE_TIME_FULL_SIMPLE = "yyyyMMddHHmmssSSS";
 
     public static final String TIME_COLON = "HH:mm:ss";
 
