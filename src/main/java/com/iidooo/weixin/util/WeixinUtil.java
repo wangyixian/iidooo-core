@@ -50,6 +50,7 @@ public class WeixinUtil {
             String response = HttpUtil.doGet(url);
 
             JSONObject jsonObject = JSONObject.fromObject(response);
+            System.out.println(jsonObject);
             result.setTicket(jsonObject.getString(WeixinConstant.KEY_TICKET));
             result.setErrCode(jsonObject.getInt(WeixinConstant.KEY_ERR_CODE));
             result.setErrMsg(jsonObject.getString(WeixinConstant.KEY_ERR_MSG));
@@ -83,7 +84,7 @@ public class WeixinUtil {
 
             result.setUrl(url);
             result.setJsAPITicket(jsapi_ticket);
-            result.setNoncestr(nonce_str);
+            result.setNonceStr(nonce_str);
             result.setTimestamp(timestamp);
             result.setSignature(signature);
 
