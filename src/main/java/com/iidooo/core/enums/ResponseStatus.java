@@ -1,5 +1,7 @@
 package com.iidooo.core.enums;
 
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
+
 public enum ResponseStatus {
 
     // 处理成功，返回OK
@@ -10,17 +12,20 @@ public enum ResponseStatus {
 
     // 处理失败
     Failed(400),
-    
+
     // 创建失败
     InsertFailed(401),
-    
+
     UpdateFailed(402),
-    
+
     // 应为一些原因而受限制后处理失败
-    ConfinedFailed(403), 
-    
+    ConfinedFailed(403),
+
     // 信息重复导致处理失败
-    DuplicateFailed(404);
+    DuplicateFailed(404),
+
+    // 上传文件大小超限制
+    MaxUploadSizeExceededException(405);
 
     private Integer code;
 

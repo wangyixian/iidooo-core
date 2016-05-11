@@ -1,5 +1,9 @@
 package com.iidooo.core.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.iidooo.core.model.po.HisOperator;
 
 public interface HisOperatorMapper {
@@ -24,7 +28,7 @@ public interface HisOperatorMapper {
      * @param hisOperator 包含UV统计所需要的一些值
      * @return 所统计到的UV
      */
-    int selectUVCount(HisOperator hisOperator);     
+    int selectUVCount(@Param("hisOperator")HisOperator hisOperator, @Param("optionList")List<String> optionList);     
 
     int updateByPrimaryKeySelective(HisOperator record);
 

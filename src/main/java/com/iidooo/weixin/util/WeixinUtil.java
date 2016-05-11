@@ -50,7 +50,7 @@ public class WeixinUtil {
             String response = HttpUtil.doGet(url);
 
             JSONObject jsonObject = JSONObject.fromObject(response);
-            System.out.println(jsonObject);
+//            System.out.println(jsonObject);
             result.setTicket(jsonObject.getString(WeixinConstant.KEY_TICKET));
             result.setErrCode(jsonObject.getInt(WeixinConstant.KEY_ERR_CODE));
             result.setErrMsg(jsonObject.getString(WeixinConstant.KEY_ERR_MSG));

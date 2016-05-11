@@ -1,6 +1,7 @@
 package com.iidooo.core.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -74,15 +75,15 @@ public class HisOperatorServiceImpl implements HisOperatorService {
     }
 
     @Override
-    public int getUVCount(String tableName, Integer tableKey, String operation) {
+    public int getUVCount(String tableName, Integer tableKey, List<String> operationList) {
         int result = 0;
         try {
             HisOperator hisOperator = new HisOperator();
             hisOperator.setTableName(tableName);
             hisOperator.setTableKey(tableKey);
-            hisOperator.setOperation(operation);
-            result = hisOperatorMapper.selectUVCount(hisOperator);
+            result = hisOperatorMapper.selectUVCount(hisOperator, operationList);
         } catch (Exception e) {
+            e.printStackTrace();
             logger.fatal(e);
         }
         return result;

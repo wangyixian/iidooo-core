@@ -81,11 +81,11 @@ public class PictureUtil {
             // Image.SCALE_SMOOTH 的缩略算法 生成缩略图片的平滑度的,优先级比速度高 生成的图片质量比较好 但速度慢
             tag.getGraphics().drawImage(inputImg.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH), 0, 0, null);
 
-//            File outputFolder = new File(outputFilePath);
-//            // 判断文件夹是否存在,如果不存在则创建文件夹
-//            if (!outputFolder.exists()) {
-//                outputFolder.mkdir();
-//            }
+            // File outputFolder = new File(outputFilePath);
+            // // 判断文件夹是否存在,如果不存在则创建文件夹
+            // if (!outputFolder.exists()) {
+            // outputFolder.mkdir();
+            // }
 
             FileOutputStream out = new FileOutputStream(outputFilePath);
             String format = FileUtil.getFileSuffix(outputFilePath);
@@ -101,7 +101,7 @@ public class PictureUtil {
             throw e;
         }
     }
-    
+
     /**
      * 不改变长宽的压缩图片
      * 
@@ -124,7 +124,7 @@ public class PictureUtil {
             }
 
             int newWidth = inputImg.getWidth(null);
-            int newHeight = inputImg.getHeight(null);           
+            int newHeight = inputImg.getHeight(null);
             BufferedImage tag = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
 
             // Image.SCALE_SMOOTH 的缩略算法 生成缩略图片的平滑度的,优先级比速度高 生成的图片质量比较好 但速度慢
@@ -157,7 +157,7 @@ public class PictureUtil {
      * @throws Exception 抛出处理异常
      */
     public static void cut(String inputFilePath, String outputFilePath, int x, int y, int width, int height) throws Exception {
-        
+
         FileInputStream fileInputStream = null;
         ImageInputStream imageInputStream = null;
         try {
@@ -171,9 +171,9 @@ public class PictureUtil {
             fileInputStream = new FileInputStream(inputFilePath);
 
             String format = FileUtil.getFileSuffix(inputFilePath);
-            System.out.println(format);
+            // System.out.println(format);
             // ImageReader声称能够解码指定格式
-            Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName(format);
+            Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName("jpg");
             ImageReader reader = it.next();
 
             // 获取图片流
@@ -253,19 +253,20 @@ public class PictureUtil {
             throw e;
         }
     }
-    
+
     /**
      * 保持上传照片的图片方向不发生调整
+     * 
      * @param filePath 图片的文件路径
      * @throws Exception 抛出异常
      */
-    public static void MaintainOrientation(String filePath) throws Exception{
+    public static void MaintainOrientation(String filePath) throws Exception {
         try {
             File file = new File(filePath);
             if (!file.exists()) {
                 throw new FileNotFoundException();
             }
-            
+
             Metadata metadata = ImageMetadataReader.readMetadata(file);
             Directory directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
             int orientation = 0;
@@ -385,12 +386,42 @@ public class PictureUtil {
         }
     }
 
+    /**
+     * 判断是否是图片文件
+     * @param filePath 文件路径
+     * @return 是否是文件的boolean
+     */
+    public static boolean isImage(String filePath) {
+        try {
+            // 获得源文件
+            File inputFile = new File(filePath);
+            if (!inputFile.exists()) {
+                return false;
+            }
+
+            BufferedImage bufferedImage = ImageIO.read(inputFile);
+            if (bufferedImage == null) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            return false;
+        }
+    }
+
     public static void main(String[] arg) {
         try {
-            String inputFilePath = "/Users/Ethan/百度云同步盘/MyProjects/iidooo-cms/04.executable/test/image_20160424002100000029.jpg";
+            String inputFilePath = "/Users/Ethan/百度云同步盘/MyProjects/iidooo-cms/03.test/PictureException/IE9  win7 x64 CHS.jpg";
             String outputFilePath = "/Users/Ethan/百度云同步盘/MyProjects/iidooo-cms/04.executable/test/image_20160424002100000029_mini.jpg";
-            //PictureUtil.MaintainOrientation(inputFilePath);
-            PictureUtil.compress(inputFilePath, outputFilePath, 200, 200, false);
+            // PictureUtil.MaintainOrientation(inputFilePath);
+            // PictureUtil.compress(inputFilePath, outputFilePath, 200, 200, false);
+            if (isImage(inputFilePath)) {
+                System.out.println(true);
+            } else {
+                System.out.println(false);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);

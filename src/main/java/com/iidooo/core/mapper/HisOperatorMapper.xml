@@ -37,7 +37,7 @@
 	</select>
 
 	<!-- 得到UV统计 -->
-	<select id="selectUVCount" resultType="java.lang.Integer" parameterType="com.iidooo.core.model.po.HisOperator">
+	<select id="selectUVCount" resultType="java.lang.Integer">
 		select
 		count(H.OperatorID)
 		from
@@ -45,13 +45,12 @@
 		HIS_OPERATOR
 		where
 		IsDelete = 0 and
-		TableName =
-		#{tableName,jdbcType=VARCHAR} and
-		<if test="tableKey != null">
-			TableKey = #{tableKey,jdbcType=INTEGER} and
+		TableName =	#{hisOperator.tableName,jdbcType=VARCHAR} and
+		<if test="hisOperator.tableKey != null">
+			TableKey = #{hisOperator.tableKey,jdbcType=INTEGER} and
 		</if>
-		Operation =
-		#{operation,jdbcType=VARCHAR}
+		Operation in
+		<foreach item="item" index="index" collection="optionList" open="(" separator="," close=")">#{item}</foreach>
 		group by OperatorIP) H
 	</select>
 	
