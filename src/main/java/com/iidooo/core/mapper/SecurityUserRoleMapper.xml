@@ -20,15 +20,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from SECURITY_USER_ROLE
+    from security_user_role
     where UserRoleID = #{userRoleID,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from SECURITY_USER_ROLE
+    delete from security_user_role
     where UserRoleID = #{userRoleID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.iidooo.core.model.po.SecurityUserRole" >
-    insert into SECURITY_USER_ROLE (UserRoleID, UserID, RoleID, 
+    insert into security_user_role (UserRoleID, UserID, RoleID, 
       Remarks, UpdateTime, UpdateUserID, 
       CreateTime, CreateUserID, IsDelete, 
       Version)
@@ -38,7 +38,7 @@
       #{version,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.iidooo.core.model.po.SecurityUserRole" >
-    insert into SECURITY_USER_ROLE
+    insert into security_user_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userRoleID != null" >
         UserRoleID,
@@ -105,7 +105,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.iidooo.core.model.po.SecurityUserRole" >
-    update SECURITY_USER_ROLE
+    update security_user_role
     <set >
       <if test="userID != null" >
         UserID = #{userID,jdbcType=INTEGER},
@@ -138,7 +138,7 @@
     where UserRoleID = #{userRoleID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.iidooo.core.model.po.SecurityUserRole" >
-    update SECURITY_USER_ROLE
+    update security_user_role
     set UserID = #{userID,jdbcType=INTEGER},
       RoleID = #{roleID,jdbcType=INTEGER},
       Remarks = #{remarks,jdbcType=VARCHAR},

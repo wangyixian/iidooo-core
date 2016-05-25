@@ -1,9 +1,12 @@
 package com.iidooo.core.model.po;
 
 import java.util.Date;
+import java.util.List;
 
 public class SecurityRole {
     private Integer roleID;
+
+    private String roleCode;
 
     private String roleName;
 
@@ -20,6 +23,8 @@ public class SecurityRole {
     private Integer isDelete;
 
     private Integer version;
+    
+    private List<SecurityResource> resourceList;
 
     public Integer getRoleID() {
         return roleID;
@@ -27,6 +32,14 @@ public class SecurityRole {
 
     public void setRoleID(Integer roleID) {
         this.roleID = roleID;
+    }
+
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode == null ? null : roleCode.trim();
     }
 
     public String getRoleName() {
@@ -92,4 +105,13 @@ public class SecurityRole {
     public void setVersion(Integer version) {
         this.version = version;
     }
+
+    public List<SecurityResource> getResourceList() {
+        return resourceList;
+    }
+
+    public void setResourceList(List<SecurityResource> resourceList) {
+        this.resourceList = resourceList;
+    }    
+    
 }

@@ -21,15 +21,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from DICT_TYPE
+    from dict_type
     where DictTypeID = #{dictTypeID,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from DICT_TYPE
+    delete from dict_type
     where DictTypeID = #{dictTypeID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.iidooo.core.model.po.DictType" >
-    insert into DICT_TYPE (DictTypeID, DictTypeCode, DictTypeName, 
+    insert into dict_type (DictTypeID, DictTypeCode, DictTypeName, 
       Sequence, Remarks, UpdateTime, 
       UpdateUserID, CreateTime, CreateUserID, 
       IsDelete, Version)
@@ -39,7 +39,7 @@
       #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.iidooo.core.model.po.DictType" >
-    insert into DICT_TYPE
+    insert into dict_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="dictTypeID != null" >
         DictTypeID,
@@ -112,7 +112,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.iidooo.core.model.po.DictType" >
-    update DICT_TYPE
+    update dict_type
     <set >
       <if test="dictTypeCode != null" >
         DictTypeCode = #{dictTypeCode,jdbcType=VARCHAR},
@@ -148,7 +148,7 @@
     where DictTypeID = #{dictTypeID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.iidooo.core.model.po.DictType" >
-    update DICT_TYPE
+    update dict_type
     set DictTypeCode = #{dictTypeCode,jdbcType=VARCHAR},
       DictTypeName = #{dictTypeName,jdbcType=VARCHAR},
       Sequence = #{sequence,jdbcType=INTEGER},

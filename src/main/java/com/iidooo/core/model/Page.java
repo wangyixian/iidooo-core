@@ -2,6 +2,7 @@ package com.iidooo.core.model;
 
 import com.iidooo.core.enums.SortField;
 import com.iidooo.core.enums.SortType;
+import com.iidooo.core.util.StringUtil;
 
 public class Page {
 
@@ -18,14 +19,25 @@ public class Page {
         sortType = SortType.desc.toString();
     }
 
-    /**
-     * The start of record No.
-     */
+    public Page(String sortField, String sortType) {
+        
+        this.sortField = sortField;
+        if (StringUtil.isBlank(this.sortField)) {
+            this.sortField = SortField.UpdateTime.toString();
+        }
+        
+        this.sortType = sortType;
+        if (StringUtil.isBlank(this.sortType)) {
+            this.sortType = SortType.desc.toString();
+        }
+        
+        this.start = 0;
+        this.pageSize = 10;
+        this.currentPage = 1;
+    }
+
     private int start;
 
-    /**
-     * The end of record No.
-     */
     private int end;
 
     /**

@@ -20,15 +20,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from SECURITY_ROLE_RESOURCE
+    from security_role_resource
     where RoleResID = #{roleResID,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from SECURITY_ROLE_RESOURCE
+    delete from security_role_resource
     where RoleResID = #{roleResID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.iidooo.core.model.po.SecurityRoleResource" >
-    insert into SECURITY_ROLE_RESOURCE (RoleResID, RoleID, ResID, 
+    insert into security_role_resource (RoleResID, RoleID, ResID, 
       Remarks, UpdateTime, UpdateUserID, 
       CreateTime, CreateUserID, IsDelete, 
       Version)
@@ -38,7 +38,7 @@
       #{version,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.iidooo.core.model.po.SecurityRoleResource" >
-    insert into SECURITY_ROLE_RESOURCE
+    insert into security_role_resource
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="roleResID != null" >
         RoleResID,
@@ -105,7 +105,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.iidooo.core.model.po.SecurityRoleResource" >
-    update SECURITY_ROLE_RESOURCE
+    update security_role_resource
     <set >
       <if test="roleID != null" >
         RoleID = #{roleID,jdbcType=INTEGER},
@@ -138,7 +138,7 @@
     where RoleResID = #{roleResID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.iidooo.core.model.po.SecurityRoleResource" >
-    update SECURITY_ROLE_RESOURCE
+    update security_role_resource
     set RoleID = #{roleID,jdbcType=INTEGER},
       ResID = #{resID,jdbcType=INTEGER},
       Remarks = #{remarks,jdbcType=VARCHAR},

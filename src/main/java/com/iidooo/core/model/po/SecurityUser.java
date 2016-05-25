@@ -1,6 +1,8 @@
 package com.iidooo.core.model.po;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class SecurityUser {
     private Integer userID;
@@ -48,6 +50,11 @@ public class SecurityUser {
     private Integer isDelete;
 
     private Integer version;
+    
+    private List<SecurityRole> roleList;
+    
+    // 该用户能访问的资源URL一览
+    private List<String> resUrlList;
 
     public Integer getUserID() {
         return userID;
@@ -231,5 +238,27 @@ public class SecurityUser {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public List<SecurityRole> getRoleList() {
+        if (roleList == null) {
+            roleList = new ArrayList<SecurityRole>();
+        }
+        return roleList;
+    }
+
+    public void setRoleList(List<SecurityRole> roleList) {
+        this.roleList = roleList;
+    }
+
+    public List<String> getResUrlList() {
+        if (resUrlList == null) {
+            this.resUrlList = new ArrayList<String>();
+        }
+        return resUrlList;
+    }
+
+    public void setResUrlList(List<String> resUrlList) {
+        this.resUrlList = resUrlList;
     }
 }

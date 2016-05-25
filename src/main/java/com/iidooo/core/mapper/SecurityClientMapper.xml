@@ -22,16 +22,16 @@
   <select id="selectByAppIDSecret" resultMap="BaseResultMap">
   	select
   	<include refid="Base_Column_List" />
-    from SECURITY_CLIENT
+    from security_client
     where AppID = #{appID,jdbcType=VARCHAR} and Secret = #{secret,jdbcType=VARCHAR} and IsDelete = 0
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from SECURITY_CLIENT
+    delete from security_client
     where ClientID = #{clientID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.iidooo.core.model.po.SecurityClient" >
-    insert into SECURITY_CLIENT (ClientID, AppID, Secret, 
+    insert into security_client (ClientID, AppID, Secret, 
       Remarks, UpdateTime, UpdateUserID, 
       CreateTime, CreateUserID, IsDelete, 
       Version)
@@ -41,7 +41,7 @@
       #{version,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.iidooo.core.model.po.SecurityClient" >
-    insert into SECURITY_CLIENT
+    insert into security_client
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="clientID != null" >
         ClientID,
@@ -108,7 +108,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.iidooo.core.model.po.SecurityClient" >
-    update SECURITY_CLIENT
+    update security_client
     <set >
       <if test="appID != null" >
         AppID = #{appID,jdbcType=VARCHAR},
@@ -141,7 +141,7 @@
     where ClientID = #{clientID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.iidooo.core.model.po.SecurityClient" >
-    update SECURITY_CLIENT
+    update security_client
     set AppID = #{appID,jdbcType=VARCHAR},
       Secret = #{secret,jdbcType=VARCHAR},
       Remarks = #{remarks,jdbcType=VARCHAR},

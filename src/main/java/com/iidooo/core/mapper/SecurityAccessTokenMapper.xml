@@ -22,18 +22,18 @@
 	<select id="selectByUserID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from SECURITY_ACCESS_TOKEN
+		from security_access_token
 		where IsDelete = 0 and UserID = #{userID,jdbcType=INTEGER}
 	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from SECURITY_ACCESS_TOKEN
+		delete from security_access_token
 		where TokenID = #{tokenID,jdbcType=INTEGER}
 	</delete>
 
 	<!-- 插入一个SecurityAccessToken -->
 	<insert id="insert" useGeneratedKeys="true" keyProperty="tokenID" parameterType="com.iidooo.core.model.po.SecurityAccessToken">
-		insert into SECURITY_ACCESS_TOKEN
+		insert into security_access_token
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="token != null">
 				Token,
@@ -96,7 +96,7 @@
 
 	<!-- 通过TokenID更新SecurityAccessToken -->
 	<update id="update" parameterType="com.iidooo.core.model.po.SecurityAccessToken">
-		update SECURITY_ACCESS_TOKEN
+		update security_access_token
 		<set>
 			<if test="token != null">
 				Token = #{token,jdbcType=VARCHAR},

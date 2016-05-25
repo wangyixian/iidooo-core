@@ -39,20 +39,21 @@ public class PictureUtil {
      * @param width 缩放目标宽度
      * @param height 缩放目标高度
      * @param proportion 是否等比例，默认为true
-     * @throws Exception 抛出异常
      */
-    public static void compress(String inputFilePath, String outputFilePath, int width, int height, boolean proportion) throws Exception {
+    public static void compress(String inputFilePath, String outputFilePath, int width, int height, boolean proportion) {
         try {
             // 获得源文件
             File inputFile = new File(inputFilePath);
             if (!inputFile.exists()) {
-                throw new FileNotFoundException();
+                logger.fatal(new FileNotFoundException());
+                return;
             }
 
             Image inputImg = ImageIO.read(inputFile);
             // 判断图片格式是否正确
             if (inputImg.getWidth(null) == -1) {
-                throw new ImageFormatException(inputFilePath);
+                logger.fatal(new ImageFormatException(inputFilePath));
+                return;
             }
 
             int newWidth;
@@ -98,7 +99,6 @@ public class PictureUtil {
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
-            throw e;
         }
     }
 
@@ -107,20 +107,21 @@ public class PictureUtil {
      * 
      * @param inputFilePath 输入的文件路径
      * @param outputFilePath 压缩后输出的文件路径
-     * @throws Exception 抛出异常
      */
-    public static void compress(String inputFilePath, String outputFilePath) throws Exception {
+    public static void compress(String inputFilePath, String outputFilePath) {
         try {
             // 获得源文件
             File inputFile = new File(inputFilePath);
             if (!inputFile.exists()) {
-                throw new FileNotFoundException();
+                logger.fatal(new FileNotFoundException());
+                return;
             }
 
             Image inputImg = ImageIO.read(inputFile);
             // 判断图片格式是否正确
             if (inputImg.getWidth(null) == -1) {
-                throw new ImageFormatException(inputFilePath);
+                logger.fatal(new ImageFormatException(inputFilePath));
+                return;
             }
 
             int newWidth = inputImg.getWidth(null);
@@ -141,7 +142,6 @@ public class PictureUtil {
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
-            throw e;
         }
     }
 
@@ -154,9 +154,8 @@ public class PictureUtil {
      * @param y y轴的开始坐标
      * @param width 所裁剪的宽度
      * @param height 所裁剪的高度
-     * @throws Exception 抛出处理异常
      */
-    public static void cut(String inputFilePath, String outputFilePath, int x, int y, int width, int height) throws Exception {
+    public static void cut(String inputFilePath, String outputFilePath, int x, int y, int width, int height) {
 
         FileInputStream fileInputStream = null;
         ImageInputStream imageInputStream = null;
@@ -164,7 +163,8 @@ public class PictureUtil {
             // 获得源文件
             File inputFile = new File(inputFilePath);
             if (!inputFile.exists()) {
-                throw new FileNotFoundException();
+                logger.fatal(new FileNotFoundException());
+                return;
             }
 
             // 读取图片文件
@@ -173,7 +173,7 @@ public class PictureUtil {
             String format = FileUtil.getFileSuffix(inputFilePath);
             // System.out.println(format);
             // ImageReader声称能够解码指定格式
-            Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName("jpg");
+            Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName(format);
             ImageReader reader = it.next();
 
             // 获取图片流
@@ -203,7 +203,6 @@ public class PictureUtil {
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
-            throw e;
         } finally {
             try {
                 if (fileInputStream != null) {
@@ -215,7 +214,6 @@ public class PictureUtil {
             } catch (IOException e) {
                 e.printStackTrace();
                 logger.fatal(e);
-                throw e;
             }
         }
     }
@@ -225,14 +223,14 @@ public class PictureUtil {
      * 
      * @param inputFilePath
      * @param outputFilePath
-     * @throws Exception 抛出处理异常
      */
-    public static void cutSquare(String inputFilePath, String outputFilePath) throws Exception {
+    public static void cutSquare(String inputFilePath, String outputFilePath) {
         try {
             // 获得源文件
             File inputFile = new File(inputFilePath);
             if (!inputFile.exists()) {
-                throw new FileNotFoundException();
+                logger.fatal(new FileNotFoundException());
+                return;
             }
             BufferedImage bufferedImage = ImageIO.read(inputFile);
             int width = bufferedImage.getWidth();
@@ -250,7 +248,6 @@ public class PictureUtil {
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
-            throw e;
         }
     }
 
@@ -258,13 +255,13 @@ public class PictureUtil {
      * 保持上传照片的图片方向不发生调整
      * 
      * @param filePath 图片的文件路径
-     * @throws Exception 抛出异常
      */
-    public static void MaintainOrientation(String filePath) throws Exception {
+    public static void MaintainOrientation(String filePath) {
         try {
             File file = new File(filePath);
             if (!file.exists()) {
-                throw new FileNotFoundException();
+                logger.fatal(new FileNotFoundException());
+                return;
             }
 
             Metadata metadata = ImageMetadataReader.readMetadata(file);
@@ -382,12 +379,12 @@ public class PictureUtil {
         } catch (Exception e) {
             e.printStackTrace();
             logger.fatal(e);
-            throw e;
         }
     }
 
     /**
      * 判断是否是图片文件
+     * 
      * @param filePath 文件路径
      * @return 是否是文件的boolean
      */

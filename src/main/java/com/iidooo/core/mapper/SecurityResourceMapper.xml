@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.iidooo.core.model.po.SecurityResource" >
     <id column="ResID" property="resID" jdbcType="INTEGER" />
     <result column="ParentID" property="parentID" jdbcType="INTEGER" />
+    <result column="ResCode" property="resCode" jdbcType="VARCHAR" />
     <result column="ResName" property="resName" jdbcType="VARCHAR" />
     <result column="ResURL" property="resURL" jdbcType="VARCHAR" />
     <result column="Sequence" property="sequence" jdbcType="INTEGER" />
@@ -16,39 +17,42 @@
     <result column="Version" property="version" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ResID, ParentID, ResName, ResURL, Sequence, Remarks, UpdateTime, UpdateUserID, CreateTime, 
-    CreateUserID, IsDelete, Version
+    ResID, ParentID, ResCode, ResName, ResURL, Sequence, Remarks, UpdateTime, UpdateUserID, 
+    CreateTime, CreateUserID, IsDelete, Version
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from SECURITY_RESOURCE
+    from security_resource
     where ResID = #{resID,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from SECURITY_RESOURCE
+    delete from security_resource
     where ResID = #{resID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.iidooo.core.model.po.SecurityResource" >
-    insert into SECURITY_RESOURCE (ResID, ParentID, ResName, 
-      ResURL, Sequence, Remarks, 
-      UpdateTime, UpdateUserID, CreateTime, 
-      CreateUserID, IsDelete, Version
-      )
-    values (#{resID,jdbcType=INTEGER}, #{parentID,jdbcType=INTEGER}, #{resName,jdbcType=VARCHAR}, 
-      #{resURL,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateUserID,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createUserID,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}
-      )
+    insert into security_resource (ResID, ParentID, ResCode, 
+      ResName, ResURL, Sequence, 
+      Remarks, UpdateTime, UpdateUserID, 
+      CreateTime, CreateUserID, IsDelete, 
+      Version)
+    values (#{resID,jdbcType=INTEGER}, #{parentID,jdbcType=INTEGER}, #{resCode,jdbcType=VARCHAR}, 
+      #{resName,jdbcType=VARCHAR}, #{resURL,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, 
+      #{remarks,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUserID,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUserID,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.iidooo.core.model.po.SecurityResource" >
-    insert into SECURITY_RESOURCE
+    insert into security_resource
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="resID != null" >
         ResID,
       </if>
       <if test="parentID != null" >
         ParentID,
+      </if>
+      <if test="resCode != null" >
+        ResCode,
       </if>
       <if test="resName != null" >
         ResName,
@@ -88,6 +92,9 @@
       <if test="parentID != null" >
         #{parentID,jdbcType=INTEGER},
       </if>
+      <if test="resCode != null" >
+        #{resCode,jdbcType=VARCHAR},
+      </if>
       <if test="resName != null" >
         #{resName,jdbcType=VARCHAR},
       </if>
@@ -121,10 +128,13 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.iidooo.core.model.po.SecurityResource" >
-    update SECURITY_RESOURCE
+    update security_resource
     <set >
       <if test="parentID != null" >
         ParentID = #{parentID,jdbcType=INTEGER},
+      </if>
+      <if test="resCode != null" >
+        ResCode = #{resCode,jdbcType=VARCHAR},
       </if>
       <if test="resName != null" >
         ResName = #{resName,jdbcType=VARCHAR},
@@ -160,8 +170,9 @@
     where ResID = #{resID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.iidooo.core.model.po.SecurityResource" >
-    update SECURITY_RESOURCE
+    update security_resource
     set ParentID = #{parentID,jdbcType=INTEGER},
+      ResCode = #{resCode,jdbcType=VARCHAR},
       ResName = #{resName,jdbcType=VARCHAR},
       ResURL = #{resURL,jdbcType=VARCHAR},
       Sequence = #{sequence,jdbcType=INTEGER},

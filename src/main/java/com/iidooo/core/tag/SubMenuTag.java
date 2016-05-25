@@ -10,11 +10,6 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.apache.log4j.Logger;
 
-import com.iidooo.core.constant.SessionConstant;
-import com.iidooo.core.dto.extend.SecurityResDto;
-import com.iidooo.core.util.StringUtil;
-import com.iidooo.core.util.ValidateUtil;
-
 public class SubMenuTag extends SimpleTagSupport {
 
     private static final Logger logger = Logger.getLogger(SubMenuTag.class);
@@ -43,30 +38,30 @@ public class SubMenuTag extends SimpleTagSupport {
 
             ServletContext sc = pageContext.getServletContext();
 
-            SecurityResDto currentRootResource = (SecurityResDto) sc.getAttribute(SessionConstant.CURRENT_ROOT_RESOURCE);
-
-            out.println("<div id='subMenu' class='sub_menu'>");
-
-            if (!StringUtil.isBlank(title)) {
-                out.println("<div class='sub_menu_title'>");
-                out.println(title);
-                out.println("</div>");
-            }
-
-            out.println("<ul>");
-            for (SecurityResDto item : currentRootResource.getChildren()) {
-
-                // If the resource was set as invisible, it should not be shown in the menu.
-//                if (item.getInvisible() != 0) {
-//                    continue;
+//            SecurityResDto currentRootResource = (SecurityResDto) sc.getAttribute(SessionConstant.CURRENT_ROOT_RESOURCE);
+//
+//            out.println("<div id='subMenu' class='sub_menu'>");
+//
+//            if (!StringUtil.isBlank(title)) {
+//                out.println("<div class='sub_menu_title'>");
+//                out.println(title);
+//                out.println("</div>");
+//            }
+//
+//            out.println("<ul>");
+//            for (SecurityResDto item : currentRootResource.getChildren()) {
+//
+//                // If the resource was set as invisible, it should not be shown in the menu.
+////                if (item.getInvisible() != 0) {
+////                    continue;
+////                }
+//
+//                if (item.getIsSelected()) {
+//                    out.println(StringUtil.replace(HTML_LI_FOCUS, item.getResURL(), item.getResName()));
+//                } else {
+//                    out.println(StringUtil.replace(HTML_LI, item.getResURL(), item.getResName()));
 //                }
-
-                if (item.getIsSelected()) {
-                    out.println(StringUtil.replace(HTML_LI_FOCUS, item.getResURL(), item.getResName()));
-                } else {
-                    out.println(StringUtil.replace(HTML_LI, item.getResURL(), item.getResName()));
-                }
-            }
+//            }
 
             out.println("</ul>");
             out.println("</div>");

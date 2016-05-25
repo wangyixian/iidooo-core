@@ -25,6 +25,7 @@
 		<result column="CreateUserID" property="createUserID" jdbcType="INTEGER" />
 		<result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
 		<result column="Version" property="version" jdbcType="INTEGER" />
+		<collection select="selectRoleList" column="userID" property="roleList" ofType="com.iidooo.core.model.po.RoleList"></collection>
 	</resultMap>
 	<sql id="Base_Column_List">
 		U.UserID, U.LoginID, '' as password, U.UserName, U.Mobile, U.Email, U.Sex, U.Birthday, U.WeixinID, U.PhotoURL,
@@ -33,11 +34,35 @@
 		U.CreateTime, U.CreateUserID, U.IsDelete, U.Version
 	</sql>
 
+	<resultMap id="RoleResultMap" type="com.iidooo.core.model.po.SecurityRole" >
+	    <id column="RoleID" property="roleID" jdbcType="INTEGER" />
+	    <result column="RoleCode" property="roleCode" jdbcType="VARCHAR" />
+	    <result column="RoleName" property="roleName" jdbcType="VARCHAR" />
+	    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+	    <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+	    <result column="UpdateUserID" property="updateUserID" jdbcType="INTEGER" />
+	    <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="CreateUserID" property="createUserID" jdbcType="INTEGER" />
+	    <result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
+	    <result column="Version" property="version" jdbcType="INTEGER" />
+	  </resultMap>
+	  <sql id="Role_Column_List" >
+	    R.RoleID, R.RoleCode, R.RoleName, R.Remarks, R.UpdateTime, R.UpdateUserID, R.CreateTime, R.CreateUserID, 
+	    R.IsDelete, R.Version
+	  </sql>
+	<select id="selectRoleList" parameterType="java.lang.Integer" resultMap="RoleResultMap">
+		select 
+		<include refid="Role_Column_List" />
+		from security_role R 
+		join security_user_role UR 
+		on R.IsDelete = 0 and UR.IsDelete = 0 and R.RoleID = UR.RoleID and UR.UserID = #{userID,jdbcType=INTEGER}
+	</select>
+
 	<!-- 通过LoginID和Password获取用户信息 -->
 	<select id="selectByLogin" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from SECURITY_USER U
+		from security_user U
 		where U.IsDelete = 0 and
 		U.LoginID = #{loginID,jdbcType=VARCHAR} and
 		U.Password = #{password,jdbcType=VARCHAR}
@@ -46,7 +71,7 @@
 	<select id="selectByUserID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from SECURITY_USER U
+		from security_user U
 		where U.IsDelete = 0 and U.UserID = #{userID,jdbcType=INTEGER}
 	</select>
 
@@ -54,7 +79,7 @@
 	<select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
-		from SECURITY_USER U
+		from security_user U
 		where U.IsDelete = 0 and U.Email = #{email,jdbcType=VARCHAR}
 	</select>
 
@@ -62,7 +87,7 @@
 	<select id="selectByToken" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
-		from SECURITY_USER U 
+		from security_user U 
 		join SECURITY_ACCESS_TOKEN A
 		on U.IsDelete = 0 and U.UserID = A.UserID and A.Token = #{token,jdbcType=VARCHAR}
 	</select>
@@ -70,7 +95,7 @@
 	<select id="selectForSearch" resultMap="BaseResultMap" parameterType="com.iidooo.core.model.po.SecurityUser">
 		select
 		<include refid="Base_Column_List" />
-		from SECURITY_USER U
+		from security_user U
 		where U.IsDelete = 0
 		<trim suffixOverrides=",">
 			<if test="loginID != null">
@@ -101,11 +126,11 @@
 	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from SECURITY_USER
+		delete from security_user
 		where UserID = #{userID,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.iidooo.core.model.po.SecurityUser">
-		insert into SECURITY_USER (UserID, LoginID, Password,
+		insert into security_user (UserID, LoginID, Password,
 		UserName, Mobile, Email,
 		Sex, Birthday, WeixinID,
 		PhotoURL, IsSilent, IsDisable,
@@ -127,7 +152,7 @@
 		#{version,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective" useGeneratedKeys="true" keyProperty="userID" parameterType="com.iidooo.core.model.po.SecurityUser">
-		insert into SECURITY_USER
+		insert into security_user
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="loginID != null">
 				LoginID,
@@ -258,7 +283,7 @@
 
 	<!-- 根据用户ID更新用户信息 -->
 	<update id="updateByUserID" parameterType="com.iidooo.core.model.po.SecurityUser">
-		update SECURITY_USER
+		update security_user
 		<set>
 			<if test="loginID != null">
 				LoginID = #{loginID,jdbcType=VARCHAR},

@@ -106,6 +106,30 @@ public class DateUtil {
             return 0;
         }
     }
+    
+    /**
+     * 两个日期相减
+     * @param subtrahendDate 第一个日期
+     * @param minuendDate 被减数日期
+     * @return 相差秒数
+     */
+    public static long subtract(Date subtrahendDate, Date minuendDate){
+        try {
+            Calendar calendar = GregorianCalendar.getInstance();
+            calendar.setTime(subtrahendDate);
+            long subtrahendMillis = calendar.getTimeInMillis();
+            
+            calendar.setTime(minuendDate);
+            long minuendMillis = calendar.getTimeInMillis();
+            
+            long result = (subtrahendMillis - minuendMillis) / 1000;
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            throw e;
+        }
+    }
 
     /**
      * 把字符串日期格式转换成Date类型
@@ -121,6 +145,26 @@ public class DateUtil {
             Date result = df.parse(dateString);
             return result;
         } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            throw e;
+        }
+    }
+        
+    /**
+     * 得到指定日期
+     * @param date 输入的日期
+     * @param dayOffSet 调整的天数
+     * @return 指定日期
+     */
+    public static Date getDate(Date date, int dayOffSet){
+        try {
+            Calendar calendar = GregorianCalendar.getInstance();
+            calendar.setTime(date);
+            calendar.add(Calendar.DAY_OF_MONTH, dayOffSet);
+            return calendar.getTime();
+        } catch (Exception e) {
+            e.printStackTrace();
             logger.fatal(e);
             throw e;
         }
@@ -128,9 +172,18 @@ public class DateUtil {
 
     public static void main(String[] args) {
         Calendar calendar = GregorianCalendar.getInstance();
-        System.out.println(calendar.get(Calendar.DATE));
-        System.out.println(calendar.get(Calendar.MONTH) + 1);
-        System.out.println(calendar.get(Calendar.YEAR));
-        System.out.println(DateUtil.getNow(DateUtil.TIME_COLON));
+        calendar.setTime(new Date());
+        
+        long time1 = calendar.getTimeInMillis();
+
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        long time2 = calendar.getTimeInMillis();
+        
+//        System.out.println(calendar.get(Calendar.DATE));
+//        System.out.println(calendar.get(Calendar.MONTH) + 1);
+//        System.out.println(calendar.get(Calendar.YEAR));
+//        System.out.println(DateUtil.getNow(DateUtil.TIME_COLON));
+        
+        System.out.println(time2 - time1);
     }
 }

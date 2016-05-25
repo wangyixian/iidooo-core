@@ -7,6 +7,8 @@ public class SecurityResource {
 
     private Integer parentID;
 
+    private String resCode;
+
     private String resName;
 
     private String resURL;
@@ -41,6 +43,14 @@ public class SecurityResource {
 
     public void setParentID(Integer parentID) {
         this.parentID = parentID;
+    }
+
+    public String getResCode() {
+        return resCode;
+    }
+
+    public void setResCode(String resCode) {
+        this.resCode = resCode == null ? null : resCode.trim();
     }
 
     public String getResName() {

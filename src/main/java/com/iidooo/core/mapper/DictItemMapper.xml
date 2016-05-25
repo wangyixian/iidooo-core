@@ -29,17 +29,27 @@
   <select id="selectByClassCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from DICT_ITEM
+    from dict_item
     where IsDelete = 0 and DictClassCode = #{dictClassCode,jdbcType=VARCHAR}
     order by Sequence
   </select>
   
+  <!-- 根据ClassCode和ItemCode获取字典项 -->
+  <select id="selectByClassItemCode" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from dict_item
+    where IsDelete = 0 and 
+    DictClassCode = #{dictClassCode,jdbcType=VARCHAR} and 
+    DictItemCode = #{dictItemCode,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from DICT_ITEM
+    delete from dict_item
     where DictItemID = #{dictItemID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.iidooo.core.model.po.DictItem" >
-    insert into DICT_ITEM (DictItemID, DictClassCode, DictItemCode, 
+    insert into dict_item (DictItemID, DictClassCode, DictItemCode, 
       DictItemName, DictItemValue, Sequence, 
       IsDefault, IsDisable, IsReadonly, 
       Remarks, UpdateTime, UpdateUserID, 
@@ -53,7 +63,7 @@
       #{version,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.iidooo.core.model.po.DictItem" >
-    insert into DICT_ITEM
+    insert into dict_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="dictItemID != null" >
         DictItemID,
@@ -156,7 +166,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.iidooo.core.model.po.DictItem" >
-    update DICT_ITEM
+    update dict_item
     <set >
       <if test="dictClassCode != null" >
         DictClassCode = #{dictClassCode,jdbcType=VARCHAR},
@@ -207,7 +217,7 @@
     where DictItemID = #{dictItemID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.iidooo.core.model.po.DictItem" >
-    update DICT_ITEM
+    update dict_item
     set DictClassCode = #{dictClassCode,jdbcType=VARCHAR},
       DictItemCode = #{dictItemCode,jdbcType=VARCHAR},
       DictItemName = #{dictItemName,jdbcType=VARCHAR},
