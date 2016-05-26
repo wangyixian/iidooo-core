@@ -17,6 +17,7 @@ public class ResponseResult{
     private List<Message> messages;
     
     public ResponseResult(){
+        messages = new ArrayList<Message>();
         data = new JSONArray();
     }
 

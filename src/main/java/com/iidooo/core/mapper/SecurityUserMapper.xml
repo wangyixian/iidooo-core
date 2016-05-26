@@ -88,7 +88,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from security_user U 
-		join SECURITY_ACCESS_TOKEN A
+		join security_access_token A
 		on U.IsDelete = 0 and U.UserID = A.UserID and A.Token = #{token,jdbcType=VARCHAR}
 	</select>
 
