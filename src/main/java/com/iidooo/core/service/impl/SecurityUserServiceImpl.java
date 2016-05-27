@@ -1,6 +1,5 @@
 package com.iidooo.core.service.impl;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -43,17 +42,12 @@ public class SecurityUserServiceImpl implements SecurityUserService {
     private SecurityAccessTokenMapper securityAccessTokenMapper;
 
     @Override
-    public SecurityAccessToken getAccessTokenByLogin(String loginID, String password, String userType) throws Exception {
+    public SecurityAccessToken getAccessTokenByLogin(String loginID, String password) {
         try {
             SecurityAccessToken result = null;
             password = SecurityUtil.getMd5(password);
             SecurityUser securityUser = securityUserMapper.selectByLogin(loginID, password);
             if (securityUser == null) {
-                return null;
-            }
-            
-            // 判断用户类型的限定
-            if (StringUtil.isNotBlank(userType) && !securityUser.getUserType().equals(userType)) {
                 return null;
             }
 
@@ -67,18 +61,48 @@ public class SecurityUserServiceImpl implements SecurityUserService {
                 result.setCreateUserID(securityUser.getUserID());
                 result.setUpdateTime(new Date());
                 result.setUpdateUserID(securityUser.getUserID());
-                if (securityAccessTokenMapper.insert(result) <= 0) {
-                    throw new SQLException();
-                }
+                securityAccessTokenMapper.insert(result);
             } else {
                 result.setToken(StringUtil.getGUID());
                 result.setUpdateTime(new Date());
                 result.setUpdateUserID(securityUser.getUserID());
-                if (securityAccessTokenMapper.update(result) <= 0) {
-                    throw new SQLException();
-                }
+                securityAccessTokenMapper.update(result);
             }
 
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.fatal(e);
+            throw e;
+        }
+    }
+
+    @Override
+    public SecurityAccessToken getAccessTokenByEmail(String email) {
+        SecurityAccessToken result = null;
+        try {
+            SecurityUser securityUser = securityUserMapper.selectByEmail(email);
+            if (securityUser == null) {
+                return null;
+            }
+
+            // 以免重复登录，所以需要检查SecutiryAccessToken表里是否登录过
+            result = securityAccessTokenMapper.selectByUserID(securityUser.getUserID());
+            if (result == null) {
+                result = new SecurityAccessToken();
+                result.setToken(StringUtil.getGUID());
+                result.setUserID(securityUser.getUserID());
+                result.setCreateTime(new Date());
+                result.setCreateUserID(securityUser.getUserID());
+                result.setUpdateTime(new Date());
+                result.setUpdateUserID(securityUser.getUserID());
+                securityAccessTokenMapper.insert(result);
+            } else {
+                result.setToken(StringUtil.getGUID());
+                result.setUpdateTime(new Date());
+                result.setUpdateUserID(securityUser.getUserID());
+                securityAccessTokenMapper.update(result);
+            }
             return result;
         } catch (Exception e) {
             e.printStackTrace();

@@ -22,18 +22,18 @@
   <select id="selectByUserID" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />
-    from HIS_USER_EXP
+    from his_user_exp
     where IsDelete = 0 and UserID = #{userID,jdbcType=INTEGER} 
     and CreateTime &gt;=  #{startTime,jdbcType=TIMESTAMP}
     and CreateTime &lt;= #{endTime,jdbcType=TIMESTAMP}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from HIS_USER_EXP
+    delete from his_user_exp
     where HisID = #{hisID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.iidooo.core.model.po.HisUserExp" >
-    insert into HIS_USER_EXP
+    insert into his_user_exp
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="hisID != null" >
         HisID,
@@ -97,7 +97,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.iidooo.core.model.po.HisUserExp" >
-    update HIS_USER_EXP
+    update his_user_exp
     <set >
       <if test="userID != null" >
         UserID = #{userID,jdbcType=INTEGER},
@@ -133,7 +133,7 @@
     where HisID = #{hisID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.iidooo.core.model.po.HisUserExp" >
-    update HIS_USER_EXP
+    update his_user_exp
     set UserID = #{userID,jdbcType=INTEGER},
       Experience = #{experience,jdbcType=INTEGER},
       Points = #{points,jdbcType=INTEGER},

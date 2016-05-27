@@ -25,7 +25,7 @@
   <select id="selectPVCount" resultType="java.lang.Integer" parameterType="com.iidooo.core.model.po.HisOperator">
 		select
 		count(OperatorID)
-		from HIS_OPERATOR
+		from his_operator
 		where
 		IsDelete = 0 and
 		TableName =
@@ -42,7 +42,7 @@
 		count(H.OperatorID)
 		from
 		(select OperatorID from
-		HIS_OPERATOR
+		his_operator
 		where
 		IsDelete = 0 and
 		TableName =	#{hisOperator.tableName,jdbcType=VARCHAR} and
@@ -55,13 +55,13 @@
 	</select>
 	
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from HIS_OPERATOR
+    delete from his_operator
     where OperatorID = #{operatorID,jdbcType=INTEGER}
   </delete>
   
   <!-- 插入一个HisOperator数据进入数据库 -->
   <insert id="insert" parameterType="com.iidooo.core.model.po.HisOperator">
-		insert into HIS_OPERATOR
+		insert into his_operator
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="tableName != null">
 				TableName,
@@ -131,7 +131,7 @@
 	</insert>
 	
   <update id="updateByPrimaryKeySelective" parameterType="com.iidooo.core.model.po.HisOperator" >
-    update HIS_OPERATOR
+    update his_operator
     <set >
       <if test="tableName != null" >
         TableName = #{tableName,jdbcType=VARCHAR},
@@ -173,7 +173,7 @@
     where OperatorID = #{operatorID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.iidooo.core.model.po.HisOperator" >
-    update HIS_OPERATOR
+    update his_operator
     set TableName = #{tableName,jdbcType=VARCHAR},
       TableKey = #{tableKey,jdbcType=INTEGER},
       Operation = #{operation,jdbcType=VARCHAR},

@@ -7,7 +7,14 @@ import com.iidooo.core.model.po.SecurityUser;
 
 public interface SecurityUserService {
     
-    SecurityAccessToken getAccessTokenByLogin(String loginID, String password, String userType) throws Exception;
+    SecurityAccessToken getAccessTokenByLogin(String loginID, String password);
+    
+    /**
+     * 通过邮件地址获取AccessToken
+     * @param email 邮箱地址
+     * @return 所获得AccessToken
+     */
+    SecurityAccessToken getAccessTokenByEmail(String email);
     
     SecurityUser getSecurityUserByID(Integer userID);
     

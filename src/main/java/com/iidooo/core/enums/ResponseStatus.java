@@ -1,6 +1,5 @@
 package com.iidooo.core.enums;
 
-import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 public enum ResponseStatus {
 
@@ -9,6 +8,9 @@ public enum ResponseStatus {
 
     // 处理成功，但返回值为空
     QueryEmpty(201),
+    
+    // 数据验证失败
+    ValidateFailed(202),
 
     // 处理失败
     Failed(400),

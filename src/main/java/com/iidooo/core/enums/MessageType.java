@@ -12,7 +12,12 @@ public enum MessageType {
     
     IsSlient(503),
     
-    FieldDuplicate(504);
+    FieldDuplicate(504),
+    
+    FieldEmailRequired(505),
+    
+    // 验证码不正确的错误信息
+    FieldVerifyCodeRequired(506);
 
     private Integer code;
 

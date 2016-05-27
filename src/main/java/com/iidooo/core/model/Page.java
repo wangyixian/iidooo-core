@@ -14,7 +14,7 @@ public class Page {
         // The default page size is 10
         pageSize = 10;
 
-        sortField = SortField.UpdateTime.toString();
+        sortField = SortField.CreateTime.toString();
 
         sortType = SortType.desc.toString();
     }
@@ -23,7 +23,7 @@ public class Page {
         
         this.sortField = sortField;
         if (StringUtil.isBlank(this.sortField)) {
-            this.sortField = SortField.UpdateTime.toString();
+            this.sortField = SortField.CreateTime.toString();
         }
         
         this.sortType = sortType;
