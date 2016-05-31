@@ -82,6 +82,9 @@ public class SecurityUserController {
             String email = request.getParameter("email");
             String verifyCode = request.getParameter("verifyCode");
 
+            System.out.println("getAccessTokenByMail mail:" +email);
+            System.out.println("getAccessTokenByMail verifyCode:" +verifyCode);
+            System.out.println("getAccessTokenByMail verifyCodeMap:" +verifyCodeMap);
             if (result.checkFieldRequired("email", email) && result.checkFieldRequired("verifyCode", verifyCode)) {
                 result.checkVerifyCode(verifyCodeMap, email, verifyCode);
             }
@@ -90,14 +93,13 @@ public class SecurityUserController {
                 return result;
             }
 
-            verifyCodeMap.remove(email);
-
             SecurityAccessToken accessToken = this.securityUserService.getAccessTokenByEmail(email);
             if (accessToken == null) {
                 result.checkQueryEmpty(MessageConstant.QUERY_EMPTY_WRONG_LOGIN);
             } else {
                 result.setStatus(ResponseStatus.OK.getCode());
                 result.setData(accessToken);
+                verifyCodeMap.remove(email);
             }
 
         } catch (Exception e) {
@@ -157,7 +159,7 @@ public class SecurityUserController {
         ResponseResult result = new ResponseResult();
         try {
             String email = request.getParameter("email");
-
+            System.out.println("sendVerifyCode email: " + email);
             result.checkFieldRequired("email", email);
             result.checkFieldEmail("email", email);
             if (result.getMessages().size() > 0) {
@@ -166,7 +168,6 @@ public class SecurityUserController {
             }
 
             String verifyCode = StringUtil.getRandomNumber(4, 9);
-            this.verifyCodeMap.put(email, verifyCode);
 
             ServletContext sc = request.getServletContext();
             Properties mailProperties = (Properties) sc.getAttribute("mail.properties");
@@ -176,6 +177,9 @@ public class SecurityUserController {
                 result.setStatus(ResponseStatus.Failed.getCode());
             } else {
                 result.setStatus(ResponseStatus.OK.getCode());
+                this.verifyCodeMap.put(email, verifyCode);
+
+                System.out.println("sendVerifyCode verifyCodeMap: " + verifyCodeMap);
                 verifyCodeTimeTask(email);
             }
 
@@ -195,6 +199,7 @@ public class SecurityUserController {
                 TimerTask task = new TimerTask() {
                     public void run() {
                         verifyCodeMap.remove(account);
+                        System.out.println("verifyCodeTimeTask remove:" + account);
                     }
                 };
 

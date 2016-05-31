@@ -4,8 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import net.sf.json.JSONObject;
 
@@ -28,6 +32,25 @@ import com.iidooo.core.constant.HttpConstant;
 public class HttpUtil {
 
     private static final Logger logger = Logger.getLogger(HttpUtil.class);
+
+    // key: userID
+    // value: url
+    public static Map<Integer, String> duplicatePostMap = new HashMap<>();
+
+    public static void duplicatePostTimeTask(final Integer userID, String url) {
+        duplicatePostMap.put(userID, url);
+        new Thread() {
+            public void run() {
+                TimerTask task = new TimerTask() {
+                    public void run() {
+                        duplicatePostMap.remove(userID);
+                    }
+                };
+                Timer timer = new Timer(false);
+                timer.schedule(task, 3000);
+            }
+        }.start();
+    }
 
     public static String sendPostRequest() {
         return "test";
