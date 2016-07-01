@@ -1,7 +1,12 @@
 package com.iidooo.core.util;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
@@ -24,7 +29,7 @@ public class FileUtil {
 
             // 判断文件夹是否存在,如果不存在则创建文件夹
             if (!file.exists()) {
-                file.mkdir();
+                file.mkdirs();
             }
 
             // 新的文件路径
@@ -44,6 +49,7 @@ public class FileUtil {
 
     /**
      * 修改文件名
+     * 
      * @param filePath 文件路径
      * @param newFileName 新的文件名
      * @return 重命名后的文件路径
@@ -56,17 +62,16 @@ public class FileUtil {
             }
             // 获取文件类型
             String suffix = filePath.substring(dotPosition + 1, filePath.length());
-            
+
             int slashPosition = filePath.lastIndexOf(File.separator);
             if (slashPosition < 0) {
                 return filePath;
             }
-            
+
             String folderPath = filePath.substring(0, slashPosition);
             filePath = folderPath + File.separator + newFileName + "." + suffix;
             return filePath;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.fatal(e);
             return "";
         }
@@ -96,7 +101,6 @@ public class FileUtil {
 
             return newName;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.fatal(e);
             return "";
         }
@@ -113,9 +117,8 @@ public class FileUtil {
             String newName = name + appendStr + "." + suffix;
             return newName;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.fatal(e);
-            throw e;
+            return "";
         }
     }
 
@@ -127,9 +130,8 @@ public class FileUtil {
 
             return suffix;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.fatal(e);
-            throw e;
+            return "";
         }
     }
 
@@ -146,15 +148,88 @@ public class FileUtil {
             String fileName = filePath.substring(slashPosition + 1, dotPosition);
             return fileName;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.fatal(e);
+            return "";
+        }
+    }
+    
+    /**
+     * 得到完整的文件名字，包括扩展名
+     * @param filePath 文件路径
+     * @return 包括扩展名的文件名
+     */
+    public static String getFullFileName(String filePath){
+        try {
+            int slashPosition = filePath.lastIndexOf(File.separator);
+            if (slashPosition < 0) {
+                return "";
+            }
+            String fileName = filePath.substring(slashPosition + 1);
+            return fileName;
+        } catch (Exception e) {
             logger.fatal(e);
             return "";
         }
     }
 
+    public static byte[] file2Byte(String filePath) {
+        byte[] buffer = null;
+        try {
+            File file = new File(filePath);
+            FileInputStream fis = new FileInputStream(file);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] b = new byte[1024];
+            int n;
+            while ((n = fis.read(b)) != -1) {
+                bos.write(b, 0, n);
+            }
+            fis.close();
+            bos.close();
+            buffer = bos.toByteArray();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return buffer;
+    }
+
+    public static void byte2File(byte[] buf, String filePath, String fileName) {
+        BufferedOutputStream bos = null;
+        FileOutputStream fos = null;
+        File file = null;
+        try {
+            File dir = new File(filePath);
+            if (!dir.exists() && dir.isDirectory()) {
+                dir.mkdirs();
+            }
+            file = new File(filePath + File.separator + fileName);
+            fos = new FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
+            bos.write(buf);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (bos != null) {
+                try {
+                    bos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         String filePath = "http://iidooo-toxic-wave-test.oss-cn-hangzhou.aliyuncs.com/201604/baobao_20160428205000035.png";
-        String newFilePath =  FileUtil.changeFileName(filePath, DateUtil.getNow(DateUtil.DATE_TIME_FULL_SIMPLE));
+        String newFilePath = FileUtil.changeFileName(filePath, DateUtil.getNow(DateUtil.DATE_TIME_FULL_SIMPLE));
         System.out.println(newFilePath);
     }
 }

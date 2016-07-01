@@ -5,8 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.iidooo.core.mapper.SecurityClientMapper;
@@ -24,7 +22,8 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
         try {
             String appID = request.getHeader("appID");
             String secret = request.getHeader("secret");
-
+            String referer = request.getHeader("referer");
+            logger.warn("referer is " + referer);
             if (StringUtil.isBlank(appID) || StringUtil.isBlank(secret)) {
                 appID = request.getParameter("appID");
                 secret = request.getParameter("secret");

@@ -3,6 +3,8 @@ package com.iidooo.core.constant;
 public class RegularConstant {
 
     public static final String REGEX_NUMBER = "^[0-9]*$"; // 数字组合的字符串正则表达式.
+    
+    public static final String REGEX_FLOAT = "[0-9]+\\.?[0-9]*"; // 是不是浮点数的正则表达式
 
     public static final String REGEX_MOBILE = "^(1[0-9]{10})$";
     

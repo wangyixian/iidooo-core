@@ -156,8 +156,6 @@ public class StringUtil {
     }
 
     public static void main(String[] args) {
-
-        System.out.println(StringUtil.getGUID());
-        System.out.println(StringUtil.getGUID().length());
+            System.out.println(getGUID());
     }
 }

@@ -12,6 +12,26 @@ import com.iidooo.core.constant.RegularConstant;
 public final class ValidateUtil {
 
     private static Logger logger = Logger.getLogger(ValidateUtil.class);
+    
+    /**
+     * 判断字符串是否符合正则表达式
+     * @param str 字符串
+     * @param regex 正则表达式
+     * @return 判断结果
+     */
+    public static boolean isMatch(String str, String regex){
+        try {
+            if (str == null || str == "") {
+                return false;
+            }
+            Pattern pattern = Pattern.compile(regex);
+            boolean result = pattern.matcher(str).matches();
+            return result;
+        } catch (Exception e) {
+            logger.fatal(e);
+            return false;
+        }
+    }
 
     /**
      * 是否是纯数字组合的字符串验证.

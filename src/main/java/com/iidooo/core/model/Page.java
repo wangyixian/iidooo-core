@@ -2,38 +2,18 @@ package com.iidooo.core.model;
 
 import com.iidooo.core.enums.SortField;
 import com.iidooo.core.enums.SortType;
-import com.iidooo.core.util.StringUtil;
 
 public class Page {
 
     public Page() {
 
-        // The default page is 1
-        currentPage = 1;
-
-        // The default page size is 10
+        this.start = 0;
         pageSize = 10;
+        currentPage = 1;
 
         sortField = SortField.CreateTime.toString();
 
         sortType = SortType.desc.toString();
-    }
-
-    public Page(String sortField, String sortType) {
-        
-        this.sortField = sortField;
-        if (StringUtil.isBlank(this.sortField)) {
-            this.sortField = SortField.CreateTime.toString();
-        }
-        
-        this.sortType = sortType;
-        if (StringUtil.isBlank(this.sortType)) {
-            this.sortType = SortType.desc.toString();
-        }
-        
-        this.start = 0;
-        this.pageSize = 10;
-        this.currentPage = 1;
     }
 
     private int start;

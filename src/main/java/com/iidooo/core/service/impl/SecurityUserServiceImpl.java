@@ -278,7 +278,8 @@ public class SecurityUserServiceImpl implements SecurityUserService {
                 securityUser.setExperience(securityUser.getExperience() + expUp);
                 securityUser.setPoints(securityUser.getPoints() + expUp * expPointsRate);
             }
-
+            securityUser.setUpdateTime(new Date());
+            securityUser.setUpdateUserID(userID);
             // 创建用户积分变更记录
             if (hisUserExpMapper.insert(hisUserExp) <= 0) {
                 throw new Exception();
