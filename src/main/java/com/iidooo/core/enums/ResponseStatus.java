@@ -15,6 +15,9 @@ public enum ResponseStatus {
     // 处理失败
     Failed(400),
 
+    // 认证失败
+    AuthFailed(400),
+    
     // 创建失败
     InsertFailed(401),
 

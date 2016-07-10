@@ -1,5 +1,7 @@
 package com.iidooo.core.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.iidooo.core.model.po.SecurityAccessToken;
 
 public interface SecurityAccessTokenMapper {
@@ -18,6 +20,14 @@ public interface SecurityAccessTokenMapper {
      * @return 返回SecutiryAccessToken
      */
     SecurityAccessToken selectByUserID(Integer userID);
+    
+    /**
+     * 通过Token和用户ID来获取一个AccessToken对象
+     * @param token 
+     * @param userID
+     * @return 返回SecutiryAccessToken
+     */
+    SecurityAccessToken selectByTokenUserID(@Param("token")String token, @Param("userID")Integer userID);
 
     /**
      * 通过TokenID更新SecurityAccessToken

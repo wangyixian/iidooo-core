@@ -105,7 +105,39 @@ public class SecurityUserServiceImpl implements SecurityUserService {
             }
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.fatal(e);
+            throw e;
+        }
+    }
+
+    @Override
+    public SecurityAccessToken getAccessTokenByEmail(String email, String password) {
+        SecurityAccessToken result = null;
+        try {
+            password = SecurityUtil.getMd5(password);
+            SecurityUser securityUser = securityUserMapper.selectByEmailLogin(email, password);
+            if (securityUser == null) {
+                return null;
+            }
+
+            // 以免重复登录，所以需要检查SecutiryAccessToken表里是否登录过
+            result = securityAccessTokenMapper.selectByUserID(securityUser.getUserID());
+            if (result == null) {
+                result = new SecurityAccessToken();
+                result.setToken(StringUtil.getGUID());
+                result.setUserID(securityUser.getUserID());
+                result.setCreateTime(new Date());
+                result.setCreateUserID(securityUser.getUserID());
+                result.setUpdateUserID(securityUser.getUserID());
+                securityAccessTokenMapper.insert(result);
+            } else {
+                result.setToken(StringUtil.getGUID());
+                result.setUpdateUserID(securityUser.getUserID());
+                securityAccessTokenMapper.update(result);
+            }
+            result.setUser(securityUser);
+            return result;
+        } catch (Exception e) {
             logger.fatal(e);
             throw e;
         }

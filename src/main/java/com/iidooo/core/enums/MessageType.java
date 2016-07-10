@@ -17,7 +17,10 @@ public enum MessageType {
     FieldEmailRequired(505),
     
     // 验证码不正确的错误信息
-    FieldVerifyCodeRequired(506);
+    FieldVerifyCodeRequired(506),
+    
+    // 唯一性约束
+    UniqueConstraints(507);
 
     private Integer code;
 

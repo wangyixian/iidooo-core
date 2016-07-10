@@ -34,23 +34,6 @@ public final class ValidateUtil {
     }
 
     /**
-     * 是否是纯数字组合的字符串验证.
-     *
-     * @param str 对象文字列
-     * @return true:数字组合字符串 false:非数字组合字符串
-     */
-    public static boolean isNumber(String str) {
-        try {
-            Pattern pattern = Pattern.compile(RegularConstant.REGEX_NUMBER);
-            boolean result = pattern.matcher(str).matches();
-            return result;
-        } catch (Exception e) {
-            logger.fatal(e);
-            return false;
-        }
-    }
-
-    /**
      * 金额类数据字符串验证（可带小数点的金额类数据）.
      *
      * @param str 对象文字列

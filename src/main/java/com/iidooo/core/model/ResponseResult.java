@@ -7,6 +7,7 @@ import java.util.Map;
 import net.sf.json.JSONArray;
 
 import com.iidooo.core.constant.MessageConstant;
+import com.iidooo.core.constant.RegularConstant;
 import com.iidooo.core.enums.MessageLevel;
 import com.iidooo.core.enums.MessageType;
 import com.iidooo.core.enums.ResponseStatus;
@@ -58,15 +59,17 @@ public class ResponseResult {
 
     public boolean checkFieldRequired(String field, String value) {
         if (StringUtil.isBlank(value)) {
-            this.addMessage(MessageType.FieldRequired, MessageLevel.WARN, field, MessageConstant.FIELD_REQUIRED);
+            String message = StringUtil.replace(MessageConstant.FIELD_REQUIRED, field);
+            this.addMessage(MessageType.FieldRequired, MessageLevel.WARN, field, message);
             return false;
         }
         return true;
     }
 
     public boolean checkFieldInteger(String field, String value) {
-        if (!ValidateUtil.isNumber(value)) {
-            this.addMessage(MessageType.FieldNumberRequired, MessageLevel.WARN, field, MessageConstant.FIELD_NUMBER_REQUIRED);
+        if (!ValidateUtil.isMatch(value, RegularConstant.REGEX_NUMBER)) {
+            String message = StringUtil.replace(MessageConstant.FIELD_NUMBER_REQUIRED, field);
+            this.addMessage(MessageType.FieldNumberRequired, MessageLevel.WARN, field, message);
             return false;
         }
         return true;
@@ -74,7 +77,17 @@ public class ResponseResult {
 
     public boolean checkFieldEmail(String field, String value) {
         if (!ValidateUtil.isEmail(value)) {
-            this.addMessage(MessageType.FieldEmailRequired, MessageLevel.WARN, field, MessageConstant.FIELD_EMAIL_REQUIRED);
+            String message = StringUtil.replace(MessageConstant.FIELD_EMAIL_REQUIRED, field);
+            this.addMessage(MessageType.FieldEmailRequired, MessageLevel.WARN, field, message);
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean checkFieldUnique(String field, Object value) {
+        if (value != null) {
+            String message = StringUtil.replace(MessageConstant.FIELD_UNIQUE_CONSTRAINTS, field);
+            this.addMessage(MessageType.UniqueConstraints, MessageLevel.WARN, field, message);
             return false;
         }
         return true;
@@ -87,7 +100,7 @@ public class ResponseResult {
             return false;
         }
         return true;
-    }
+    }    
 
     public void checkQueryEmpty(String description) {
         this.addMessage(MessageType.Information, MessageLevel.INFO, "", description);

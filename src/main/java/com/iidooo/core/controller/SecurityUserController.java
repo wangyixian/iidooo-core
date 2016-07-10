@@ -44,6 +44,36 @@ public class SecurityUserController {
     private SecurityUserService securityUserService;
 
     @ResponseBody
+    @RequestMapping(value = "/core/loginByEmail", method = RequestMethod.POST)
+    public ResponseResult loginByEmail(HttpServletRequest request, HttpServletResponse response) {
+        ResponseResult result = new ResponseResult();
+        try {
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+
+            result.checkFieldRequired("email", email);
+            result.checkFieldRequired("password", password);
+            if (result.getMessages().size() > 0) {
+                result.setStatus(ResponseStatus.ValidateFailed.getCode());
+                return result;
+            }
+
+            SecurityAccessToken accessToken = this.securityUserService.getAccessTokenByEmail(email, password);
+            if (accessToken == null) {
+                result.checkQueryEmpty(MessageConstant.QUERY_EMPTY_WRONG_LOGIN);
+            } else {
+                result.setStatus(ResponseStatus.OK.getCode());
+                result.setData(accessToken);
+            }
+
+        } catch (Exception e) {
+            logger.fatal(e);
+            result.checkException(e);
+        }
+        return result;
+    }
+    
+    @ResponseBody
     @RequestMapping(value = "/core/getAccessToken", method = RequestMethod.POST)
     public ResponseResult getAccessToken(HttpServletRequest request, HttpServletResponse response) {
         ResponseResult result = new ResponseResult();

@@ -38,13 +38,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
                 logger.warn("Access Denied!");
                 return false;
             }
-
-            // 临时代码，拦截爬虫和安卓机
-            String userAgent = request.getHeader("User-Agent");
-            if (userAgent.toLowerCase().contains("scrapy")) {
-                logger.warn("Access Denied because of " + userAgent);
-                return false;
-            }
+            
             logger.info("Access OK!");
 
         } catch (Exception e) {

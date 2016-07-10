@@ -27,6 +27,14 @@ public interface SecurityUserMapper {
     SecurityUser selectByLogin(@Param("loginID")String loginID, @Param("password")String password);
     
     /**
+     * 通过Email和Password获取用户信息
+     * @param email 邮箱地址
+     * @param password 密码
+     * @return 返回的用户对象
+     */
+    SecurityUser selectByEmailLogin(@Param("email")String email, @Param("password")String password);
+    
+    /**
      * 通过用户主键ID获得UserInfo对象
      * @param userID 用户主键ID
      * @return securityUser对象

@@ -16,6 +16,14 @@ public interface SecurityUserService {
      */
     SecurityAccessToken getAccessTokenByEmail(String email);
     
+    /**
+     * 通过邮件地址登陆获取AccessToken
+     * @param email 邮箱地址
+     * @param password 密码
+     * @return 所获的的AccessToken
+     */
+    SecurityAccessToken getAccessTokenByEmail(String email, String password);
+    
     SecurityUser getSecurityUserByID(Integer userID);
     
     SecurityUser getSecurityUserByEmail(String email);

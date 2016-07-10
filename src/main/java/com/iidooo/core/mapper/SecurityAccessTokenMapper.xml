@@ -14,16 +14,24 @@
 		<result column="Version" property="version" jdbcType="INTEGER" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		TokenID, Token, UserID, Remarks, UpdateTime, UpdateUserID, CreateTime, CreateUserID,
-		IsDelete, Version
+		T.TokenID, T.Token, T.UserID, T.Remarks, T.UpdateTime, T.UpdateUserID, T.CreateTime, T.CreateUserID,
+		T.IsDelete, T.Version
 	</sql>
 
 	<!-- 根据用户获取AccessToken对象 -->
 	<select id="selectByUserID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from security_access_token
-		where IsDelete = 0 and UserID = #{userID,jdbcType=INTEGER}
+		from security_access_token T
+		where T.IsDelete = 0 and T.UserID = #{userID,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 通过Token和用户ID来获取一个AccessToken对象 -->
+	<select id="selectByTokenUserID" resultType="com.iidooo.core.model.po.SecurityAccessToken">
+		select
+		<include refid="Base_Column_List" />
+		from security_access_token T
+		where T.IsDelete = 0 and T.UserID = #{userID,jdbcType=INTEGER} and T.Token = #{token,jdbcType=VARCHAR}
 	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -44,9 +52,6 @@
 			<if test="remarks != null">
 				Remarks,
 			</if>
-			<if test="updateTime != null">
-				UpdateTime,
-			</if>
 			<if test="updateUserID != null">
 				UpdateUserID,
 			</if>
@@ -55,12 +60,6 @@
 			</if>
 			<if test="createUserID != null">
 				CreateUserID,
-			</if>
-			<if test="isDelete != null">
-				IsDelete,
-			</if>
-			<if test="version != null">
-				Version,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -73,9 +72,6 @@
 			<if test="remarks != null">
 				#{remarks,jdbcType=VARCHAR},
 			</if>
-			<if test="updateTime != null">
-				#{updateTime,jdbcType=TIMESTAMP},
-			</if>
 			<if test="updateUserID != null">
 				#{updateUserID,jdbcType=INTEGER},
 			</if>
@@ -84,12 +80,6 @@
 			</if>
 			<if test="createUserID != null">
 				#{createUserID,jdbcType=INTEGER},
-			</if>
-			<if test="isDelete != null">
-				#{isDelete,jdbcType=INTEGER},
-			</if>
-			<if test="version != null">
-				#{version,jdbcType=INTEGER},
 			</if>
 		</trim>
 	</insert>
@@ -106,9 +96,6 @@
 			</if>
 			<if test="remarks != null">
 				Remarks = #{remarks,jdbcType=VARCHAR},
-			</if>
-			<if test="updateTime != null">
-				UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="updateUserID != null">
 				UpdateUserID = #{updateUserID,jdbcType=INTEGER},

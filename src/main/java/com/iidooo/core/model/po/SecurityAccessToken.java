@@ -8,6 +8,8 @@ public class SecurityAccessToken {
     private String token;
 
     private Integer userID;
+    
+    private SecurityUser user;
 
     private String remarks;
 
@@ -45,6 +47,14 @@ public class SecurityAccessToken {
 
     public void setUserID(Integer userID) {
         this.userID = userID;
+    }   
+
+    public SecurityUser getUser() {
+        return user;
+    }
+
+    public void setUser(SecurityUser user) {
+        this.user = user;
     }
 
     public String getRemarks() {

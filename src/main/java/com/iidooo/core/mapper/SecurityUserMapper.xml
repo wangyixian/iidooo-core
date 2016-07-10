@@ -63,8 +63,18 @@
 		select
 		<include refid="Base_Column_List" />
 		from security_user U
-		where U.IsDelete = 0 and
+		where U.IsDelete = 0 and U.IsDisable = 0 and 
 		U.LoginID = #{loginID,jdbcType=VARCHAR} and
+		U.Password = #{password,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 通过Email和Password获取用户信息 -->
+	<select id="selectByEmailLogin" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from security_user U
+		where U.IsDelete = 0 and U.IsDisable = 0 and 
+		U.Email = #{email,jdbcType=VARCHAR} and
 		U.Password = #{password,jdbcType=VARCHAR}
 	</select>
 
