@@ -57,8 +57,14 @@ public class ResponseResult {
         this.messages = messages;
     }
 
-    public boolean checkFieldRequired(String field, String value) {
-        if (StringUtil.isBlank(value)) {
+    public boolean checkFieldRequired(String field, Object value) {
+        if(value == null){
+            String message = StringUtil.replace(MessageConstant.FIELD_REQUIRED, field);
+            this.addMessage(MessageType.FieldRequired, MessageLevel.WARN, field, message);
+            return false;
+        }
+        
+        if (value instanceof String && StringUtil.isBlank((String)value)) {
             String message = StringUtil.replace(MessageConstant.FIELD_REQUIRED, field);
             this.addMessage(MessageType.FieldRequired, MessageLevel.WARN, field, message);
             return false;

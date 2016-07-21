@@ -6,6 +6,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.model.SimplifiedObjectMeta;
 
 public class OSSUtil {
 
@@ -41,8 +42,19 @@ public class OSSUtil {
         } catch (Exception e) {
             logger.fatal(e);
             return null;
-        } finally {
-            client.shutdown();
         }
     }
+    
+    public static long getFileSize(Properties aliyunProperties, OSSClient client, String key) {
+        try {            
+            String bucketName = aliyunProperties.getProperty("ALIYUN_OSS_BUCKET_NAME");
+            // 获取文件的部分元信息
+            SimplifiedObjectMeta objectMeta = client.getSimplifiedObjectMeta(bucketName, key);            
+            long fileSize = objectMeta.getSize();
+            return fileSize;
+        } catch (Exception e) {
+            logger.fatal(e);
+            return 0;
+        }
+    } 
 }

@@ -23,7 +23,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
             String appID = request.getHeader("appID");
             String secret = request.getHeader("secret");
             String referer = request.getHeader("referer");
-            logger.warn("referer is " + referer);
+
             if (StringUtil.isBlank(appID) || StringUtil.isBlank(secret)) {
                 appID = request.getParameter("appID");
                 secret = request.getParameter("secret");
